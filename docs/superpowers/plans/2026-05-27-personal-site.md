@@ -8,6 +8,8 @@
 
 **Tech Stack:** Astro 4, Tailwind CSS, TypeScript, Vitest, `@astrojs/vercel`, Vercel KV (`@vercel/kv`), grammy (Telegram Bot framework), Anthropic SDK (`@anthropic-ai/sdk`)
 
+**Design System:** `DESIGN.md` (Apple design analysis) — reference before writing any UI. Key rules: single Action Blue `#0066cc` for all interactive elements; `system-ui, -apple-system` font stack; body at 17px/400; display headlines at 600 with negative letter-spacing; no shadows on UI chrome (only on product imagery); no gradients; pill radius (`9999px`) for primary CTAs; `18px` radius for cards; black nav (44px); parchment footer (`#f5f5f7`).
+
 ---
 
 ## File Map
@@ -92,7 +94,7 @@ export default defineConfig({
 });
 ```
 
-- [ ] **Step 5: Configure Tailwind with typography plugin**
+- [ ] **Step 5: Configure Tailwind with Apple design tokens and typography plugin**
 
 Replace the full contents of `tailwind.config.mjs`:
 
@@ -100,6 +102,41 @@ Replace the full contents of `tailwind.config.mjs`:
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  theme: {
+    extend: {
+      colors: {
+        // Apple design tokens (from DESIGN.md)
+        'apple-blue':      '#0066cc', // primary — every interactive element
+        'apple-blue-focus':'#0071e3', // focus ring
+        'apple-blue-dark': '#2997ff', // links on dark surfaces
+        'apple-ink':       '#1d1d1f', // body text on light
+        'apple-ink-80':    '#333333', // muted body / footer text
+        'apple-ink-48':    '#7a7a7a', // disabled / fine-print
+        'apple-parchment': '#f5f5f7', // alternating light tile / footer
+        'apple-pearl':     '#fafafc', // secondary ghost button fill
+        'apple-hairline':  '#e0e0e0', // 1px card borders
+        'apple-divider':   '#f0f0f0', // soft ring on secondary buttons
+        'apple-chip':      '#d2d2d7', // translucent chip on photography
+        'apple-tile-1':    '#272729', // dark tile
+        'apple-tile-2':    '#2a2a2c', // dark tile variant
+        'apple-tile-3':    '#252527', // dark tile deepest
+      },
+      borderRadius: {
+        'apple-sm': '8px',   // utility buttons
+        'apple-md': '11px',  // pearl capsule buttons
+        'apple-lg': '18px',  // cards (store-utility-card)
+      },
+      fontSize: {
+        'apple-hero':    ['56px', { lineHeight: '1.07', letterSpacing: '-0.28px', fontWeight: '600' }],
+        'apple-display': ['40px', { lineHeight: '1.10', letterSpacing: '0',       fontWeight: '600' }],
+        'apple-tagline': ['21px', { lineHeight: '1.19', letterSpacing: '0.231px', fontWeight: '600' }],
+        'apple-body':    ['17px', { lineHeight: '1.47', letterSpacing: '-0.374px',fontWeight: '400' }],
+        'apple-caption': ['14px', { lineHeight: '1.43', letterSpacing: '-0.224px',fontWeight: '400' }],
+        'apple-nav':     ['12px', { lineHeight: '1.0',  letterSpacing: '-0.12px', fontWeight: '400' }],
+        'apple-fine':    ['12px', { lineHeight: '1.0',  letterSpacing: '-0.12px', fontWeight: '400' }],
+      },
+    },
+  },
   plugins: [
     (await import('@tailwindcss/typography')).default,
   ],
@@ -735,25 +772,32 @@ const { title, description = 'Meu site pessoal' } = Astro.props;
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body class="min-h-screen bg-white text-gray-900 font-sans">
-    <nav class="border-b border-gray-200 px-6 py-4">
-      <div class="max-w-3xl mx-auto flex items-center justify-between">
-        <a href="/" class="font-semibold text-lg hover:text-blue-600 transition-colors">
+  <!-- Apple: near-black ink on white canvas; system-ui resolves to SF Pro on Apple devices -->
+  <body class="min-h-screen bg-white text-apple-ink" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;">
+
+    <!-- global-nav: pure black, 44px, nav-link typography (12px/400/-0.12px) -->
+    <nav class="bg-black h-11 flex items-center px-6 sticky top-0 z-50">
+      <div class="max-w-[980px] mx-auto w-full flex items-center justify-between">
+        <a
+          href="/"
+          class="text-apple-nav text-white font-normal hover:opacity-70 transition-opacity"
+        >
           Vinicius Vp
         </a>
-        <div class="flex gap-6 text-sm">
-          <a href="/blog" class="hover:text-blue-600 transition-colors">Blog</a>
-          <a href="/library" class="hover:text-blue-600 transition-colors">Biblioteca</a>
+        <div class="flex gap-5">
+          <a href="/blog"    class="text-apple-nav text-white/80 hover:text-white transition-colors">Blog</a>
+          <a href="/library" class="text-apple-nav text-white/80 hover:text-white transition-colors">Biblioteca</a>
         </div>
       </div>
     </nav>
 
-    <main class="max-w-3xl mx-auto px-6 py-12">
+    <main class="max-w-[980px] mx-auto px-6 py-20">
       <slot />
     </main>
 
-    <footer class="border-t border-gray-200 px-6 py-8 mt-12">
-      <div class="max-w-3xl mx-auto text-center text-sm text-gray-500">
+    <!-- footer: parchment canvas, ink-muted-80 text, 64px vertical padding, fine-print -->
+    <footer class="bg-apple-parchment px-6 py-16 mt-20">
+      <div class="max-w-[980px] mx-auto text-center text-apple-fine text-apple-ink-80">
         © {new Date().getFullYear()} Vinicius Vp
       </div>
     </footer>
@@ -794,25 +838,36 @@ Create `src/pages/index.astro`:
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
+<!-- Apple: centered single-column hero tile on white canvas -->
 <BaseLayout title="Vinicius Vp" description="Perfil profissional">
-  <div class="flex flex-col items-center text-center gap-6 py-8">
-    <div class="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center text-4xl">
+  <div class="flex flex-col items-center text-center gap-8 py-20">
+
+    <div class="w-24 h-24 rounded-full bg-apple-parchment flex items-center justify-center text-4xl">
       👤
     </div>
-    <div>
-      <h1 class="text-3xl font-bold">Vinicius Vp</h1>
-      <p class="text-gray-500 mt-1">Título profissional aqui</p>
+
+    <div class="flex flex-col gap-2">
+      <!-- display-lg: 40px/600/0 letter-spacing -->
+      <h1 class="text-apple-display font-semibold text-apple-ink">Vinicius Vp</h1>
+      <!-- lead: 28px/400 -->
+      <p class="text-[28px] leading-[1.14] font-normal text-apple-ink-48">
+        Título profissional aqui
+      </p>
     </div>
-    <p class="text-gray-700 max-w-lg leading-relaxed">
+
+    <!-- body: 17px/400/1.47/-0.374px -->
+    <p class="text-apple-body text-apple-ink max-w-lg">
       Breve bio sobre quem você é, suas áreas de interesse e o que você faz.
-      Edite este texto em <code>src/pages/index.astro</code>.
+      Edite este texto em <code class="text-apple-blue text-[15px]">src/pages/index.astro</code>.
     </p>
-    <div class="flex gap-4 text-sm flex-wrap justify-center">
+
+    <!-- Two pill CTAs side by side — button-primary grammar -->
+    <div class="flex gap-4 flex-wrap justify-center">
       <a
         href="https://github.com/seu-usuario"
         target="_blank"
         rel="noopener noreferrer"
-        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+        class="bg-apple-blue text-white text-apple-body rounded-full px-[22px] py-[11px] transition-transform active:scale-95"
       >
         GitHub
       </a>
@@ -820,7 +875,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         href="https://linkedin.com/in/seu-perfil"
         target="_blank"
         rel="noopener noreferrer"
-        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+        class="border border-apple-blue text-apple-blue text-apple-body rounded-full px-[22px] py-[11px] transition-transform active:scale-95"
       >
         LinkedIn
       </a>
@@ -1118,21 +1173,26 @@ const typeLabel: Record<string, string> = {
 ---
 
 <BaseLayout title="Biblioteca" description="Recursos que estudo e recomendo">
-  <div class="mb-8">
-    <h1 class="text-3xl font-bold">Biblioteca</h1>
-    <p class="text-gray-500 mt-2">Artigos, vídeos e links que estudo, organizados por tema.</p>
+  <div class="mb-12">
+    <!-- display-lg: 40px/600 -->
+    <h1 class="text-apple-display font-semibold text-apple-ink">Biblioteca</h1>
+    <!-- body: 17px/400 -->
+    <p class="text-apple-body text-apple-ink-48 mt-2">
+      Artigos, vídeos e links que estudo, organizados por tema.
+    </p>
   </div>
 
-  <div class="flex flex-wrap gap-2 mb-8">
+  <!-- Theme filters: pill-shaped chips — configurator-option-chip grammar -->
+  <div class="flex flex-wrap gap-2 mb-10">
     <button
-      class="filter-btn active px-3 py-1 text-sm rounded-full border border-gray-300 transition-colors"
+      class="filter-btn px-4 py-[11px] text-apple-caption rounded-full border border-apple-blue bg-apple-blue text-white transition-all"
       data-theme="all"
     >
       Todos
     </button>
     {themes.map((theme) => (
       <button
-        class="filter-btn px-3 py-1 text-sm rounded-full border border-gray-300 hover:bg-gray-100 transition-colors"
+        class="filter-btn px-4 py-[11px] text-apple-caption rounded-full border border-apple-hairline text-apple-ink hover:border-apple-blue hover:text-apple-blue transition-all"
         data-theme={theme}
       >
         {theme}
@@ -1140,43 +1200,49 @@ const typeLabel: Record<string, string> = {
     ))}
   </div>
 
-  <ul class="flex flex-col gap-6" id="library-list">
+  <!-- Cards: store-utility-card grammar — rounded-apple-lg, hairline border, 24px padding -->
+  <ul class="flex flex-col gap-4" id="library-list">
     {items.map((item) => (
       <li
-        class="library-item border border-gray-200 rounded-xl p-5"
+        class="library-item rounded-apple-lg border border-apple-hairline p-6"
         data-theme={item.theme}
       >
-        <div class="flex items-start justify-between gap-4">
+        <div class="flex items-start justify-between gap-6">
           <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2 mb-1 flex-wrap">
-              <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-medium">
+            <div class="flex items-center gap-2 mb-2 flex-wrap">
+              <!-- Type badge: pearl capsule style -->
+              <span class="text-apple-caption text-apple-ink-48 bg-apple-parchment px-3 py-1 rounded-full border border-apple-divider">
                 {typeLabel[item.type] ?? item.type}
               </span>
-              <span class="text-xs text-gray-400 bg-gray-50 px-2 py-0.5 rounded">
+              <!-- Theme tag: caption, muted -->
+              <span class="text-apple-caption text-apple-ink-48">
                 {item.theme}
               </span>
             </div>
+            <!-- Title: body-strong (17px/600) -->
             <a
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-lg font-semibold hover:text-blue-600 transition-colors block"
+              class="text-[17px] font-semibold leading-[1.24] tracking-[-0.374px] text-apple-ink hover:text-apple-blue transition-colors block"
             >
               {item.title}
             </a>
-            <p class="text-gray-600 text-sm mt-1">{item.description}</p>
+            <!-- Description: body (17px/400) -->
+            <p class="text-apple-body text-apple-ink-48 mt-1">{item.description}</p>
             {item.personalNote && (
-              <p class="text-gray-500 text-sm mt-2 italic border-l-2 border-gray-200 pl-3">
+              <!-- Personal note: caption, left border rule -->
+              <p class="text-apple-caption text-apple-ink-48 mt-3 italic border-l-2 border-apple-hairline pl-3">
                 {item.personalNote}
               </p>
             )}
           </div>
-          <div class="flex flex-col items-end gap-2 shrink-0">
+          <div class="flex flex-col items-end gap-3 shrink-0">
             <ShareButton url={item.url} title={item.title} />
             <StarRating itemId={item.id} />
           </div>
         </div>
-        <p class="text-xs text-gray-400 mt-3">
+        <p class="text-apple-caption text-apple-ink-48 mt-4">
           Adicionado em {new Date(item.addedAt).toLocaleDateString('pt-BR')}
         </p>
       </li>
@@ -1191,9 +1257,11 @@ const typeLabel: Record<string, string> = {
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       filterBtns.forEach((b) => {
-        b.classList.remove('active', 'bg-gray-900', 'text-white', 'border-gray-900');
+        b.classList.remove('bg-apple-blue', 'text-white', 'border-apple-blue');
+        b.classList.add('border-apple-hairline', 'text-apple-ink');
       });
-      btn.classList.add('active', 'bg-gray-900', 'text-white', 'border-gray-900');
+      btn.classList.add('bg-apple-blue', 'text-white', 'border-apple-blue');
+      btn.classList.remove('border-apple-hairline', 'text-apple-ink');
 
       const theme = btn.dataset.theme;
       libraryItems.forEach((item) => {
@@ -1244,16 +1312,17 @@ interface Props {
 const { url, title } = Astro.props;
 ---
 
+<!-- text-link style: Action Blue, caption size, no background -->
 <button
-  class="share-btn text-sm text-gray-500 hover:text-blue-600 transition-colors flex items-center gap-1"
+  class="share-btn text-apple-caption text-apple-blue flex items-center gap-1 hover:opacity-70 transition-opacity active:scale-95"
   data-url={url}
   data-title={title}
   aria-label="Compartilhar"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
+    width="13"
+    height="13"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -1459,11 +1528,12 @@ interface Props {
 const { itemId } = Astro.props;
 ---
 
+<!-- Single accent color: apple-blue for filled stars, consistent with the design system rule -->
 <div class="star-rating flex flex-col items-end gap-1" data-item-id={itemId}>
   <div class="stars flex gap-0.5">
     {[1, 2, 3, 4, 5].map((star) => (
       <button
-        class="star text-gray-300 hover:text-yellow-400 transition-colors text-lg leading-none cursor-pointer"
+        class="star text-apple-hairline hover:text-apple-blue transition-colors text-lg leading-none cursor-pointer"
         data-star={star}
         aria-label={`Dar ${star} estrela${star > 1 ? 's' : ''}`}
       >
@@ -1471,7 +1541,7 @@ const { itemId } = Astro.props;
       </button>
     ))}
   </div>
-  <p class="rating-summary text-xs text-gray-400">Sem avaliações</p>
+  <p class="rating-summary text-apple-caption text-apple-ink-48">Sem avaliações</p>
 </div>
 
 <script>
@@ -1484,8 +1554,8 @@ const { itemId } = Astro.props;
     function updateDisplay(average: number, count: number) {
       const rounded = Math.round(average);
       stars.forEach((star, i) => {
-        star.classList.toggle('text-yellow-400', i < rounded);
-        star.classList.toggle('text-gray-300', i >= rounded);
+        // apple-blue (#0066cc) for filled; apple-hairline (#e0e0e0) for empty
+        star.style.color = i < rounded ? '#0066cc' : '#e0e0e0';
       });
       summary.textContent =
         count > 0
