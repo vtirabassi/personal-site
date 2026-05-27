@@ -5,6 +5,79 @@ interface Props {
 const { itemId } = Astro.props;
 ---
 
-<div class="star-rating" data-item-id={itemId}>
-  <span class="text-apple-caption text-apple-ink-48">Sem avaliações</span>
+<div class="star-rating flex flex-col items-end gap-1" data-item-id={itemId}>
+  <div class="stars flex gap-0.5">
+    {[1, 2, 3, 4, 5].map((star) => (
+      <button
+        class="star text-apple-hairline hover:text-apple-blue transition-colors text-lg leading-none cursor-pointer"
+        data-star={star}
+        aria-label={`Dar ${star} estrela${star > 1 ? 's' : ''}`}
+      >
+        ★
+      </button>
+    ))}
+  </div>
+  <p class="rating-summary text-apple-caption text-apple-ink-48">Sem avaliações</p>
 </div>
+
+<script>
+  document.querySelectorAll<HTMLDivElement>('.star-rating').forEach((widget) => {
+    const itemId = widget.dataset.itemId!;
+    const stars = widget.querySelectorAll<HTMLButtonElement>('.star');
+    const summary = widget.querySelector<HTMLParagraphElement>('.rating-summary')!;
+    const storageKey = `voted:${itemId}`;
+
+    function updateDisplay(average: number, count: number) {
+      const rounded = Math.round(average);
+      stars.forEach((star, i) => {
+        star.style.color = i < rounded ? '#0066cc' : '#e0e0e0';
+      });
+      summary.textContent =
+        count > 0
+          ? `${average.toFixed(1)} (${count} ${count === 1 ? 'voto' : 'votos'})`
+          : 'Sem avaliações';
+    }
+
+    async function loadRating() {
+      try {
+        const res = await fetch(`/api/ratings?id=${itemId}`);
+        const { average, count } = await res.json();
+        updateDisplay(average, count);
+      } catch {
+        // API not available locally — leave default state
+      }
+    }
+
+    if (localStorage.getItem(storageKey)) {
+      stars.forEach((s) => {
+        s.disabled = true;
+        s.style.cursor = 'default';
+      });
+    }
+
+    stars.forEach((star) => {
+      star.addEventListener('click', async () => {
+        if (localStorage.getItem(storageKey)) return;
+        const vote = Number(star.dataset.star);
+        localStorage.setItem(storageKey, String(vote));
+        stars.forEach((s) => {
+          s.disabled = true;
+          s.style.cursor = 'default';
+        });
+        try {
+          const res = await fetch('/api/ratings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: itemId, vote }),
+          });
+          const { average, count } = await res.json();
+          updateDisplay(average, count);
+        } catch {
+          // silently fail
+        }
+      });
+    });
+
+    loadRating();
+  });
+</script>
