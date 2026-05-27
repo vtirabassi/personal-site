@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article>
+    <header class="mb-8">
+      <p class="text-apple-caption text-apple-ink-48 mb-2">
+        {post.data.date.toLocaleDateString('pt-BR', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        })}
+      </p>
+      <h1 class="text-apple-display font-semibold text-apple-ink leading-tight">{post.data.title}</h1>
+      <p class="text-apple-body text-apple-ink-48 mt-3">{post.data.description}</p>
+      <div class="flex gap-2 mt-4 flex-wrap">
+        {post.data.tags.map((tag) => (
+          <span class="text-apple-caption bg-apple-parchment text-apple-ink-48 px-3 py-1 rounded-full border border-apple-divider">{tag}</span>
+        ))}
+      </div>
+    </header>
+
+    <div class="prose prose-gray max-w-none">
+      <Content />
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-apple-hairline">
+      <a href="/blog" class="text-apple-body text-apple-blue hover:opacity-70 transition-opacity">
+        ← Voltar para o blog
+      </a>
+    </div>
+  </article>
+</BaseLayout>
