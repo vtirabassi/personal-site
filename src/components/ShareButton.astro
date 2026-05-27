@@ -6,6 +6,50 @@ interface Props {
 const { url, title } = Astro.props;
 ---
 
-<button class="share-btn text-apple-caption text-apple-blue" data-url={url} data-title={title}>
-  Compartilhar
+<button
+  class="share-btn text-apple-caption text-apple-blue flex items-center gap-1 hover:opacity-70 transition-opacity active:scale-95"
+  data-url={url}
+  data-title={title}
+  aria-label="Compartilhar"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="13"
+    height="13"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+  >
+    <circle cx="18" cy="5" r="3" />
+    <circle cx="6" cy="12" r="3" />
+    <circle cx="18" cy="19" r="3" />
+    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+  </svg>
+  <span class="share-label">Compartilhar</span>
 </button>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.share-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.url!;
+      const title = btn.dataset.title!;
+      const label = btn.querySelector('.share-label')!;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({ title, url });
+        } catch {
+          // user cancelled — do nothing
+        }
+      } else {
+        await navigator.clipboard.writeText(url);
+        label.textContent = 'Copiado!';
+        setTimeout(() => {
+          label.textContent = 'Compartilhar';
+        }, 2000);
+      }
+    });
+  });
+</script>
