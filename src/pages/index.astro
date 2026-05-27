@@ -1,17 +1,43 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Vinicius Vp" description="Perfil profissional">
+  <div class="flex flex-col items-center text-center gap-8 py-20">
+
+    <div class="w-24 h-24 rounded-full bg-apple-parchment flex items-center justify-center text-4xl">
+      👤
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <h1 class="text-apple-display font-semibold text-apple-ink">Vinicius Vp</h1>
+      <p class="text-[28px] leading-[1.14] font-normal text-apple-ink-48">
+        Título profissional aqui
+      </p>
+    </div>
+
+    <p class="text-apple-body text-apple-ink max-w-lg">
+      Breve bio sobre quem você é, suas áreas de interesse e o que você faz.
+      Edite este texto em <code class="text-apple-blue text-[15px]">src/pages/index.astro</code>.
+    </p>
+
+    <div class="flex gap-4 flex-wrap justify-center">
+      <a
+        href="https://github.com/seu-usuario"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-apple-blue text-white text-apple-body rounded-full px-[22px] py-[11px] transition-transform active:scale-95"
+      >
+        GitHub
+      </a>
+      <a
+        href="https://linkedin.com/in/seu-perfil"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="border border-apple-blue text-apple-blue text-apple-body rounded-full px-[22px] py-[11px] transition-transform active:scale-95"
+      >
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</BaseLayout>
