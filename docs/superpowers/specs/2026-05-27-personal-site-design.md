@@ -97,7 +97,7 @@ tags: ["AI", "Software Engineering"]
 
 - Grid or list of resources grouped and filterable by theme
 - Each resource displays: title, type badge (article/video/link), theme tag, personal note, public star rating, and a share button
-- Theme filter at the top of the page
+- Theme filter at the top of the page (client-side filtering via JavaScript — no page reload)
 
 ---
 
@@ -143,6 +143,11 @@ Ratings are stored in Vercel KV (Redis), keyed by item `id`. Two keys per item:
 - `rating:count:{id}` → number of votes
 
 Average is computed as `total / count` at read time. No user authentication — anonymous voting, one vote per session (tracked via localStorage to prevent repeat votes from the same browser).
+
+**API endpoints (`/api/ratings.ts`):**
+
+- `GET /api/ratings?id={id}` → returns `{ average: number, count: number }`
+- `POST /api/ratings` with body `{ id, vote }` (vote: 1–5) → records vote, returns updated average
 
 ---
 
