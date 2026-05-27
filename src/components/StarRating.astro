@@ -1,0 +1,10 @@
+---
+interface Props {
+  itemId: string;
+}
+const { itemId } = Astro.props;
+---
+
+<div class="star-rating" data-item-id={itemId}>
+  <span class="text-apple-caption text-apple-ink-48">Sem avaliações</span>
+</div>

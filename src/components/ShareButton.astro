@@ -1,0 +1,11 @@
+---
+interface Props {
+  url: string;
+  title: string;
+}
+const { url, title } = Astro.props;
+---
+
+<button class="share-btn text-apple-caption text-apple-blue" data-url={url} data-title={title}>
+  Compartilhar
+</button>

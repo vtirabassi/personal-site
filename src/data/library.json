@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "id": "attention-is-all-you-need",
+      "title": "Attention Is All You Need",
+      "url": "https://arxiv.org/abs/1706.03762",
+      "type": "article",
+      "theme": "Machine Learning",
+      "description": "Paper original da arquitetura Transformer, base dos modelos de linguagem modernos.",
+      "personalNote": "Leitura obrigatória para entender LLMs. Denso mas fundamental.",
+      "addedAt": "2026-05-27"
+    },
+    {
+      "id": "clean-code",
+      "title": "Clean Code — Robert C. Martin",
+      "url": "https://www.oreilly.com/library/view/clean-code-a/9780136083238/",
+      "type": "link",
+      "theme": "Engenharia de Software",
+      "description": "Guia clássico para escrever código limpo e manutenível.",
+      "personalNote": "Leitura obrigatória para qualquer engenheiro de software.",
+      "addedAt": "2026-05-27"
+    }
+  ]
+}
