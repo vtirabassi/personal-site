@@ -1,9 +1,33 @@
 ---
+import { getCollection } from 'astro:content';
+import libraryRaw from '../data/library.json';
+import type { LibraryData } from '../lib/library-schema';
+
 interface Props {
   title: string;
   description?: string;
 }
 const { title, description = 'Meu site pessoal' } = Astro.props;
+
+const library = libraryRaw as LibraryData;
+const posts = await getCollection('blog');
+
+const searchItems = [
+  ...posts.map(p => ({
+    type: 'blog',
+    title: p.data.title,
+    description: p.data.description ?? '',
+    url: `/blog/${p.slug}`,
+    external: false,
+  })),
+  ...library.items.map(i => ({
+    type: 'library',
+    title: i.title,
+    description: i.description ?? '',
+    url: i.url,
+    external: true,
+  })),
+];
 ---
 
 <!doctype html>
@@ -14,32 +38,180 @@ const { title, description = 'Meu site pessoal' } = Astro.props;
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Prevent flash of wrong theme -->
+    <script is:inline>
+      (function () {
+        var t = localStorage.getItem('theme') || 'system';
+        var dark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      })();
+    </script>
   </head>
-  <body class="min-h-screen bg-white text-apple-ink" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;">
+  <body class="min-h-screen bg-white dark:bg-[#1c1c1e] text-apple-ink dark:text-[#f5f5f7] transition-colors duration-200" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;">
 
+    <!-- Nav -->
     <nav class="bg-black h-11 flex items-center px-6 sticky top-0 z-50">
-      <div class="max-w-[980px] mx-auto w-full flex items-center justify-between">
-        <a
-          href="/"
-          class="text-apple-nav text-white font-normal hover:opacity-70 transition-opacity"
-        >
-          Vinicius Vp
+      <div class="max-w-[980px] mx-auto w-full flex items-center justify-between gap-4">
+        <a href="/" class="text-apple-nav text-white font-normal hover:opacity-70 transition-opacity shrink-0">
+          Vinicius Tirabassi
         </a>
-        <div class="flex gap-5">
-          <a href="/blog"    class="text-apple-nav text-white/80 hover:text-white transition-colors">Blog</a>
-          <a href="/library" class="text-apple-nav text-white/80 hover:text-white transition-colors">Biblioteca</a>
+        <div class="flex items-center gap-4">
+          <a href="/sobre"    class="text-apple-nav text-white/80 hover:text-white transition-colors">Sobre</a>
+          <a href="/library"  class="text-apple-nav text-white/80 hover:text-white transition-colors">Biblioteca</a>
+
+          <!-- Search button -->
+          <button id="search-open" aria-label="Buscar" class="text-white/80 hover:text-white transition-colors p-1 -m-1">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+          </button>
+
+          <!-- Theme toggle -->
+          <button id="theme-toggle" aria-label="Alternar tema" class="text-white/80 hover:text-white transition-colors p-1 -m-1">
+            <!-- system (default) -->
+            <svg id="icon-system" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+            <!-- light -->
+            <svg id="icon-light" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+            </svg>
+            <!-- dark -->
+            <svg id="icon-dark" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
         </div>
       </div>
     </nav>
+
+    <!-- Search panel -->
+    <div id="search-backdrop" class="hidden fixed inset-0 z-40 bg-black/40" aria-hidden="true"></div>
+    <div id="search-panel" class="hidden fixed top-11 left-0 right-0 z-50 bg-white dark:bg-[#1c1c1e] border-b border-apple-hairline dark:border-[#3a3a3c] shadow-lg">
+      <div class="max-w-[980px] mx-auto px-6 py-4">
+        <div class="relative">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-apple-ink-48 dark:text-[#6e6e73] pointer-events-none" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Buscar artigos e recursos..."
+            autocomplete="off"
+            class="w-full bg-apple-parchment dark:bg-[#2c2c2e] text-apple-ink dark:text-[#f5f5f7] placeholder-apple-ink-48 dark:placeholder-[#6e6e73] rounded-apple-md px-4 py-2 pl-10 text-apple-body border border-apple-hairline dark:border-[#3a3a3c] outline-none focus:border-apple-blue dark:focus:border-apple-blue-dark"
+          />
+        </div>
+        <ul id="search-results" class="mt-3 flex flex-col gap-1 max-h-72 overflow-y-auto empty:hidden"></ul>
+      </div>
+    </div>
 
     <main class="max-w-[980px] mx-auto px-6 py-20">
       <slot />
     </main>
 
-    <footer class="bg-apple-parchment px-6 py-16 mt-20">
-      <div class="max-w-[980px] mx-auto text-center text-apple-fine text-apple-ink-80">
-        © {new Date().getFullYear()} Vinicius Vp
+    <footer class="bg-apple-parchment dark:bg-[#111113] px-6 py-16 mt-20 border-t border-apple-hairline dark:border-[#3a3a3c]">
+      <div class="max-w-[980px] mx-auto text-center text-apple-fine text-apple-ink-80 dark:text-[#6e6e73]">
+        © {new Date().getFullYear()} Vinicius Tirabassi
       </div>
     </footer>
+
+    <script define:vars={{ searchItems }}>
+      // --- Theme ---
+      const THEMES = ['system', 'light', 'dark'];
+      const icons = {
+        system: document.getElementById('icon-system'),
+        light:  document.getElementById('icon-light'),
+        dark:   document.getElementById('icon-dark'),
+      };
+
+      function applyTheme(t) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = t === 'dark' || (t === 'system' && prefersDark);
+        document.documentElement.classList.toggle('dark', isDark);
+        Object.entries(icons).forEach(([key, el]) => {
+          if (el) el.classList.toggle('hidden', key !== t);
+        });
+      }
+
+      function getTheme() { return localStorage.getItem('theme') || 'system'; }
+
+      applyTheme(getTheme());
+
+      document.getElementById('theme-toggle').addEventListener('click', () => {
+        const current = getTheme();
+        const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
+        localStorage.setItem('theme', next);
+        applyTheme(next);
+      });
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (getTheme() === 'system') applyTheme('system');
+      });
+
+      // --- Search ---
+      const searchOpen    = document.getElementById('search-open');
+      const searchPanel   = document.getElementById('search-panel');
+      const searchBackdrop = document.getElementById('search-backdrop');
+      const searchInput   = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+
+      function openSearch() {
+        searchPanel.classList.remove('hidden');
+        searchBackdrop.classList.remove('hidden');
+        searchInput.focus();
+      }
+
+      function closeSearch() {
+        searchPanel.classList.add('hidden');
+        searchBackdrop.classList.add('hidden');
+        searchInput.value = '';
+        searchResults.innerHTML = '';
+      }
+
+      searchOpen.addEventListener('click', openSearch);
+      searchBackdrop.addEventListener('click', closeSearch);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeSearch();
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+      });
+
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.trim().toLowerCase();
+        searchResults.innerHTML = '';
+        if (!q) return;
+
+        const hits = searchItems.filter(item =>
+          item.title.toLowerCase().includes(q) || item.description.toLowerCase().includes(q)
+        ).slice(0, 8);
+
+        if (!hits.length) {
+          searchResults.innerHTML = '<li class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] px-2 py-3">Nenhum resultado encontrado.</li>';
+          return;
+        }
+
+        hits.forEach(item => {
+          const li = document.createElement('li');
+          const label = item.type === 'blog' ? 'Blog' : 'Biblioteca';
+          const labelColor = item.type === 'blog'
+            ? 'bg-apple-blue/10 text-apple-blue'
+            : 'bg-[#3a3a3c]/10 text-apple-ink-48 dark:text-[#98989d]';
+
+          li.innerHTML = `
+            <a href="${item.url}"
+               ${item.external ? 'target="_blank" rel="noopener noreferrer"' : ''}
+               class="flex items-start gap-3 px-3 py-2 rounded-apple-md hover:bg-apple-parchment dark:hover:bg-[#2c2c2e] transition-colors group">
+              <span class="mt-[2px] shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full ${labelColor}">${label}</span>
+              <div class="min-w-0">
+                <p class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7] group-hover:text-apple-blue dark:group-hover:text-apple-blue-dark transition-colors truncate">${item.title}</p>
+                <p class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] truncate">${item.description}</p>
+              </div>
+            </a>
+          `;
+          li.querySelector('a').addEventListener('click', closeSearch);
+          searchResults.appendChild(li);
+        });
+      });
+    </script>
   </body>
 </html>
