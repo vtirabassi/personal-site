@@ -59,28 +59,48 @@ const searchItems = [
           <a href="/sobre"    class="text-apple-nav text-white/80 hover:text-white transition-colors">Sobre</a>
           <a href="/library"  class="text-apple-nav text-white/80 hover:text-white transition-colors">Biblioteca</a>
 
-          <!-- Search button -->
-          <button id="search-open" aria-label="Buscar" class="text-white/80 hover:text-white transition-colors p-1 -m-1">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Search box -->
+          <button id="search-open" aria-label="Buscar" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/70 hover:text-white rounded-full px-3 h-7 transition-colors text-apple-nav">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
             </svg>
+            <span class="hidden sm:inline">Buscar</span>
           </button>
 
-          <!-- Theme toggle -->
-          <button id="theme-toggle" aria-label="Alternar tema" class="text-white/80 hover:text-white transition-colors p-1 -m-1">
-            <!-- system (default) -->
-            <svg id="icon-system" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-            </svg>
-            <!-- light -->
-            <svg id="icon-light" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-            </svg>
-            <!-- dark -->
-            <svg id="icon-dark" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-          </button>
+          <!-- Theme dropdown -->
+          <div class="relative" id="theme-wrapper">
+            <button id="theme-toggle" aria-label="Alternar tema" class="text-white/80 hover:text-white transition-colors p-1 -m-1">
+              <svg id="icon-system" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+              <svg id="icon-light" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+              </svg>
+              <svg id="icon-dark" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+            <div id="theme-dropdown" class="hidden absolute right-0 top-[calc(100%+8px)] bg-white dark:bg-[#2c2c2e] border border-apple-hairline dark:border-[#3a3a3c] rounded-apple-md shadow-lg py-1 w-36 z-50">
+              <button data-theme="system" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                Sistema
+              </button>
+              <button data-theme="light" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                </svg>
+                Claro
+              </button>
+              <button data-theme="dark" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                Escuro
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -117,12 +137,13 @@ const searchItems = [
 
     <script define:vars={{ searchItems }}>
       // --- Theme ---
-      const THEMES = ['system', 'light', 'dark'];
       const icons = {
         system: document.getElementById('icon-system'),
         light:  document.getElementById('icon-light'),
         dark:   document.getElementById('icon-dark'),
       };
+      const themeDropdown = document.getElementById('theme-dropdown');
+      const themeWrapper  = document.getElementById('theme-wrapper');
 
       function applyTheme(t) {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -131,17 +152,32 @@ const searchItems = [
         Object.entries(icons).forEach(([key, el]) => {
           if (el) el.classList.toggle('hidden', key !== t);
         });
+        // highlight active option
+        document.querySelectorAll('.theme-option').forEach(btn => {
+          btn.classList.toggle('font-semibold', btn.dataset.theme === t);
+        });
       }
 
       function getTheme() { return localStorage.getItem('theme') || 'system'; }
 
       applyTheme(getTheme());
 
-      document.getElementById('theme-toggle').addEventListener('click', () => {
-        const current = getTheme();
-        const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
-        localStorage.setItem('theme', next);
-        applyTheme(next);
+      document.getElementById('theme-toggle').addEventListener('click', (e) => {
+        e.stopPropagation();
+        themeDropdown.classList.toggle('hidden');
+      });
+
+      document.querySelectorAll('.theme-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.dataset.theme;
+          localStorage.setItem('theme', t);
+          applyTheme(t);
+          themeDropdown.classList.add('hidden');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!themeWrapper.contains(e.target)) themeDropdown.classList.add('hidden');
       });
 
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
