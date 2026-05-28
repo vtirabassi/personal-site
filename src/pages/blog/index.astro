@@ -1,4 +1,43 @@
 ---
-export const prerender = false;
-return Astro.redirect('/', 301);
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
+
+<BaseLayout title="Blog — Vinicius Tirabassi" description="Artigos sobre engenharia de software e liderança técnica">
+  <h1 class="text-apple-display font-semibold text-apple-ink dark:text-[#f5f5f7] mb-12">Blog</h1>
+
+  {posts.length === 0 && (
+    <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d]">Nenhum artigo publicado ainda.</p>
+  )}
+
+  <ul class="flex flex-col gap-8">
+    {posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.slug}`} class="group block">
+          <p class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] mb-1">
+            {post.data.date.toLocaleDateString('pt-BR', {
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </p>
+          <h2 class="text-apple-tagline font-semibold text-apple-ink dark:text-[#f5f5f7] group-hover:text-apple-blue dark:group-hover:text-apple-blue-dark transition-colors">
+            {post.data.title}
+          </h2>
+          <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d] mt-1">{post.data.description}</p>
+          <div class="flex gap-2 mt-2 flex-wrap">
+            {post.data.tags.map((tag) => (
+              <span class="text-apple-caption bg-apple-parchment dark:bg-[#2c2c2e] text-apple-ink-48 dark:text-[#98989d] px-3 py-1 rounded-full border border-apple-divider dark:border-[#3a3a3c]">{tag}</span>
+            ))}
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
