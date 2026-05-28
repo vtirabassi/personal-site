@@ -112,7 +112,15 @@ function createBot() {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const bot = createBot();
-  const handler = webhookCallback(bot, 'fetch');
-  return handler(request);
+  try {
+    const bot = createBot();
+    const handler = webhookCallback(bot, 'fetch');
+    return handler(request);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    return new Response(JSON.stringify({ error: message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 };
