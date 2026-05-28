@@ -7,17 +7,17 @@
       "type": "article",
       "theme": "Machine Learning",
       "description": "Paper original da arquitetura Transformer, base dos modelos de linguagem modernos.",
-      "personalNote": "Leitura obrigatÃ³ria para entender LLMs. Denso mas fundamental.",
+      "personalNote": "Leitura obrigatÃÂ³ria para entender LLMs. Denso mas fundamental.",
       "addedAt": "2026-05-27"
     },
     {
       "id": "clean-code",
-      "title": "Clean Code â Robert C. Martin",
+      "title": "Clean Code Ã¢ÂÂ Robert C. Martin",
       "url": "https://www.oreilly.com/library/view/clean-code-a/9780136083238/",
       "type": "link",
       "theme": "Engenharia de Software",
-      "description": "Guia clÃ¡ssico para escrever cÃ³digo limpo e manutenÃ­vel.",
-      "personalNote": "Leitura obrigatÃ³ria para qualquer engenheiro de software.",
+      "description": "Guia clÃÂ¡ssico para escrever cÃÂ³digo limpo e manutenÃÂ­vel.",
+      "personalNote": "Leitura obrigatÃÂ³ria para qualquer engenheiro de software.",
       "addedAt": "2026-05-27"
     },
     {
@@ -27,6 +27,15 @@
       "type": "link",
       "theme": "https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code",
       "description": "Build AI-powered applications without writing code.",
+      "addedAt": "2026-05-28"
+    },
+    {
+      "id": "what-is-the-superpowers-plugin-for-claude-code-the-agentic-skills-framework-explained",
+      "title": "What Is the Superpowers Plugin for Claude Code? The Agentic Skills Framework Explained",
+      "url": "https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code",
+      "type": "link",
+      "theme": "IA Skills",
+      "description": "Superpowers is a free open-source plugin that installs 14 structured skills into Claude Code. Learn how it reduces tokens and improves output quality.",
       "addedAt": "2026-05-28"
     }
   ]
