@@ -10,7 +10,7 @@ export const GET: APIRoute = async () => {
   try {
     await kv.set('debug-test', '1', { ex: 60 });
     const val = await kv.get('debug-test');
-    results.kv = val === '1' ? 'ok' : 'wrong value';
+    results.kv = `got: ${JSON.stringify(val)}`;
   } catch (e) {
     results.kv = String(e);
   }

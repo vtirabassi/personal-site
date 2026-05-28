@@ -115,7 +115,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const bot = createBot();
     const handler = webhookCallback(bot, 'fetch');
-    return handler(request);
+    return await handler(request);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return new Response(JSON.stringify({ error: message }), {
