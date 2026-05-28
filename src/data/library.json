@@ -1,35 +1,6 @@
 {
   "items": [
     {
-      "id": "attention-is-all-you-need",
-      "title": "Attention Is All You Need",
-      "url": "https://arxiv.org/abs/1706.03762",
-      "type": "article",
-      "theme": "Machine Learning",
-      "description": "Paper original da arquitetura Transformer, base dos modelos de linguagem modernos.",
-      "personalNote": "Leitura obrigatÃÂÃÂ³ria para entender LLMs. Denso mas fundamental.",
-      "addedAt": "2026-05-27"
-    },
-    {
-      "id": "clean-code",
-      "title": "Clean Code ÃÂ¢ÃÂÃÂ Robert C. Martin",
-      "url": "https://www.oreilly.com/library/view/clean-code-a/9780136083238/",
-      "type": "link",
-      "theme": "Engenharia de Software",
-      "description": "Guia clÃÂÃÂ¡ssico para escrever cÃÂÃÂ³digo limpo e manutenÃÂÃÂ­vel.",
-      "personalNote": "Leitura obrigatÃÂÃÂ³ria para qualquer engenheiro de software.",
-      "addedAt": "2026-05-27"
-    },
-    {
-      "id": "page-not-found",
-      "title": "Page Not Found",
-      "url": "https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code'",
-      "type": "link",
-      "theme": "https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code",
-      "description": "Build AI-powered applications without writing code.",
-      "addedAt": "2026-05-28"
-    },
-    {
       "id": "what-is-the-superpowers-plugin-for-claude-code-the-agentic-skills-framework-explained",
       "title": "What Is the Superpowers Plugin for Claude Code? The Agentic Skills Framework Explained",
       "url": "https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code",
