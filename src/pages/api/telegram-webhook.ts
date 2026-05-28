@@ -115,6 +115,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const update = await request.json();
     const bot = createBot();
+    await bot.init();
     await bot.handleUpdate(update);
     return new Response('OK', { status: 200 });
   } catch (err) {
