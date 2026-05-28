@@ -41,3 +41,50 @@ export function buildMarkdownFile(item: RssItem): string {
 
 const FEED_URL = 'https://medium.com/feed/@viniciustirabassi';
 const OUTPUT_DIR = join(process.cwd(), 'src/content/blog');
+
+async function main() {
+  const res = await fetch(FEED_URL);
+  if (!res.ok) throw new Error(`Falha ao buscar feed: ${res.status}`);
+  const xml = await res.text();
+
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    cdataPropName: '__cdata',
+    parseTagValue: true,
+    trimValues: true,
+  });
+  const feed = parser.parse(xml);
+  const rawItems: any[] = [].concat(feed.rss.channel.item);
+
+  let imported = 0;
+  let skipped = 0;
+
+  for (const raw of rawItems) {
+    const title: string = raw.title?.__cdata ?? raw.title ?? '(sem título)';
+    const slug = slugify(title);
+    const filepath = join(OUTPUT_DIR, `${slug}.md`);
+
+    if (existsSync(filepath)) {
+      console.log(`Pulando (já existe): ${slug}.md`);
+      skipped++;
+      continue;
+    }
+
+    const item: RssItem = {
+      title,
+      pubDate: raw.pubDate,
+      link: raw.link ?? raw.guid,
+      description: raw.description?.__cdata ?? raw.description ?? '',
+      htmlContent: raw['content:encoded']?.__cdata ?? raw['content:encoded'] ?? '',
+    };
+
+    const markdown = buildMarkdownFile(item);
+    writeFileSync(filepath, markdown, 'utf-8');
+    console.log(`Importado: ${slug}.md`);
+    imported++;
+  }
+
+  console.log(`\nConcluído: ${imported} importados, ${skipped} pulados.`);
+}
+
+main().catch((err) => { console.error(err); process.exit(1); });
