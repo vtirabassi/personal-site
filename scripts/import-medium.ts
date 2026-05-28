@@ -20,7 +20,7 @@ export function stripHtml(html: string): string {
 
 export function buildFrontmatter(title: string, date: string, description: string): string {
   const escapedTitle = title.replace(/"/g, '\\"');
-  const escapedDesc = description.replace(/"/g, '\\"').slice(0, 200);
+  const escapedDesc = description.slice(0, 200).replace(/"/g, '\\"');
   return `---\ntitle: "${escapedTitle}"\ndate: ${date}\ndescription: "${escapedDesc}"\ntags: []\n---\n\n`;
 }
 
