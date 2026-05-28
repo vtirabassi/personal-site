@@ -1,7 +1,7 @@
 ---
 title: "SaaS, muito provavelmente você já deve ter ouvido falar sobre…"
 date: 2022-02-15
-description: ""
+description: "SaaS (software-as-a-service), muito provavelmente você já deve ter ouvido falar sobre esse termo, seja desenvolvendo o mesmo ou consumindo algum produto SaaS."
 tags: []
 ---
 

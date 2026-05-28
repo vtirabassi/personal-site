@@ -1,7 +1,7 @@
 ---
 title: "De Relacional a NoSQL e por quê?"
 date: 2023-10-13
-description: ""
+description: "Em algum momento de sua trajetória profissional como programador, analista ou engenheiro de software, você já deve ter se deparado com a seguinte pergunta"
 tags: []
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Azure Functions: Publicando nossa primeira função"
 date: 2024-09-11
-description: ""
+description: "Neste artigo, vamos aprender como publicar no Azure uma função desenvolvida localmente e também como interagir com uma fila como gatilho."
 tags: []
 ---
 

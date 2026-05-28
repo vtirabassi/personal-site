@@ -1,7 +1,7 @@
 ---
 title: "Arquitetura Hexagonal"
 date: 2021-08-13
-description: ""
+description: "Bom, toda vez que estudo algo novo nesse mundo de tecnologia eu falo para mim mesmo que vou documentar para compartilhar sobre e até mesmo para eu lembrar"
 tags: []
 ---
 

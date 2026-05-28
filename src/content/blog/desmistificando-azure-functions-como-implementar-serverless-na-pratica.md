@@ -1,7 +1,7 @@
 ---
 title: "Desmistificando Azure Functions: Como Implementar Serverless na Prática"
 date: 2024-08-21
-description: ""
+description: "Para entendermos melhor o Azure Functions, vamos dar um pequeno passo para trás. O que vem à mente quando você ouve a palavra Serverless?"
 tags: []
 ---
 

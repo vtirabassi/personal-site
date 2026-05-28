@@ -1,7 +1,7 @@
 ---
 title: ".NET 6 — Minimal WebApi"
 date: 2021-11-03
-description: ""
+description: "Com a versão do .NET 6 sendo lançada em novembro/2021, versão LTS. Uma das grandes novidades é a facilidade de criar pequenos endpoints de forma simples."
 tags: []
 ---
 

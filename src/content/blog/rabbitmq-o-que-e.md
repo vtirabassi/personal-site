@@ -1,7 +1,7 @@
 ---
 title: "RabbitMQ, O que é?"
 date: 2021-09-22
-description: ""
+description: "Antes de falarmos sobre o RabbitMQ, precisamos entender o que é um sistema de mensageria e seu objetivo. Um broker de mensagens capaz de processar até 20 mil mensagens por segundo."
 tags: []
 ---
 
