@@ -88,7 +88,6 @@ O RabbitMQ disponibiliza uma interface de usuário automaticamente, com isso tem
 
 Espero poder ter ajudado e ter sanado algumas curiosidades ou curiosidades. Deixe uma sugestão nos comentários e de o seu like. To igual youtuber já! :)
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=3fff92a4ba18)
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/rabbitmq-o-que-%C3%A9-3fff92a4ba18?source=rss-93f65ddb28b5------2).*

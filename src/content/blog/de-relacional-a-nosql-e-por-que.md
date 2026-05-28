@@ -112,7 +112,6 @@ Temos diversos assuntos a serem explorados quando falamos dos bancos NoSQL, como
 
 Tenham em mente que, nenhuma das tecnologias hoje existente é dada como uma bala de prata. Essa regra serve para os bancos NoSQL também. Com isso é essencial o time de engenharia testar, validar suas expectativas sobre a produtividade, desempenho do time antes de decidir utilizar um desses bancos.
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=5b521c348216)
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/de-relacional-a-nosql-e-por-qu%C3%AA-5b521c348216?source=rss-93f65ddb28b5------2).*

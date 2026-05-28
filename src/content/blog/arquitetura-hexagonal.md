@@ -66,7 +66,6 @@ Muito se fala em aplicar a arquitetura hexagonal em apenas sistemas grandes, dev
 
 Porém, isso não está escrito em pedra, uma vez que todo desenvolvimento de software demanda uma análise e discussões técnicas, podendo ter n variáveis, desde conhecimento do time quanto necessidade do negócio.
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=de58e8c495be)
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/arquitetura-hexagonal-de58e8c495be?source=rss-93f65ddb28b5------2).*

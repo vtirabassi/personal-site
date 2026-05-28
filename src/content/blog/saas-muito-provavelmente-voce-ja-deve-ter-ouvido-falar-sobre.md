@@ -90,7 +90,6 @@ Essas rotinas devem ser incluídas no codebase de sua aplicação e nunca deve s
 
 Vale lembrar que simplesmente aplicar os 12 fatores não significa que você terá uma aplicação automaticamente escalável, mas não aplicá-los irá dificultar muito. 🙌
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=d8e5fe1d878a)
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/saas-muito-provavelmente-voc%C3%AA-j%C3%A1-deve-ter-ouvido-falar-sobre-d8e5fe1d878a?source=rss-93f65ddb28b5------2).*

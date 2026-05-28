@@ -34,7 +34,8 @@ export function buildMarkdownFile(item: RssItem): string {
 
   const date = new Date(item.pubDate).toISOString().split('T')[0];
   const description = stripHtml(item.description);
-  const content = td.turndown(item.htmlContent);
+  const cleanHtml = item.htmlContent.replace(/<img[^>]+medium\.com\/_\/stat[^>]*\/?>/g, '');
+  const content = td.turndown(cleanHtml);
 
   return buildFrontmatter(item.title, date, description) + content + buildFootnote(item.link);
 }
@@ -72,7 +73,7 @@ async function main() {
 
     const item: RssItem = {
       title,
-      pubDate: raw.pubDate,
+      pubDate: raw.pubDate ?? new Date().toISOString(),
       link: raw.link ?? raw.guid,
       description: raw.description?.__cdata ?? raw.description ?? '',
       htmlContent: raw['content:encoded']?.__cdata ?? raw['content:encoded'] ?? '',

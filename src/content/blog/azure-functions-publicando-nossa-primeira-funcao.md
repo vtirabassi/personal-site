@@ -111,7 +111,6 @@ Conseguimos observar a mensagem pública sendo processada pela nossa função.
 
 Ótimo! Isso é o que eu queria compartilhar com vocês neste segundo artigo sobre Azure Functions. Espero ter contribuído um pouco mais à nossa jornada sem fim de aprendizado. 👨🏻‍💻
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=3eb0fdd91a1d)
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/azure-functions-publicando-nossa-primeira-fun%C3%A7%C3%A3o-3eb0fdd91a1d?source=rss-93f65ddb28b5------2).*

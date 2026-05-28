@@ -80,7 +80,6 @@ Acredito que seja isso! 🙌
 
 Podemos ver o quão simples é realizar a criação de novos endpoints, microsserviços com as novidades que a versão 6 do dotnet traz.
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=19f56ab814e)
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/net-6-minimal-webapi-19f56ab814e?source=rss-93f65ddb28b5------2).*

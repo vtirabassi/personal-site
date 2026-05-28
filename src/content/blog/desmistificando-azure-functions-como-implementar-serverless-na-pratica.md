@@ -139,7 +139,6 @@ Agora, ao executar o projeto com sucesso, poderemos visualizar os logs gerados p
 
 Espero ter contribuído para o seu conhecimento e desmistificado um pouco sobre a implementação do modelo serverless da Microsoft, o Azure Functions. 🙌
 
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=7c6dc811a4ad)
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/desmistificando-azure-functions-como-implementar-serverless-na-pr%C3%A1tica-7c6dc811a4ad?source=rss-93f65ddb28b5------2).*
