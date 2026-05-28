@@ -63,8 +63,9 @@ function createBot() {
         await addLibraryItem(item);
         await kv.del(`pending:${chatId}`);
         await ctx.reply('✅ Adicionado! O site será atualizado em ~2 minutos.');
-      } catch {
-        await ctx.reply('❌ Erro ao salvar. Tente novamente.');
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        await ctx.reply(`❌ Erro ao salvar: ${msg.slice(0, 200)}`);
       }
       return;
     }

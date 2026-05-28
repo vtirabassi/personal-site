@@ -16,18 +16,26 @@ export async function addLibraryItem(item: LibraryItem): Promise<void> {
   const url = `${GITHUB_API}/repos/${repo}/contents/${FILE_PATH}`;
 
   const getRes = await fetch(url, { headers: headers() });
+  if (!getRes.ok) {
+    const body = await getRes.text();
+    throw new Error(`GitHub GET failed ${getRes.status}: ${body}`);
+  }
   const fileData: { content: string; sha: string } = await getRes.json();
 
-  const library: LibraryData = JSON.parse(atob(fileData.content));
+  const library: LibraryData = JSON.parse(atob(fileData.content.replace(/\n/g, '')));
   library.items.push(item);
 
-  await fetch(url, {
+  const putRes = await fetch(url, {
     method: 'PUT',
     headers: headers(),
     body: JSON.stringify({
       message: `feat: add resource "${item.title}"`,
-      content: btoa(JSON.stringify(library, null, 2)),
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(library, null, 2)))),
       sha: fileData.sha,
     }),
   });
+  if (!putRes.ok) {
+    const body = await putRes.text();
+    throw new Error(`GitHub PUT failed ${putRes.status}: ${body}`);
+  }
 }
