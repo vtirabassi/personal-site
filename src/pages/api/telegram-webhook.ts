@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { Bot, webhookCallback } from 'grammy';
+import { Bot } from 'grammy';
 import { kv } from '@vercel/kv';
 import { fetchMetadata } from '../../lib/fetch-metadata';
 import { classifyTheme } from '../../lib/classify-theme';
@@ -113,9 +113,10 @@ function createBot() {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const update = await request.json();
     const bot = createBot();
-    const handler = webhookCallback(bot, 'fetch');
-    return await handler(request);
+    await bot.handleUpdate(update);
+    return new Response('OK', { status: 200 });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return new Response(JSON.stringify({ error: message }), {
