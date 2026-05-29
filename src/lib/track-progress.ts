@@ -1,26 +1,24 @@
 export interface TrackProgress {
-  completedModules: number[];
+  completedResources: string[];
   lastUpdated: number;
 }
 
-export function getCompletedModules(slug: string): number[] {
+export function getCompletedResources(slug: string): string[] {
   try {
     const raw = localStorage.getItem(`track-progress-${slug}`);
     if (!raw) return [];
     const data = JSON.parse(raw) as TrackProgress;
-    return Array.isArray(data.completedModules) ? data.completedModules : [];
+    return Array.isArray(data.completedResources) ? data.completedResources : [];
   } catch {
     return [];
   }
 }
 
-export function markModuleComplete(slug: string, order: number): void {
-  const completed = getCompletedModules(slug);
-  if (completed.includes(order)) return;
-  const data: TrackProgress = {
-    completedModules: [...completed, order].sort((a, b) => a - b),
-    lastUpdated: Date.now(),
-  };
+export function toggleResourceComplete(slug: string, resourceId: string): void {
+  const completed = getCompletedResources(slug);
+  const idx = completed.indexOf(resourceId);
+  const next = idx === -1 ? [...completed, resourceId] : completed.filter(id => id !== resourceId);
+  const data: TrackProgress = { completedResources: next, lastUpdated: Date.now() };
   localStorage.setItem(`track-progress-${slug}`, JSON.stringify(data));
 }
 
