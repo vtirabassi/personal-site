@@ -10,4 +10,30 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const tracks = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    category: z.string(),
+    source: z.string(),
+    estimatedHours: z.number(),
+  }),
+});
+
+const trackModules = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+    duration: z.string().optional(),
+    domain: z.string().optional(),
+    resources: z.array(z.object({
+      title: z.string(),
+      url: z.string(),
+    })).optional(),
+    exercises: z.array(z.string()).optional(),
+  }).passthrough(),
+});
+
+export const collections = { blog, tracks, 'track-modules': trackModules };
