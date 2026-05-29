@@ -93,7 +93,6 @@ const renderedModules = await Promise.all(
         id={'module-' + mod.data.order}
         class="border border-apple-hairline dark:border-[#3a3a3c] rounded-apple-lg overflow-hidden transition-colors duration-200"
       >
-        <!-- Module header -->
         <button
           class="w-full flex items-center gap-3 p-4 text-left hover:bg-apple-parchment dark:hover:bg-[#2c2c2e] transition-colors"
           onclick={'window.__toggleModule(' + mod.data.order + ')'}
@@ -114,7 +113,6 @@ const renderedModules = await Promise.all(
           </div>
         </button>
 
-        <!-- Module content -->
         <div
           id={'content-' + mod.data.order}
           class="hidden border-t border-apple-hairline dark:border-[#3a3a3c] p-4"
@@ -145,7 +143,7 @@ const renderedModules = await Promise.all(
                       rel="noopener noreferrer"
                       class="mt-1.5 inline-flex items-center gap-1 text-apple-caption text-apple-blue dark:text-apple-blue-dark bg-apple-blue/10 dark:bg-apple-blue/20 px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
                     >
-                      {r.title}
+                      Acessar →
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
                   </div>
@@ -175,7 +173,7 @@ const renderedModules = await Promise.all(
                       rel="noopener noreferrer"
                       class="mt-1.5 inline-flex items-center gap-1 text-apple-caption text-[#1a7a33] dark:text-[#34c759] bg-[#34c759]/10 dark:bg-[#34c759]/20 px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
                     >
-                      {r.title}
+                      Acessar →
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
                   </div>
@@ -184,7 +182,7 @@ const renderedModules = await Promise.all(
             </div>
           )}
 
-          <!-- Exercises (decorative) -->
+          <!-- visual only, not tracked -->
           {mod.data.exercises && (mod.data.exercises as any[]).length > 0 && (
             <div class="mb-4">
               <p class="text-apple-caption font-semibold text-apple-ink-48 dark:text-[#6e6e73] uppercase tracking-wide mb-2">
