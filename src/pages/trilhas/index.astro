@@ -10,10 +10,11 @@ const tracks = (await getCollection('tracks')).sort((a, b) =>
 );
 
 const allModules = await getCollection('track-modules');
-const moduleCounts: Record<string, number> = {};
+const resourceCounts: Record<string, number> = {};
 for (const mod of allModules) {
   const trackSlug = mod.id.split('/')[0];
-  moduleCounts[trackSlug] = (moduleCounts[trackSlug] ?? 0) + 1;
+  const count = (mod.data.officialResources as any[] | undefined)?.length ?? 0;
+  resourceCounts[trackSlug] = (resourceCounts[trackSlug] ?? 0) + count;
 }
 
 const categoryColors: Record<string, string> = {
@@ -29,7 +30,7 @@ const tracksData = tracks.map(t => ({
   category:       t.data.category,
   source:         t.data.source,
   estimatedHours: t.data.estimatedHours,
-  moduleCount:    moduleCounts[t.slug] ?? 0,
+  resourceCount:  resourceCounts[t.slug] ?? 0,
   href:           `/trilhas/${t.slug}`,
   tagClass:       categoryColors[t.data.category] ?? 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]',
 }));
@@ -109,10 +110,9 @@ const [featured, ...rest] = tracksData;
   if (listing) {
   const tracksData = JSON.parse(listing.dataset.tracks ?? '[]') as Array<{
     slug: string;
-    moduleCount: number;
+    resourceCount: number;
   }>;
 
-  // Find track with most completed resources (fallback: first alphabetically)
   let featuredSlug = tracksData[0]?.slug;
   let maxCompleted = 0;
   for (const t of tracksData) {
@@ -126,14 +126,14 @@ const [featured, ...rest] = tracksData;
   const featuredTrack = tracksData.find(t => t.slug === featuredSlug);
   if (featuredTrack && maxCompleted > 0) {
     const completed = getCompletedResources(featuredTrack.slug);
-    const pct = calcProgressPercent(completed.length, featuredTrack.moduleCount);
+    const pct = calcProgressPercent(completed.length, featuredTrack.resourceCount);
 
     const progressText = document.getElementById('featured-progress-text');
     const progressBar  = document.getElementById('featured-bar');
     const progressPct  = document.getElementById('featured-pct');
     const statusBadge  = document.getElementById('featured-status');
 
-    if (progressText) progressText.textContent = `${completed.length} de ${featuredTrack.moduleCount} recursos`;
+    if (progressText) progressText.textContent = `${completed.length} de ${featuredTrack.resourceCount} recursos`;
     if (progressBar)  progressBar.style.width = `${pct}%`;
     if (progressPct)  { progressPct.textContent = `${pct}%`; progressPct.classList.remove('hidden'); }
     if (statusBadge)  statusBadge.classList.remove('hidden');
