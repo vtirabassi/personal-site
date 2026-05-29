@@ -10,6 +10,12 @@ const blog = defineCollection({
   }),
 });
 
+const resourceItem = z.object({
+  title: z.string(),
+  description: z.string(),
+  url: z.string(),
+});
+
 const tracks = defineCollection({
   type: 'content',
   schema: z.object({
@@ -18,6 +24,7 @@ const tracks = defineCollection({
     category: z.string(),
     source: z.string(),
     estimatedHours: z.number(),
+    domains: z.array(z.object({ name: z.string(), percent: z.number() })).optional(),
   }),
 });
 
@@ -28,10 +35,8 @@ const trackModules = defineCollection({
     order: z.number(),
     duration: z.string().optional(),
     domain: z.string().optional(),
-    resources: z.array(z.object({
-      title: z.string(),
-      url: z.string(),
-    })).optional(),
+    officialResources: z.array(resourceItem).optional(),
+    complementaryResources: z.array(resourceItem).optional(),
     exercises: z.array(z.string()).optional(),
   }).passthrough(),
 });
