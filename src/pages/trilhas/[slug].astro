@@ -25,6 +25,16 @@ const categoryColors: Record<string, string> = {
 };
 const tagClass = categoryColors[track.data.category] ?? 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]';
 
+const totalResources = modules.reduce((sum, mod) => {
+  return sum + ((mod.data.officialResources as any[] | undefined)?.length ?? 0);
+}, 0);
+
+const moduleResourceCounts: Record<string, number> = {};
+for (const mod of modules) {
+  moduleResourceCounts[String(mod.data.order)] =
+    (mod.data.officialResources as any[] | undefined)?.length ?? 0;
+}
+
 const renderedModules = await Promise.all(
   modules.map(async (mod) => {
     const { Content } = await render(mod);
@@ -52,7 +62,7 @@ const renderedModules = await Promise.all(
         </h1>
         <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d]">
           {track.data.source} · ~{track.data.estimatedHours}h ·
-          <span id="modules-progress-text">0 de {modules.length} módulos</span>
+          <span id="modules-progress-text">0 de {totalResources} recursos</span>
         </p>
       </div>
       <span id="track-pct" class="text-apple-tagline font-semibold text-apple-blue dark:text-apple-blue-dark shrink-0 mt-1 hidden">
@@ -60,13 +70,20 @@ const renderedModules = await Promise.all(
       </span>
     </div>
     <ProgressBar percent={0} id="track-progress-bar" />
+
+    {track.data.domains && (track.data.domains as any[]).length > 0 && (
+      <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] mt-2">
+        {'Domínios: ' + (track.data.domains as any[]).map((d: any) => d.name + ' ' + d.percent + '%').join(' · ')}
+      </p>
+    )}
   </div>
 
   <!-- Modules list -->
   <div
     id="track-page"
     data-slug={slug}
-    data-total={modules.length}
+    data-total-resources={totalResources}
+    data-module-resource-counts={JSON.stringify(moduleResourceCounts)}
     class="flex flex-col gap-3"
   >
     {renderedModules.map(({ mod, Content }) => (
@@ -76,7 +93,7 @@ const renderedModules = await Promise.all(
         id={'module-' + mod.data.order}
         class="border border-apple-hairline dark:border-[#3a3a3c] rounded-apple-lg overflow-hidden transition-colors duration-200"
       >
-        <!-- Header: always visible, toggles content on click -->
+        <!-- Module header -->
         <button
           class="w-full flex items-center gap-3 p-4 text-left hover:bg-apple-parchment dark:hover:bg-[#2c2c2e] transition-colors"
           onclick={'window.__toggleModule(' + mod.data.order + ')'}
@@ -97,34 +114,77 @@ const renderedModules = await Promise.all(
           </div>
         </button>
 
-        <!-- Content: hidden by default, opened for current module by JS -->
+        <!-- Module content -->
         <div
           id={'content-' + mod.data.order}
           class="hidden border-t border-apple-hairline dark:border-[#3a3a3c] p-4"
         >
-          {mod.data.resources && mod.data.resources.length > 0 && (
-            <div class="mb-4">
-              <p class="text-apple-caption font-semibold text-apple-ink-48 dark:text-[#6e6e73] uppercase tracking-wide mb-2">
-                Recursos
-              </p>
-              <ul class="flex flex-col gap-1.5">
-                {(mod.data.resources as any[]).map((r: any) => (
-                  <li>
+          <!-- Official resources checklist -->
+          {mod.data.officialResources && (mod.data.officialResources as any[]).length > 0 && (
+            <div class="mb-4 flex flex-col gap-3">
+              {(mod.data.officialResources as any[]).map((r: any, idx: number) => (
+                <div class="flex items-start gap-3">
+                  <button
+                    id={'resource-check-' + mod.data.order + '-' + idx}
+                    onclick={'window.__toggleResource(' + mod.data.order + ', ' + idx + ')'}
+                    class="mt-0.5 w-4 h-4 rounded border border-apple-chip dark:border-[#3a3a3c] flex-shrink-0 bg-white dark:bg-[#2c2c2e] transition-colors hover:border-apple-blue"
+                  />
+                  <div class="flex-1 min-w-0">
+                    <p
+                      id={'resource-label-' + mod.data.order + '-' + idx}
+                      class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7]"
+                    >
+                      {r.title}
+                    </p>
+                    <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] mt-0.5">
+                      {r.description}
+                    </p>
                     <a
                       href={r.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-apple-body text-apple-blue dark:text-apple-blue-dark hover:opacity-70 transition-opacity inline-flex items-center gap-1"
+                      class="mt-1.5 inline-flex items-center gap-1 text-apple-caption text-apple-blue dark:text-apple-blue-dark bg-apple-blue/10 dark:bg-apple-blue/20 px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
                     >
                       {r.title}
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
-                  </li>
-                ))}
-              </ul>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
+          <!-- Complementary resources -->
+          {mod.data.complementaryResources && (mod.data.complementaryResources as any[]).length > 0 && (
+            <div class="mb-4 bg-apple-parchment dark:bg-[#2c2c2e] rounded-apple-md p-3">
+              <p class="text-apple-caption font-semibold text-apple-ink-48 dark:text-[#6e6e73] uppercase tracking-wide mb-3">
+                + Complementar
+              </p>
+              <div class="flex flex-col gap-3">
+                {(mod.data.complementaryResources as any[]).map((r: any) => (
+                  <div>
+                    <p class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7]">
+                      {r.title}
+                    </p>
+                    <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] mt-0.5">
+                      {r.description}
+                    </p>
+                    <a
+                      href={r.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mt-1.5 inline-flex items-center gap-1 text-apple-caption text-[#1a7a33] dark:text-[#34c759] bg-[#34c759]/10 dark:bg-[#34c759]/20 px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
+                    >
+                      {r.title}
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Exercises (decorative) -->
           {mod.data.exercises && (mod.data.exercises as any[]).length > 0 && (
             <div class="mb-4">
               <p class="text-apple-caption font-semibold text-apple-ink-48 dark:text-[#6e6e73] uppercase tracking-wide mb-2">
@@ -144,14 +204,6 @@ const renderedModules = await Promise.all(
           <article class="prose prose-apple dark:prose-invert prose-sm mt-4 max-w-none">
             <Content />
           </article>
-
-          <button
-            id={'complete-btn-' + mod.data.order}
-            class="hidden mt-4 bg-apple-blue hover:bg-apple-blue-focus text-white text-apple-caption font-medium px-4 py-2 rounded-full transition-colors"
-            onclick={'window.__completeModule(' + mod.data.order + ')'}
-          >
-            Marcar como concluído
-          </button>
         </div>
       </div>
     ))}
@@ -159,20 +211,21 @@ const renderedModules = await Promise.all(
 </BaseLayout>
 
 <script>
-  import { getCompletedModules, markModuleComplete, calcProgressPercent } from '../../lib/track-progress';
+  import { getCompletedResources, toggleResourceComplete, calcProgressPercent } from '../../lib/track-progress';
 
   const page = document.getElementById('track-page')!;
-  const slug         = page.dataset.slug!;
-  const totalModules = parseInt(page.dataset.total!);
+  const slug            = page.dataset.slug!;
+  const totalResources  = parseInt(page.dataset.totalResources!);
+  const moduleResourceCounts: Record<string, number> = JSON.parse(page.dataset.moduleResourceCounts!);
 
   function updateProgress() {
-    const completed = getCompletedModules(slug);
-    const pct = calcProgressPercent(completed.length, totalModules);
+    const completed = getCompletedResources(slug);
+    const pct = calcProgressPercent(completed.length, totalResources);
 
     const progressText = document.getElementById('modules-progress-text');
     const progressBar  = document.getElementById('track-progress-bar');
     const pctEl        = document.getElementById('track-pct');
-    if (progressText) progressText.textContent = `${completed.length} de ${totalModules} módulos`;
+    if (progressText) progressText.textContent = `${completed.length} de ${totalResources} recursos`;
     if (progressBar)  progressBar.style.width = `${pct}%`;
     if (pctEl)        { pctEl.textContent = `${pct}%`; pctEl.classList.remove('hidden'); }
 
@@ -180,17 +233,22 @@ const renderedModules = await Promise.all(
     let currentFound = false;
 
     moduleEls.forEach(el => {
-      const order   = parseInt(el.dataset.order!);
-      const isDone  = completed.includes(order);
-      const isCurrent = !isDone && !currentFound;
+      const order = parseInt(el.dataset.order!);
+      const count = moduleResourceCounts[String(order)] ?? 0;
+
+      let moduleDone = count > 0;
+      for (let i = 0; i < count; i++) {
+        if (!completed.includes(`${order}-${i}`)) { moduleDone = false; break; }
+      }
+
+      const isCurrent = !moduleDone && !currentFound;
       if (isCurrent) currentFound = true;
 
-      const indicator  = document.getElementById(`indicator-${order}`);
-      const content    = document.getElementById(`content-${order}`);
-      const completeBtn = document.getElementById(`complete-btn-${order}`);
+      const indicator   = document.getElementById(`indicator-${order}`);
+      const content     = document.getElementById(`content-${order}`);
 
       if (indicator) {
-        if (isDone) {
+        if (moduleDone) {
           indicator.className = 'w-4 h-4 rounded-full bg-apple-blue flex-shrink-0';
         } else if (isCurrent) {
           indicator.className = 'w-4 h-4 rounded-full border-2 border-apple-blue bg-white dark:bg-[#1c1c1e] flex-shrink-0';
@@ -207,22 +265,29 @@ const renderedModules = await Promise.all(
         el.classList.add('border-apple-hairline', 'dark:border-[#3a3a3c]');
       }
 
-      // Auto-open current, collapse done
       if (content) {
         if (isCurrent) content.classList.remove('hidden');
-        else if (isDone) content.classList.add('hidden');
+        else if (moduleDone) content.classList.add('hidden');
       }
 
-      if (completeBtn) {
-        if (isCurrent) completeBtn.classList.remove('hidden');
-        else           completeBtn.classList.add('hidden');
+      for (let i = 0; i < count; i++) {
+        const isDoneResource = completed.includes(`${order}-${i}`);
+        const checkbox = document.getElementById(`resource-check-${order}-${i}`);
+        const label    = document.getElementById(`resource-label-${order}-${i}`);
+        if (checkbox) {
+          checkbox.classList.toggle('bg-apple-blue', isDoneResource);
+          checkbox.classList.toggle('border-apple-blue', isDoneResource);
+        }
+        if (label) {
+          label.classList.toggle('line-through', isDoneResource);
+          label.classList.toggle('opacity-50', isDoneResource);
+        }
       }
     });
   }
 
-  // Expose to inline onclick handlers (required because onclick attrs call globals, not module scope)
-  (window as any).__completeModule = (order: number) => {
-    markModuleComplete(slug, order);
+  (window as any).__toggleResource = (order: number, index: number) => {
+    toggleResourceComplete(slug, `${order}-${index}`);
     updateProgress();
   };
 
