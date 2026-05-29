@@ -11,6 +11,7 @@ const { title, description = 'Meu site pessoal' } = Astro.props;
 
 const library = libraryRaw as LibraryData;
 const posts = await getCollection('blog');
+const tracks = await getCollection('tracks');
 
 const searchItems = [
   ...posts.map(p => ({
@@ -26,6 +27,13 @@ const searchItems = [
     description: i.description ?? '',
     url: i.url,
     external: true,
+  })),
+  ...tracks.map(t => ({
+    type: 'trilha',
+    title: t.data.title,
+    description: t.data.description,
+    url: `/trilhas/${t.slug}`,
+    external: false,
   })),
 ];
 ---
@@ -230,9 +238,13 @@ const searchItems = [
 
         hits.forEach(item => {
           const li = document.createElement('li');
-          const label = item.type === 'blog' ? 'Blog' : 'Biblioteca';
+          const label = item.type === 'blog' ? 'Blog'
+                      : item.type === 'trilha' ? 'Trilha'
+                      : 'Biblioteca';
           const labelColor = item.type === 'blog'
             ? 'bg-apple-blue/10 text-apple-blue'
+            : item.type === 'trilha'
+            ? 'bg-[#34c759]/10 text-[#1a7a33] dark:text-[#34c759]'
             : 'bg-[#3a3a3c]/10 text-apple-ink-48 dark:text-[#98989d]';
 
           li.innerHTML = `
