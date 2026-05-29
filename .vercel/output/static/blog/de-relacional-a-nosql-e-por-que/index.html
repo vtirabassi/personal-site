@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="pt-BR"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Em algum momento de sua trajetória profissional como programador, analista ou engenheiro de software, você já deve ter se deparado com a seguinte pergunta"><title>De Relacional a NoSQL e por quê?</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- Prevent flash of wrong theme --><script>
+      (function () {
+        var t = localStorage.getItem('theme') || 'system';
+        var dark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      })();
+    </script><link rel="stylesheet" href="/_astro/_slug_.BoorSqYC.css"></head> <body class="min-h-screen bg-white dark:bg-[#1c1c1e] text-apple-ink dark:text-[#f5f5f7] transition-colors duration-200" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;"> <!-- Nav --> <nav class="bg-black h-11 flex items-center px-6 sticky top-0 z-50"> <div class="max-w-[980px] mx-auto w-full flex items-center justify-between gap-4"> <a href="/" class="text-apple-nav text-white font-normal hover:opacity-70 transition-opacity shrink-0">
+Vinicius Tirabassi
+</a> <div class="flex items-center gap-4"> <a href="/sobre" class="text-apple-nav text-white/80 hover:text-white transition-colors">Sobre</a> <a href="/blog" class="text-apple-nav text-white/80 hover:text-white transition-colors">Blog</a> <a href="/library" class="text-apple-nav text-white/80 hover:text-white transition-colors">Biblioteca</a> <!-- Search box --> <button id="search-open" aria-label="Buscar" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/70 hover:text-white rounded-full px-3 h-7 transition-colors text-apple-nav"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path> </svg> <span class="hidden sm:inline">Buscar</span> </button> <!-- Theme dropdown --> <div class="relative" id="theme-wrapper"> <button id="theme-toggle" aria-label="Alternar tema" class="text-white/80 hover:text-white transition-colors p-1 -m-1"> <svg id="icon-system" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line> </svg> <svg id="icon-light" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg> <svg id="icon-dark" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <div id="theme-dropdown" class="hidden absolute right-0 top-[calc(100%+8px)] bg-white dark:bg-[#2c2c2e] border border-apple-hairline dark:border-[#3a3a3c] rounded-apple-md shadow-lg py-1 w-36 z-50"> <button data-theme="system" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line> </svg>
+Sistema
+</button> <button data-theme="light" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg>
+Claro
+</button> <button data-theme="dark" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg>
+Escuro
+</button> </div> </div> </div> </div> </nav> <!-- Search panel --> <div id="search-backdrop" class="hidden fixed inset-0 z-40 bg-black/40" aria-hidden="true"></div> <div id="search-panel" class="hidden fixed top-11 left-0 right-0 z-50 bg-white dark:bg-[#1c1c1e] border-b border-apple-hairline dark:border-[#3a3a3c] shadow-lg"> <div class="max-w-[980px] mx-auto px-6 py-4"> <div class="relative"> <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-apple-ink-48 dark:text-[#6e6e73] pointer-events-none" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path> </svg> <input id="search-input" type="search" placeholder="Buscar artigos e recursos..." autocomplete="off" class="w-full bg-apple-parchment dark:bg-[#2c2c2e] text-apple-ink dark:text-[#f5f5f7] placeholder-apple-ink-48 dark:placeholder-[#6e6e73] rounded-apple-md px-4 py-2 pl-10 text-apple-body border border-apple-hairline dark:border-[#3a3a3c] outline-none focus:border-apple-blue dark:focus:border-apple-blue-dark"> </div> <ul id="search-results" class="mt-3 flex flex-col gap-1 max-h-72 overflow-y-auto empty:hidden"></ul> </div> </div> <main class="max-w-[980px] mx-auto px-6 py-20">  <article> <header class="mb-8"> <p class="text-apple-caption text-apple-ink-48 mb-2"> 12 de outubro de 2023 </p> <h1 class="text-apple-display font-semibold text-apple-ink leading-tight">De Relacional a NoSQL e por quê?</h1> <p class="text-apple-body text-apple-ink-48 mt-3">Em algum momento de sua trajetória profissional como programador, analista ou engenheiro de software, você já deve ter se deparado com a seguinte pergunta</p> <div class="flex gap-2 mt-4 flex-wrap">  </div> </header> <div class="prose prose-gray max-w-none"> <p><img src="https://cdn-images-1.medium.com/max/1024/1*CcTjcvXTFfIcSkY2AEmP2g.png" alt=""></p>
+<p>Em algum momento de sua trajetória profissional como programador, analista ou engenheiro de software, você já deve ter se deparado com a seguinte pergunta:</p>
+<blockquote>
+<p>Quais são os cenários ideais para o uso de bancos de dados relacionais e bancos de dados NoSQL (não relacionais)?</p>
+</blockquote>
+<p>Pois bem, a resposta que por muito anos eu usava era algo assim: “<em>Opto por um banco relacional quando tenho dados bem estruturados (schemas bem definidos) e quando não, opto por um NoSQL</em>”.</p>
+<p>Pois bem, a resposta não é de se jogar totalmente fora, mas ela pode e deve ser melhor elaborada e entendida, espero poder enriquecer de alguma forma essa discussão com esse artigo.</p>
+<h4 id="porque-o-termonosql">Porque o termo NoSQL?</h4>
+<p>Para os curiosos de plantão, o termo NoSQL tem origem de um nome dado à uma reunião realizada nos Estados Unidos entre desenvolvedores que tinham o intuito de fomentar e entender melhor sobre o assunto do momento que ocorria em meados de 2009, que era sobre esses novos bancos de dados que estavam surgindo.</p>
+<p>Embora os bancos de dados NoSQL não utilizam a linguagem SQL, o nome não possui uma ligação direta com essa característica, por mais que existem bancos NoSQL que possuem a linguagem de consulta parecida.</p>
+<p>Outro ponto interessante, é que o termo NoSQL não possui uma definição genérica, o que podemos fazer é analisar as característica comuns entre os bancos que estão de baixo dessa termo (guarda-chuva), assim por dizer.</p>
+<h4 id="mas-por-que-mexer-em-time-que-esta-ganhando"><strong>Mas por que mexer em time que esta ganhando?</strong></h4>
+<p>Com a web no século XXI, o mundo está conectado a todo tempo, consequentemente grandes volumes de informações e dados são gerados constantemente. Diante desse cenário, surge a necessidade crucial de armazenar esses dados de forma eficaz.</p>
+<p>Mas por que não armazenar esses dados em bancos já existentes, como os bancos relacionais?</p>
+<p>O que mais chama a atenção no NoSQL é sua capacidade de executar banco de dados em um grande cluster. Conforme os volumes de dados aumentam, o trabalho de de fazer uma expansão em bancos relacionais se torna mais difícil e caro, uma vez que existe a necessidade de compra de um novo servidor maior do que o banco relacional está (escalonamento vertical).</p>
+<p>Uma opção que se torna interessante é a escalonamento horizontal, uma forma distribuída dos dados, isso se torna possível com os bancos sendo executados em um cluster que possui um pool (uma quantidade) de nodos, vale salientar que essa decisão introduz um malefício para as equipes: a complexidade.</p>
+<p>De forma resumida existe duas maneiras para a distribuição dos dados no cluster: a <strong>replicação</strong> e <strong>fragmentação</strong>. Nós não iremos entrar em detalhes, mas em termos gerais a replicação copia o mesmo dados em diversos nodos, já a fragmentação coloca os dados diferentes em nodos diferentes. Não necessariamente você terá que escolher entre as duas, você pode utiliza ambas.</p>
+<p>Outro fato interessante para termos mais razões para se considerar o uso do NoSQL, é a necessidade das equipes de entregas serem constantemente provocadas em termos de eficiência (no planejamento, desenvolvimento) de projetos, para assim, o grande objetivo de “time to market” das empresas serem atingidos. Sabemos que planejar e realizar o mapeamento de dados (schemas) é um processo custoso e os bancos NoSQL possam ser uma opção nessa provocação.</p>
+<p>Algumas principais características que podemos destacar dos bancos NoSQL são:</p>
+<ul>
+<li>Boa execução em clusters;</li>
+<li>Não possuem schemas;</li>
+<li>Não utilizam o modelo relacional;</li>
+<li>São open-sources.</li>
+</ul>
+<p>Precisamos destacar também o termo persistência poliglota, que nada mais é que agora há diversas opções para o armazenamento de dados, com isso precisamos entender os dados que estamos trabalhando e o problema em questão e tentar realizar a melhor escolha dado as opções de banco de dados que agora temos disponíveis.</p>
+<p>Vamos entender um pouco melhor as categorias dos bancos NoSQL existentes.</p>
+<h4 id="bancos-de-dados-de-chave-valor">Bancos de dados de chave-valor</h4>
+<p>São bancos que armazenam seus dados em um tabela de hash simples, o que é isso? São tabelas que você armazena os dados em formas de pares de chave e valor. Aqui temos o conceito de deposito de chave-valor, que nada mais são do que os depósitos de dados NoSQL mais simples de utilizar, possibilitando as funções de inserir, atualizar, excluir e pesquisar, a partir de uma chave informada.</p>
+<p><img src="https://cdn-images-1.medium.com/max/698/1*EiLo6pTU2L1dvDsWcaI_ow.png" alt=""></p>
+<p>São indicados para armazenamento e recuperação rapidos de dados com operações simples de leitura e escrita. Ideais para armazenamentos temporários de dados tornando super indicado para sessões, cache, carrinho de compras de usuário, por exemplo.</p>
+<p>Não são muito indicados quando há a necessidade de consultas mais complexas e modelagens de dados mais estruturados que possuem um grande relacionamento entre si.</p>
+<p>Exemplos de banco: Redis, MemCachedDB, DynamoDB.</p>
+<h4 id="bancos-de-dados-colunares">Bancos de dados colunares</h4>
+<p>Permitem o armazenamento dos dados com chaves mapeadas para valores, os valores são agrupados em múltiplas famílias de colunas.</p>
+<p>Famílias de colunas são grupos de dados relacionados que na maioria dos casos são acessados juntos.</p>
+<p>Cada família de coluna pode ser comparada a um contêiner, conjunto de linhas em uma tabela SQL, onde a chave identifica a linha, que é constituída de múltiplas colunas. A diferença que a linha não precisa ter as mesmas colunas, onde uma nova coluna pode ser adicionada facilmente a qualquer linha ser ter a necessidade de ser adicionada em todas.</p>
+<p><img src="https://cdn-images-1.medium.com/max/760/1*YV-g_aSHP-T-Aw21zEvICA.png" alt=""></p>
+<p>Devido sua alta eficiência em compressão de dados e otimização para consultas, normalmente são indicados e usados em registros de eventos, como logs, devido o grande volume de dados que são gerados e armazenados e por muitas vezes há a necessidade de consultas analíticas complexas.</p>
+<p>Por outro lado, quando o acesso rápido a um único dado for necessario ou existir uma estrutura de dados altamente relacionadas, os bancos de dados colunares não são muito indicados devido não serem otimizados para essas operações.</p>
+<p>Exemplos de banco: Cassandra, HBase, Google BigQuery, Azure SQL Data Warehouse.</p>
+<h4 id="bancos-de-dados-degrafos">Bancos de dados de grafos</h4>
+<p>São bancos que armazenam entidades, possibilitando também o relacionamento entre elas.</p>
+<p>Entidades são conhecidas como nodos que por sua vez possuem uma ou mais propriedades.</p>
+<p>Os relacionamentos são conhecidos como arestas que também podem ter propriedades. As arestas possuem significância direcional, o que isso significa? Que elas possuem uma relação unidirecional, uma direnção definida de um nodo de origem para um nodo de destino.</p>
+<p><img src="https://cdn-images-1.medium.com/max/580/1*i9A0JVcx56mYOU0XiMjwnA.jpeg" alt=""></p>
+<p>Com essas características e fácil relacionamento entre os nodos atraves das arestas, esse tipo de banco é bastante usado e indicado quando os dados possuem relacionamentos complexos e interconectados, conseguimos fazer uma conexão com as redes sociais ou sistemas de recomendações onde todos os dados são interconectados.</p>
+<p>Já essa caterogia não é muito recomendada quando não há a necessidade de exploxar esses relacionamentos, e quando há necessidade de consultas simples principalmente com um único dado.</p>
+<p>Exemplos de banco: Neo4J, Amazon Neptune.</p>
+<h4 id="banco-de-dados-de-documentos">Banco de dados de documentos</h4>
+<p>São bancos que armazenam e recuperam documentos que são semelhantes entre si, mas não necessariamente idênticos, na maioria dos casos os documentos são XML e JSON.</p>
+<p>Pense no armazenamento de chave-valor, os documentos são armazenados na parte do valor e esse valor pode ser examinado (queries).</p>
+<p><img src="https://cdn-images-1.medium.com/max/798/1*3JIvwG38SlkYVksM0bGL1w.png" alt=""></p>
+<p>Um característica é no valor do documento, não há atributos vazios, nulos. Também os documentos permitem que sejam adicionados novos atributos e que não tenha a necessidade de mapear o novo atributo nos documentos já existentes.</p>
+<p>Essa categoria de banco é fortemente indicada quando a necessidade de um esquema flexível, uma vez que você pode adicionar novos documentos com atributos diferentes sem ter que alterar os já existentes.</p>
+<p>Já quando os dados são fortemente tipados, altamente relacionados, o acesso rápido seja um requisito, consultas complexas serão frequentes e a consistência rígida que garanta que todas as réplicas de dados estarão atualizadas, essa categoria não é a mais indica.</p>
+<p>Exemplos de banco: MongoDB, CouchDB, Firebase Firestore.</p>
+<p>Temos diversos assuntos a serem explorados quando falamos dos bancos NoSQL, como os modelos de distribuição, consistências (Teorema CAP), marcadores de versões, mas a minha intenção principal era dar um panorama geral das categorias existentes de bancos não relacionais e enriquecer um pouco mais a resposta que poderia ser dada para a primeira pergunta desse artigo.</p>
+<p>Tenham em mente que, nenhuma das tecnologias hoje existente é dada como uma bala de prata. Essa regra serve para os bancos NoSQL também. Com isso é essencial o time de engenharia testar, validar suas expectativas sobre a produtividade, desempenho do time antes de decidir utilizar um desses bancos.</p>
+<hr>
+<p><em>Publicado originalmente no <a href="https://medium.com/@viniciustirabassi/de-relacional-a-nosql-e-por-qu%C3%AA-5b521c348216?source=rss-93f65ddb28b5------2">Medium</a>.</em></p> </div> <div class="mt-12 pt-8 border-t border-apple-hairline dark:border-[#3a3a3c]"> <a href="/" class="text-apple-body text-apple-blue dark:text-apple-blue-dark hover:opacity-70 transition-opacity">
+← Voltar para o blog
+</a> </div> </article>  </main> <footer class="bg-apple-parchment dark:bg-[#111113] px-6 py-16 mt-20 border-t border-apple-hairline dark:border-[#3a3a3c]"> <div class="max-w-[980px] mx-auto text-center text-apple-fine text-apple-ink-80 dark:text-[#6e6e73]">
+© 2026 Vinicius Tirabassi
+</div> </footer> <script>(function(){const searchItems = [{"type":"blog","title":"Olá, mundo!","description":"Primeiro artigo do blog — uma apresentação.","url":"/blog/hello-world","external":false},{"type":"blog","title":"Arquitetura Hexagonal","description":"Bom, toda vez que estudo algo novo nesse mundo de tecnologia eu falo para mim mesmo que vou documentar para compartilhar sobre e até mesmo para eu lembrar","url":"/blog/arquitetura-hexagonal","external":false},{"type":"blog","title":"Azure Functions: Publicando nossa primeira função","description":"Neste artigo, vamos aprender como publicar no Azure uma função desenvolvida localmente e também como interagir com uma fila como gatilho.","url":"/blog/azure-functions-publicando-nossa-primeira-funcao","external":false},{"type":"blog","title":"Desmistificando Azure Functions: Como Implementar Serverless na Prática","description":"Para entendermos melhor o Azure Functions, vamos dar um pequeno passo para trás. O que vem à mente quando você ouve a palavra Serverless?","url":"/blog/desmistificando-azure-functions-como-implementar-serverless-na-pratica","external":false},{"type":"blog","title":"De Relacional a NoSQL e por quê?","description":"Em algum momento de sua trajetória profissional como programador, analista ou engenheiro de software, você já deve ter se deparado com a seguinte pergunta","url":"/blog/de-relacional-a-nosql-e-por-que","external":false},{"type":"blog","title":".NET 6 — Minimal WebApi","description":"Com a versão do .NET 6 sendo lançada em novembro/2021, versão LTS. Uma das grandes novidades é a facilidade de criar pequenos endpoints de forma simples.","url":"/blog/net-6-minimal-webapi","external":false},{"type":"blog","title":"RabbitMQ, O que é?","description":"Antes de falarmos sobre o RabbitMQ, precisamos entender o que é um sistema de mensageria e seu objetivo. Um broker de mensagens capaz de processar até 20 mil mensagens por segundo.","url":"/blog/rabbitmq-o-que-e","external":false},{"type":"blog","title":"SaaS, muito provavelmente você já deve ter ouvido falar sobre…","description":"SaaS (software-as-a-service), muito provavelmente você já deve ter ouvido falar sobre esse termo, seja desenvolvendo o mesmo ou consumindo algum produto SaaS.","url":"/blog/saas-muito-provavelmente-voce-ja-deve-ter-ouvido-falar-sobre","external":false},{"type":"library","title":"What Is the Superpowers Plugin for Claude Code? The Agentic Skills Framework Explained","description":"Superpowers is a free open-source plugin that installs 14 structured skills into Claude Code. Learn how it reduces tokens and improves output quality.","url":"https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code","external":true},{"type":"library","title":"Structured-Prompt-Driven Development (SPDD)","description":"","url":"https://martinfowler.com/articles/structured-prompt-driven/","external":true}];
+
+      // --- Theme ---
+      const icons = {
+        system: document.getElementById('icon-system'),
+        light:  document.getElementById('icon-light'),
+        dark:   document.getElementById('icon-dark'),
+      };
+      const themeDropdown = document.getElementById('theme-dropdown');
+      const themeWrapper  = document.getElementById('theme-wrapper');
+
+      function applyTheme(t) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = t === 'dark' || (t === 'system' && prefersDark);
+        document.documentElement.classList.toggle('dark', isDark);
+        Object.entries(icons).forEach(([key, el]) => {
+          if (el) el.classList.toggle('hidden', key !== t);
+        });
+        // highlight active option
+        document.querySelectorAll('.theme-option').forEach(btn => {
+          btn.classList.toggle('font-semibold', btn.dataset.theme === t);
+        });
+      }
+
+      function getTheme() { return localStorage.getItem('theme') || 'system'; }
+
+      applyTheme(getTheme());
+
+      document.getElementById('theme-toggle').addEventListener('click', (e) => {
+        e.stopPropagation();
+        themeDropdown.classList.toggle('hidden');
+      });
+
+      document.querySelectorAll('.theme-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.dataset.theme;
+          localStorage.setItem('theme', t);
+          applyTheme(t);
+          themeDropdown.classList.add('hidden');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!themeWrapper.contains(e.target)) themeDropdown.classList.add('hidden');
+      });
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (getTheme() === 'system') applyTheme('system');
+      });
+
+      // --- Search ---
+      const searchOpen    = document.getElementById('search-open');
+      const searchPanel   = document.getElementById('search-panel');
+      const searchBackdrop = document.getElementById('search-backdrop');
+      const searchInput   = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+
+      function openSearch() {
+        searchPanel.classList.remove('hidden');
+        searchBackdrop.classList.remove('hidden');
+        searchInput.focus();
+      }
+
+      function closeSearch() {
+        searchPanel.classList.add('hidden');
+        searchBackdrop.classList.add('hidden');
+        searchInput.value = '';
+        searchResults.innerHTML = '';
+      }
+
+      searchOpen.addEventListener('click', openSearch);
+      searchBackdrop.addEventListener('click', closeSearch);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeSearch();
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+      });
+
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.trim().toLowerCase();
+        searchResults.innerHTML = '';
+        if (!q) return;
+
+        const hits = searchItems.filter(item =>
+          item.title.toLowerCase().includes(q) || item.description.toLowerCase().includes(q)
+        ).slice(0, 8);
+
+        if (!hits.length) {
+          searchResults.innerHTML = '<li class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] px-2 py-3">Nenhum resultado encontrado.</li>';
+          return;
+        }
+
+        hits.forEach(item => {
+          const li = document.createElement('li');
+          const label = item.type === 'blog' ? 'Blog' : 'Biblioteca';
+          const labelColor = item.type === 'blog'
+            ? 'bg-apple-blue/10 text-apple-blue'
+            : 'bg-[#3a3a3c]/10 text-apple-ink-48 dark:text-[#98989d]';
+
+          li.innerHTML = `
+            <a href="${item.url}"
+               ${item.external ? 'target="_blank" rel="noopener noreferrer"' : ''}
+               class="flex items-start gap-3 px-3 py-2 rounded-apple-md hover:bg-apple-parchment dark:hover:bg-[#2c2c2e] transition-colors group">
+              <span class="mt-[2px] shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full ${labelColor}">${label}</span>
+              <div class="min-w-0">
+                <p class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7] group-hover:text-apple-blue dark:group-hover:text-apple-blue-dark transition-colors truncate">${item.title}</p>
+                <p class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] truncate">${item.description}</p>
+              </div>
+            </a>
+          `;
+          li.querySelector('a').addEventListener('click', closeSearch);
+          searchResults.appendChild(li);
+        });
+      });
+    })();</script> </body> </html>

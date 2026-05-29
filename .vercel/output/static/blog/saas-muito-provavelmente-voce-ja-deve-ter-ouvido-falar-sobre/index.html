@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="pt-BR"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="SaaS (software-as-a-service), muito provavelmente você já deve ter ouvido falar sobre esse termo, seja desenvolvendo o mesmo ou consumindo algum produto SaaS."><title>SaaS, muito provavelmente você já deve ter ouvido falar sobre…</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- Prevent flash of wrong theme --><script>
+      (function () {
+        var t = localStorage.getItem('theme') || 'system';
+        var dark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      })();
+    </script><link rel="stylesheet" href="/_astro/_slug_.BoorSqYC.css"></head> <body class="min-h-screen bg-white dark:bg-[#1c1c1e] text-apple-ink dark:text-[#f5f5f7] transition-colors duration-200" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;"> <!-- Nav --> <nav class="bg-black h-11 flex items-center px-6 sticky top-0 z-50"> <div class="max-w-[980px] mx-auto w-full flex items-center justify-between gap-4"> <a href="/" class="text-apple-nav text-white font-normal hover:opacity-70 transition-opacity shrink-0">
+Vinicius Tirabassi
+</a> <div class="flex items-center gap-4"> <a href="/sobre" class="text-apple-nav text-white/80 hover:text-white transition-colors">Sobre</a> <a href="/blog" class="text-apple-nav text-white/80 hover:text-white transition-colors">Blog</a> <a href="/library" class="text-apple-nav text-white/80 hover:text-white transition-colors">Biblioteca</a> <!-- Search box --> <button id="search-open" aria-label="Buscar" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/70 hover:text-white rounded-full px-3 h-7 transition-colors text-apple-nav"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path> </svg> <span class="hidden sm:inline">Buscar</span> </button> <!-- Theme dropdown --> <div class="relative" id="theme-wrapper"> <button id="theme-toggle" aria-label="Alternar tema" class="text-white/80 hover:text-white transition-colors p-1 -m-1"> <svg id="icon-system" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line> </svg> <svg id="icon-light" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg> <svg id="icon-dark" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <div id="theme-dropdown" class="hidden absolute right-0 top-[calc(100%+8px)] bg-white dark:bg-[#2c2c2e] border border-apple-hairline dark:border-[#3a3a3c] rounded-apple-md shadow-lg py-1 w-36 z-50"> <button data-theme="system" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line> </svg>
+Sistema
+</button> <button data-theme="light" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg>
+Claro
+</button> <button data-theme="dark" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg>
+Escuro
+</button> </div> </div> </div> </div> </nav> <!-- Search panel --> <div id="search-backdrop" class="hidden fixed inset-0 z-40 bg-black/40" aria-hidden="true"></div> <div id="search-panel" class="hidden fixed top-11 left-0 right-0 z-50 bg-white dark:bg-[#1c1c1e] border-b border-apple-hairline dark:border-[#3a3a3c] shadow-lg"> <div class="max-w-[980px] mx-auto px-6 py-4"> <div class="relative"> <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-apple-ink-48 dark:text-[#6e6e73] pointer-events-none" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path> </svg> <input id="search-input" type="search" placeholder="Buscar artigos e recursos..." autocomplete="off" class="w-full bg-apple-parchment dark:bg-[#2c2c2e] text-apple-ink dark:text-[#f5f5f7] placeholder-apple-ink-48 dark:placeholder-[#6e6e73] rounded-apple-md px-4 py-2 pl-10 text-apple-body border border-apple-hairline dark:border-[#3a3a3c] outline-none focus:border-apple-blue dark:focus:border-apple-blue-dark"> </div> <ul id="search-results" class="mt-3 flex flex-col gap-1 max-h-72 overflow-y-auto empty:hidden"></ul> </div> </div> <main class="max-w-[980px] mx-auto px-6 py-20">  <article> <header class="mb-8"> <p class="text-apple-caption text-apple-ink-48 mb-2"> 14 de fevereiro de 2022 </p> <h1 class="text-apple-display font-semibold text-apple-ink leading-tight">SaaS, muito provavelmente você já deve ter ouvido falar sobre…</h1> <p class="text-apple-body text-apple-ink-48 mt-3">SaaS (software-as-a-service), muito provavelmente você já deve ter ouvido falar sobre esse termo, seja desenvolvendo o mesmo ou consumindo algum produto SaaS.</p> <div class="flex gap-2 mt-4 flex-wrap">  </div> </header> <div class="prose prose-gray max-w-none"> <p><img src="https://cdn-images-1.medium.com/max/845/1*Pu3vnbFzM2sRCkOEK6Gyfw.png" alt=""></p>
+<p>SaaS (software-as-a-service <em>em inglês)</em>, muito provavelmente você já deve ter ouvido falar sobre esse termo, seja desenvolvendo o mesmo ou consumindo algum produto SaaS. Um dos exemplos mais famosos que temos, é o Netflix, plataforma de streaming de vídeos que vende seu software como serviço para clientes finais (nós).</p>
+<p>O SaaS permite que os usuários possam se conectar e utilizar aplicativos baseados em nuvem pela Internet, sem a necessidade de adquirir uma licença ou instala-ló localmente.</p>
+<p>O Twelve-Factor é um método pensado e construído pelos desenvolvedores da Heroku (plataforma e serviços em nuvem), com objetivo de evangelizar e compartilhar as melhores práticas para desenvolvimento de aplicativos software-as-a-service.</p>
+<p>Uma maneira de poder compreender os 12 fatores, é pensarmos inicialmente em 3 blocos maiores, são eles: <strong>Code Factor</strong>, <strong>Deploy Factor</strong>, <strong>Operate Factor</strong>.</p>
+<h3 id="code-factor">Code Factor</h3>
+<h4 id="1-codebase">1. Codebase</h4>
+<p>Pode parecer óbvio, mas não custa nada lembrar né?<br>
+Todo código deve estar em um sistema de controle de versão, como GitHub, Bitbucket. Isso torna possível o rastreamento de qualquer alteração no código e termos também o controle de todos os deploys já realizados.</p>
+<p>Deve haver apenas um repositório (base de código) para cada projeto. Tendo uma relação 1:1.</p>
+<h4 id="5-buid-releaserun">5. Buid, Release, Run</h4>
+<p><em>Build</em>: Transformar uma versão do seu repositório e tornar-lá uma versão executável.</p>
+<p><em>Release</em>: Combinação do build com suas devidas configurações de ambiente deixando-á preparada para run.</p>
+<p><em>Run</em>: Execução de todos os processos necessários para o possível uso do cliente final no ambiente desejado.</p>
+<h4 id="10-devprodparity">10. Dev/Prod parity</h4>
+<p>O sonho de todos os desenvolvedores.<br>
+Sempre que possível mantenha os ambientes de desenvolvimento, homologação e produção (DEV/HOM/PROD) o mais similar possível, seja aplicações front-end, back-end, até mesmo os dados.</p>
+<h3 id="deploy-factor">Deploy Factor</h3>
+<h4 id="2-dependencies">2. Dependencies</h4>
+<p>Tenha certeza que o código realiza a declaração explícita de todas as dependências necessárias, garantindo que nenhuma aplicação dependa de pacote específicos dos sistemas operacionais, onde é preciso estar instalados na máquina, um exemplo seria o arquivo <em>package.json</em></p>
+<p>Um dos benefícios a se destacar é também a fácil configuração do ambiente para um novo desenvolvedor que chegará na equipe, garantindo que não haverá diferenças entre ambientes.</p>
+<h4 id="3-config">3. Config</h4>
+<p>As configurações das aplicações devem ser armazenadas separadamente do código fonte, ou seja, ter um repositório para o código fonte da aplicação e outro para as configurações.</p>
+<p>Mas o que faz parte de um config?<br>
+Podemos considerar todas as informações que variam entre os ambientes, onde cada ambiente precisa ter uma informação divergente do outro.</p>
+<p>Tenha configurações separadas por ambiente, um exemplo seria os arquivos <em>appsettings-release.json</em> e <em>appsettings-development.json,</em> usados em ambiente produtivo e o outro em ambiente de desenvolvimento respectivamente.</p>
+<h4 id="4-backingservices">4. Backing services</h4>
+<p>Backing services é qualquer serviço que a aplicação consome por meio da rede. Sua aplicação não deve distinguir entre a origem do serviço, seja ela local ou de terceiros. Eles devem ser conectados através de um URL ou outro localizador, onde a informação será armazenada no config.</p>
+<h4 id="6-proccess">6. Proccess</h4>
+<p>Pense na sua aplicação como <strong><em>stateless,</em></strong> ou seja, não há o compartilhamento de nenhuma informação. Qualquer dado que precisa ser persistido, tem que ser armazenado em um <em>stateful</em> <em>service</em>, como um banco de dados.</p>
+<h4 id="7-portbinding">7. Port binding</h4>
+<p>Sua aplicação tem que ser independente, ela não pode ser dependente de um servidor externo, como: (java + tomcat). Exponha sempre sua aplicação em uma porta HTTP específica, isso faz com que sua aplicação possa servir como apoio para outras, ou seja, podemos pensar que não devemos utilizar serviços que não estejam expostos em uma porta.</p>
+<h4 id="9-disposability">9. Disposability</h4>
+<p>Os processos devem ser iniciados rápidos e parados com tranquilidade a qualquer momento sem dados colaterais, isso irá facilitar uma rápida escalabilidade horizontal, um rápido deploy ou uma alteração de alguma informação no config.</p>
+<h4 id="11-logs">11. Logs</h4>
+<p>Um ponto super importante são os logs, eles habilitam o poder de obter visibilidade do comportamento da aplicação, uma possível identificação preventiva de um possível erro, ou determinados pontos de melhorias.</p>
+<p>As aplicações não devem ter conhecimento onde os logs são armazenados, ela sempre deve escrever logs pro STDOUT e consequentemente algum serviço externo, como Kibana, Datadog, Splunk devem consumir os logs e organiza-lós.</p>
+<h3 id="operate-factor">Operate Factor</h3>
+<h4 id="8-concurrency">8. Concurrency</h4>
+<p>Processos concorrentes podem ser usados para a escalabilidade da aplicação, ao pensar em construir um SaaS, temos que sempre ter em mente o grande volume de dados que podemos receber e pensar no projeto em forma de diversos processos que podem ser realizados paralelamente.</p>
+<h4 id="12-admin-processess">12. Admin processess</h4>
+<p>As aplicações mais robustas, as vezes apresentam a necessidade de execução de algumas rotinas para manter o sistema ou simplesmente atualiza-las.</p>
+<p>Essas rotinas devem ser incluídas no codebase de sua aplicação e nunca deve ser aberto um SSL para o container específico da aplicação e executar, o processo não deve concorrer com requisições de usuários</p>
+<p>Vale lembrar que simplesmente aplicar os 12 fatores não significa que você terá uma aplicação automaticamente escalável, mas não aplicá-los irá dificultar muito. 🙌</p>
+<hr>
+<p><em>Publicado originalmente no <a href="https://medium.com/@viniciustirabassi/saas-muito-provavelmente-voc%C3%AA-j%C3%A1-deve-ter-ouvido-falar-sobre-d8e5fe1d878a?source=rss-93f65ddb28b5------2">Medium</a>.</em></p> </div> <div class="mt-12 pt-8 border-t border-apple-hairline dark:border-[#3a3a3c]"> <a href="/" class="text-apple-body text-apple-blue dark:text-apple-blue-dark hover:opacity-70 transition-opacity">
+← Voltar para o blog
+</a> </div> </article>  </main> <footer class="bg-apple-parchment dark:bg-[#111113] px-6 py-16 mt-20 border-t border-apple-hairline dark:border-[#3a3a3c]"> <div class="max-w-[980px] mx-auto text-center text-apple-fine text-apple-ink-80 dark:text-[#6e6e73]">
+© 2026 Vinicius Tirabassi
+</div> </footer> <script>(function(){const searchItems = [{"type":"blog","title":"Olá, mundo!","description":"Primeiro artigo do blog — uma apresentação.","url":"/blog/hello-world","external":false},{"type":"blog","title":"Arquitetura Hexagonal","description":"Bom, toda vez que estudo algo novo nesse mundo de tecnologia eu falo para mim mesmo que vou documentar para compartilhar sobre e até mesmo para eu lembrar","url":"/blog/arquitetura-hexagonal","external":false},{"type":"blog","title":"Azure Functions: Publicando nossa primeira função","description":"Neste artigo, vamos aprender como publicar no Azure uma função desenvolvida localmente e também como interagir com uma fila como gatilho.","url":"/blog/azure-functions-publicando-nossa-primeira-funcao","external":false},{"type":"blog","title":"Desmistificando Azure Functions: Como Implementar Serverless na Prática","description":"Para entendermos melhor o Azure Functions, vamos dar um pequeno passo para trás. O que vem à mente quando você ouve a palavra Serverless?","url":"/blog/desmistificando-azure-functions-como-implementar-serverless-na-pratica","external":false},{"type":"blog","title":"De Relacional a NoSQL e por quê?","description":"Em algum momento de sua trajetória profissional como programador, analista ou engenheiro de software, você já deve ter se deparado com a seguinte pergunta","url":"/blog/de-relacional-a-nosql-e-por-que","external":false},{"type":"blog","title":".NET 6 — Minimal WebApi","description":"Com a versão do .NET 6 sendo lançada em novembro/2021, versão LTS. Uma das grandes novidades é a facilidade de criar pequenos endpoints de forma simples.","url":"/blog/net-6-minimal-webapi","external":false},{"type":"blog","title":"RabbitMQ, O que é?","description":"Antes de falarmos sobre o RabbitMQ, precisamos entender o que é um sistema de mensageria e seu objetivo. Um broker de mensagens capaz de processar até 20 mil mensagens por segundo.","url":"/blog/rabbitmq-o-que-e","external":false},{"type":"blog","title":"SaaS, muito provavelmente você já deve ter ouvido falar sobre…","description":"SaaS (software-as-a-service), muito provavelmente você já deve ter ouvido falar sobre esse termo, seja desenvolvendo o mesmo ou consumindo algum produto SaaS.","url":"/blog/saas-muito-provavelmente-voce-ja-deve-ter-ouvido-falar-sobre","external":false},{"type":"library","title":"What Is the Superpowers Plugin for Claude Code? The Agentic Skills Framework Explained","description":"Superpowers is a free open-source plugin that installs 14 structured skills into Claude Code. Learn how it reduces tokens and improves output quality.","url":"https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code","external":true},{"type":"library","title":"Structured-Prompt-Driven Development (SPDD)","description":"","url":"https://martinfowler.com/articles/structured-prompt-driven/","external":true}];
+
+      // --- Theme ---
+      const icons = {
+        system: document.getElementById('icon-system'),
+        light:  document.getElementById('icon-light'),
+        dark:   document.getElementById('icon-dark'),
+      };
+      const themeDropdown = document.getElementById('theme-dropdown');
+      const themeWrapper  = document.getElementById('theme-wrapper');
+
+      function applyTheme(t) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = t === 'dark' || (t === 'system' && prefersDark);
+        document.documentElement.classList.toggle('dark', isDark);
+        Object.entries(icons).forEach(([key, el]) => {
+          if (el) el.classList.toggle('hidden', key !== t);
+        });
+        // highlight active option
+        document.querySelectorAll('.theme-option').forEach(btn => {
+          btn.classList.toggle('font-semibold', btn.dataset.theme === t);
+        });
+      }
+
+      function getTheme() { return localStorage.getItem('theme') || 'system'; }
+
+      applyTheme(getTheme());
+
+      document.getElementById('theme-toggle').addEventListener('click', (e) => {
+        e.stopPropagation();
+        themeDropdown.classList.toggle('hidden');
+      });
+
+      document.querySelectorAll('.theme-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.dataset.theme;
+          localStorage.setItem('theme', t);
+          applyTheme(t);
+          themeDropdown.classList.add('hidden');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!themeWrapper.contains(e.target)) themeDropdown.classList.add('hidden');
+      });
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (getTheme() === 'system') applyTheme('system');
+      });
+
+      // --- Search ---
+      const searchOpen    = document.getElementById('search-open');
+      const searchPanel   = document.getElementById('search-panel');
+      const searchBackdrop = document.getElementById('search-backdrop');
+      const searchInput   = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+
+      function openSearch() {
+        searchPanel.classList.remove('hidden');
+        searchBackdrop.classList.remove('hidden');
+        searchInput.focus();
+      }
+
+      function closeSearch() {
+        searchPanel.classList.add('hidden');
+        searchBackdrop.classList.add('hidden');
+        searchInput.value = '';
+        searchResults.innerHTML = '';
+      }
+
+      searchOpen.addEventListener('click', openSearch);
+      searchBackdrop.addEventListener('click', closeSearch);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeSearch();
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+      });
+
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.trim().toLowerCase();
+        searchResults.innerHTML = '';
+        if (!q) return;
+
+        const hits = searchItems.filter(item =>
+          item.title.toLowerCase().includes(q) || item.description.toLowerCase().includes(q)
+        ).slice(0, 8);
+
+        if (!hits.length) {
+          searchResults.innerHTML = '<li class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] px-2 py-3">Nenhum resultado encontrado.</li>';
+          return;
+        }
+
+        hits.forEach(item => {
+          const li = document.createElement('li');
+          const label = item.type === 'blog' ? 'Blog' : 'Biblioteca';
+          const labelColor = item.type === 'blog'
+            ? 'bg-apple-blue/10 text-apple-blue'
+            : 'bg-[#3a3a3c]/10 text-apple-ink-48 dark:text-[#98989d]';
+
+          li.innerHTML = `
+            <a href="${item.url}"
+               ${item.external ? 'target="_blank" rel="noopener noreferrer"' : ''}
+               class="flex items-start gap-3 px-3 py-2 rounded-apple-md hover:bg-apple-parchment dark:hover:bg-[#2c2c2e] transition-colors group">
+              <span class="mt-[2px] shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full ${labelColor}">${label}</span>
+              <div class="min-w-0">
+                <p class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7] group-hover:text-apple-blue dark:group-hover:text-apple-blue-dark transition-colors truncate">${item.title}</p>
+                <p class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] truncate">${item.description}</p>
+              </div>
+            </a>
+          `;
+          li.querySelector('a').addEventListener('click', closeSearch);
+          searchResults.appendChild(li);
+        });
+      });
+    })();</script> </body> </html>

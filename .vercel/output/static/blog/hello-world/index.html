@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="pt-BR"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Primeiro artigo do blog — uma apresentação."><title>Olá, mundo!</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- Prevent flash of wrong theme --><script>
+      (function () {
+        var t = localStorage.getItem('theme') || 'system';
+        var dark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      })();
+    </script><link rel="stylesheet" href="/_astro/_slug_.BoorSqYC.css"></head> <body class="min-h-screen bg-white dark:bg-[#1c1c1e] text-apple-ink dark:text-[#f5f5f7] transition-colors duration-200" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;"> <!-- Nav --> <nav class="bg-black h-11 flex items-center px-6 sticky top-0 z-50"> <div class="max-w-[980px] mx-auto w-full flex items-center justify-between gap-4"> <a href="/" class="text-apple-nav text-white font-normal hover:opacity-70 transition-opacity shrink-0">
+Vinicius Tirabassi
+</a> <div class="flex items-center gap-4"> <a href="/sobre" class="text-apple-nav text-white/80 hover:text-white transition-colors">Sobre</a> <a href="/blog" class="text-apple-nav text-white/80 hover:text-white transition-colors">Blog</a> <a href="/library" class="text-apple-nav text-white/80 hover:text-white transition-colors">Biblioteca</a> <!-- Search box --> <button id="search-open" aria-label="Buscar" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/70 hover:text-white rounded-full px-3 h-7 transition-colors text-apple-nav"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path> </svg> <span class="hidden sm:inline">Buscar</span> </button> <!-- Theme dropdown --> <div class="relative" id="theme-wrapper"> <button id="theme-toggle" aria-label="Alternar tema" class="text-white/80 hover:text-white transition-colors p-1 -m-1"> <svg id="icon-system" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line> </svg> <svg id="icon-light" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg> <svg id="icon-dark" class="hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <div id="theme-dropdown" class="hidden absolute right-0 top-[calc(100%+8px)] bg-white dark:bg-[#2c2c2e] border border-apple-hairline dark:border-[#3a3a3c] rounded-apple-md shadow-lg py-1 w-36 z-50"> <button data-theme="system" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line> </svg>
+Sistema
+</button> <button data-theme="light" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg>
+Claro
+</button> <button data-theme="dark" class="theme-option flex items-center gap-2 w-full px-3 py-2 text-apple-caption text-apple-ink dark:text-[#f5f5f7] hover:bg-apple-parchment dark:hover:bg-[#3a3a3c] transition-colors"> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg>
+Escuro
+</button> </div> </div> </div> </div> </nav> <!-- Search panel --> <div id="search-backdrop" class="hidden fixed inset-0 z-40 bg-black/40" aria-hidden="true"></div> <div id="search-panel" class="hidden fixed top-11 left-0 right-0 z-50 bg-white dark:bg-[#1c1c1e] border-b border-apple-hairline dark:border-[#3a3a3c] shadow-lg"> <div class="max-w-[980px] mx-auto px-6 py-4"> <div class="relative"> <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-apple-ink-48 dark:text-[#6e6e73] pointer-events-none" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path> </svg> <input id="search-input" type="search" placeholder="Buscar artigos e recursos..." autocomplete="off" class="w-full bg-apple-parchment dark:bg-[#2c2c2e] text-apple-ink dark:text-[#f5f5f7] placeholder-apple-ink-48 dark:placeholder-[#6e6e73] rounded-apple-md px-4 py-2 pl-10 text-apple-body border border-apple-hairline dark:border-[#3a3a3c] outline-none focus:border-apple-blue dark:focus:border-apple-blue-dark"> </div> <ul id="search-results" class="mt-3 flex flex-col gap-1 max-h-72 overflow-y-auto empty:hidden"></ul> </div> </div> <main class="max-w-[980px] mx-auto px-6 py-20">  <article> <header class="mb-8"> <p class="text-apple-caption text-apple-ink-48 mb-2"> 26 de maio de 2026 </p> <h1 class="text-apple-display font-semibold text-apple-ink leading-tight">Olá, mundo!</h1> <p class="text-apple-body text-apple-ink-48 mt-3">Primeiro artigo do blog — uma apresentação.</p> <div class="flex gap-2 mt-4 flex-wrap"> <span class="text-apple-caption bg-apple-parchment text-apple-ink-48 px-3 py-1 rounded-full border border-apple-divider">meta</span> </div> </header> <div class="prose prose-gray max-w-none"> <p>Bem-vindo ao meu blog. Aqui vou compartilhar artigos sobre temas que estou estudando e aprendendo.</p>
+<h2 id="como-funciona">Como funciona</h2>
+<p>Este blog é gerado com <a href="https://astro.build">Astro</a> e hospedado no Vercel. Os artigos são escritos em Markdown e commitados diretamente no repositório.</p>
+<p>Para publicar um novo artigo, basta criar um arquivo <code>.md</code> em <code>src/content/blog/</code> com o frontmatter correto e fazer push.</p> </div> <div class="mt-12 pt-8 border-t border-apple-hairline dark:border-[#3a3a3c]"> <a href="/" class="text-apple-body text-apple-blue dark:text-apple-blue-dark hover:opacity-70 transition-opacity">
+← Voltar para o blog
+</a> </div> </article>  </main> <footer class="bg-apple-parchment dark:bg-[#111113] px-6 py-16 mt-20 border-t border-apple-hairline dark:border-[#3a3a3c]"> <div class="max-w-[980px] mx-auto text-center text-apple-fine text-apple-ink-80 dark:text-[#6e6e73]">
+© 2026 Vinicius Tirabassi
+</div> </footer> <script>(function(){const searchItems = [{"type":"blog","title":"Olá, mundo!","description":"Primeiro artigo do blog — uma apresentação.","url":"/blog/hello-world","external":false},{"type":"blog","title":"Arquitetura Hexagonal","description":"Bom, toda vez que estudo algo novo nesse mundo de tecnologia eu falo para mim mesmo que vou documentar para compartilhar sobre e até mesmo para eu lembrar","url":"/blog/arquitetura-hexagonal","external":false},{"type":"blog","title":"Azure Functions: Publicando nossa primeira função","description":"Neste artigo, vamos aprender como publicar no Azure uma função desenvolvida localmente e também como interagir com uma fila como gatilho.","url":"/blog/azure-functions-publicando-nossa-primeira-funcao","external":false},{"type":"blog","title":"Desmistificando Azure Functions: Como Implementar Serverless na Prática","description":"Para entendermos melhor o Azure Functions, vamos dar um pequeno passo para trás. O que vem à mente quando você ouve a palavra Serverless?","url":"/blog/desmistificando-azure-functions-como-implementar-serverless-na-pratica","external":false},{"type":"blog","title":"De Relacional a NoSQL e por quê?","description":"Em algum momento de sua trajetória profissional como programador, analista ou engenheiro de software, você já deve ter se deparado com a seguinte pergunta","url":"/blog/de-relacional-a-nosql-e-por-que","external":false},{"type":"blog","title":".NET 6 — Minimal WebApi","description":"Com a versão do .NET 6 sendo lançada em novembro/2021, versão LTS. Uma das grandes novidades é a facilidade de criar pequenos endpoints de forma simples.","url":"/blog/net-6-minimal-webapi","external":false},{"type":"blog","title":"RabbitMQ, O que é?","description":"Antes de falarmos sobre o RabbitMQ, precisamos entender o que é um sistema de mensageria e seu objetivo. Um broker de mensagens capaz de processar até 20 mil mensagens por segundo.","url":"/blog/rabbitmq-o-que-e","external":false},{"type":"blog","title":"SaaS, muito provavelmente você já deve ter ouvido falar sobre…","description":"SaaS (software-as-a-service), muito provavelmente você já deve ter ouvido falar sobre esse termo, seja desenvolvendo o mesmo ou consumindo algum produto SaaS.","url":"/blog/saas-muito-provavelmente-voce-ja-deve-ter-ouvido-falar-sobre","external":false},{"type":"library","title":"What Is the Superpowers Plugin for Claude Code? The Agentic Skills Framework Explained","description":"Superpowers is a free open-source plugin that installs 14 structured skills into Claude Code. Learn how it reduces tokens and improves output quality.","url":"https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code","external":true},{"type":"library","title":"Structured-Prompt-Driven Development (SPDD)","description":"","url":"https://martinfowler.com/articles/structured-prompt-driven/","external":true}];
+
+      // --- Theme ---
+      const icons = {
+        system: document.getElementById('icon-system'),
+        light:  document.getElementById('icon-light'),
+        dark:   document.getElementById('icon-dark'),
+      };
+      const themeDropdown = document.getElementById('theme-dropdown');
+      const themeWrapper  = document.getElementById('theme-wrapper');
+
+      function applyTheme(t) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = t === 'dark' || (t === 'system' && prefersDark);
+        document.documentElement.classList.toggle('dark', isDark);
+        Object.entries(icons).forEach(([key, el]) => {
+          if (el) el.classList.toggle('hidden', key !== t);
+        });
+        // highlight active option
+        document.querySelectorAll('.theme-option').forEach(btn => {
+          btn.classList.toggle('font-semibold', btn.dataset.theme === t);
+        });
+      }
+
+      function getTheme() { return localStorage.getItem('theme') || 'system'; }
+
+      applyTheme(getTheme());
+
+      document.getElementById('theme-toggle').addEventListener('click', (e) => {
+        e.stopPropagation();
+        themeDropdown.classList.toggle('hidden');
+      });
+
+      document.querySelectorAll('.theme-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.dataset.theme;
+          localStorage.setItem('theme', t);
+          applyTheme(t);
+          themeDropdown.classList.add('hidden');
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!themeWrapper.contains(e.target)) themeDropdown.classList.add('hidden');
+      });
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (getTheme() === 'system') applyTheme('system');
+      });
+
+      // --- Search ---
+      const searchOpen    = document.getElementById('search-open');
+      const searchPanel   = document.getElementById('search-panel');
+      const searchBackdrop = document.getElementById('search-backdrop');
+      const searchInput   = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+
+      function openSearch() {
+        searchPanel.classList.remove('hidden');
+        searchBackdrop.classList.remove('hidden');
+        searchInput.focus();
+      }
+
+      function closeSearch() {
+        searchPanel.classList.add('hidden');
+        searchBackdrop.classList.add('hidden');
+        searchInput.value = '';
+        searchResults.innerHTML = '';
+      }
+
+      searchOpen.addEventListener('click', openSearch);
+      searchBackdrop.addEventListener('click', closeSearch);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeSearch();
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+      });
+
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.trim().toLowerCase();
+        searchResults.innerHTML = '';
+        if (!q) return;
+
+        const hits = searchItems.filter(item =>
+          item.title.toLowerCase().includes(q) || item.description.toLowerCase().includes(q)
+        ).slice(0, 8);
+
+        if (!hits.length) {
+          searchResults.innerHTML = '<li class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] px-2 py-3">Nenhum resultado encontrado.</li>';
+          return;
+        }
+
+        hits.forEach(item => {
+          const li = document.createElement('li');
+          const label = item.type === 'blog' ? 'Blog' : 'Biblioteca';
+          const labelColor = item.type === 'blog'
+            ? 'bg-apple-blue/10 text-apple-blue'
+            : 'bg-[#3a3a3c]/10 text-apple-ink-48 dark:text-[#98989d]';
+
+          li.innerHTML = `
+            <a href="${item.url}"
+               ${item.external ? 'target="_blank" rel="noopener noreferrer"' : ''}
+               class="flex items-start gap-3 px-3 py-2 rounded-apple-md hover:bg-apple-parchment dark:hover:bg-[#2c2c2e] transition-colors group">
+              <span class="mt-[2px] shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full ${labelColor}">${label}</span>
+              <div class="min-w-0">
+                <p class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7] group-hover:text-apple-blue dark:group-hover:text-apple-blue-dark transition-colors truncate">${item.title}</p>
+                <p class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] truncate">${item.description}</p>
+              </div>
+            </a>
+          `;
+          li.querySelector('a').addEventListener('click', closeSearch);
+          searchResults.appendChild(li);
+        });
+      });
+    })();</script> </body> </html>
