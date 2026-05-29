@@ -100,7 +100,7 @@ const renderedModules = await Promise.all(
         <!-- Content: hidden by default, opened for current module by JS -->
         <div
           id={'content-' + mod.data.order}
-          class="hidden border-t border-apple-hairline dark:border-[#3a3a3c] p-4 pt-4"
+          class="hidden border-t border-apple-hairline dark:border-[#3a3a3c] p-4"
         >
           {mod.data.resources && mod.data.resources.length > 0 && (
             <div class="mb-4">
@@ -199,7 +199,6 @@ const renderedModules = await Promise.all(
         }
       }
 
-      // Card border style
       if (isCurrent) {
         el.classList.add('border-apple-blue', 'border-2');
         el.classList.remove('border-apple-hairline', 'dark:border-[#3a3a3c]');
@@ -214,7 +213,6 @@ const renderedModules = await Promise.all(
         else if (isDone) content.classList.add('hidden');
       }
 
-      // Show "Marcar como concluído" only for current module
       if (completeBtn) {
         if (isCurrent) completeBtn.classList.remove('hidden');
         else           completeBtn.classList.add('hidden');
