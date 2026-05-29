@@ -103,7 +103,7 @@ const [featured, ...rest] = tracksData;
 </BaseLayout>
 
 <script>
-  import { getCompletedModules, calcProgressPercent } from '../../lib/track-progress';
+  import { getCompletedResources, calcProgressPercent } from '../../lib/track-progress';
 
   const listing = document.getElementById('tracks-listing');
   if (listing) {
@@ -112,11 +112,11 @@ const [featured, ...rest] = tracksData;
     moduleCount: number;
   }>;
 
-  // Find track with most completed modules (fallback: first alphabetically)
+  // Find track with most completed resources (fallback: first alphabetically)
   let featuredSlug = tracksData[0]?.slug;
   let maxCompleted = 0;
   for (const t of tracksData) {
-    const count = getCompletedModules(t.slug).length;
+    const count = getCompletedResources(t.slug).length;
     if (count > maxCompleted) {
       maxCompleted = count;
       featuredSlug = t.slug;
@@ -125,7 +125,7 @@ const [featured, ...rest] = tracksData;
 
   const featuredTrack = tracksData.find(t => t.slug === featuredSlug);
   if (featuredTrack && maxCompleted > 0) {
-    const completed = getCompletedModules(featuredTrack.slug);
+    const completed = getCompletedResources(featuredTrack.slug);
     const pct = calcProgressPercent(completed.length, featuredTrack.moduleCount);
 
     const progressText = document.getElementById('featured-progress-text');
@@ -133,7 +133,7 @@ const [featured, ...rest] = tracksData;
     const progressPct  = document.getElementById('featured-pct');
     const statusBadge  = document.getElementById('featured-status');
 
-    if (progressText) progressText.textContent = `${completed.length} de ${featuredTrack.moduleCount} módulos`;
+    if (progressText) progressText.textContent = `${completed.length} de ${featuredTrack.moduleCount} recursos`;
     if (progressBar)  progressBar.style.width = `${pct}%`;
     if (progressPct)  { progressPct.textContent = `${pct}%`; progressPct.classList.remove('hidden'); }
     if (statusBadge)  statusBadge.classList.remove('hidden');
