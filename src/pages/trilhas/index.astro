@@ -58,6 +58,9 @@ const [featured, ...rest] = tracksData;
               <span class={`text-apple-nav font-medium px-2 py-0.5 rounded-full uppercase tracking-wide ${featured.tagClass}`}>
                 {featured.category}
               </span>
+              <span class="text-apple-nav font-medium px-2 py-0.5 rounded-full bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]">
+                {featured.source}
+              </span>
               <span id="featured-status" class="text-apple-nav text-apple-ink-48 dark:text-[#98989d] hidden">
                 EM PROGRESSO
               </span>
@@ -87,9 +90,12 @@ const [featured, ...rest] = tracksData;
             href={t.href}
             class="flex items-center justify-between gap-4 py-4 group"
           >
-            <div class="flex items-center gap-3 min-w-0">
+            <div class="flex items-center gap-2 min-w-0">
               <span class={`shrink-0 text-apple-nav font-medium px-2 py-0.5 rounded-full uppercase tracking-wide ${t.tagClass}`}>
                 {t.category}
+              </span>
+              <span class="shrink-0 text-apple-nav font-medium px-2 py-0.5 rounded-full bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]">
+                {t.source}
               </span>
               <span class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7] group-hover:text-apple-blue dark:group-hover:text-apple-blue-dark transition-colors truncate">
                 {t.title}
