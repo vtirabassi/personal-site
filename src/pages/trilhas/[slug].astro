@@ -23,7 +23,7 @@ const categoryColors: Record<string, string> = {
   'engenharia':   'bg-[#34c759]/10 text-[#1a7a33] dark:bg-[#34c759]/20 dark:text-[#34c759]',
   'produto':      'bg-[#ff9500]/10 text-[#8a5100] dark:bg-[#ff9500]/20 dark:text-[#ff9500]',
 };
-const tagClass = categoryColors[track.data.category] ?? 'bg-apple-parchment text-apple-ink-48';
+const tagClass = categoryColors[track.data.category] ?? 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]';
 
 const renderedModules = await Promise.all(
   modules.map(async (mod) => {
@@ -55,7 +55,7 @@ const renderedModules = await Promise.all(
           <span id="modules-progress-text">0 de {modules.length} módulos</span>
         </p>
       </div>
-      <span id="track-pct" class="text-apple-tagline font-semibold text-apple-blue dark:text-apple-blue-dark shrink-0 mt-1">
+      <span id="track-pct" class="text-apple-tagline font-semibold text-apple-blue dark:text-apple-blue-dark shrink-0 mt-1 hidden">
         0%
       </span>
     </div>
@@ -174,7 +174,7 @@ const renderedModules = await Promise.all(
     const pctEl        = document.getElementById('track-pct');
     if (progressText) progressText.textContent = `${completed.length} de ${totalModules} módulos`;
     if (progressBar)  progressBar.style.width = `${pct}%`;
-    if (pctEl)        pctEl.textContent = `${pct}%`;
+    if (pctEl)        { pctEl.textContent = `${pct}%`; pctEl.classList.remove('hidden'); }
 
     const moduleEls = document.querySelectorAll<HTMLElement>('[data-module]');
     let currentFound = false;
