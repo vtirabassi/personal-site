@@ -4,4 +4,15 @@ description: "Cronograma de estudos para a certificação Claude Certified Archi
 category: "certificação"
 source: "Anthropic"
 estimatedHours: 80
+domains:
+  - name: "Agentic"
+    percent: 27
+  - name: "Claude Code"
+    percent: 20
+  - name: "Prompt eng."
+    percent: 20
+  - name: "MCP & tools"
+    percent: 18
+  - name: "Context"
+    percent: 15
 ---
