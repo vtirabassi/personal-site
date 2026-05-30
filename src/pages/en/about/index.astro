@@ -1,5 +1,44 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const experience = [
+  {
+    logo: '/logos/xp.png',
+    role: 'Software Engineering Manager',
+    company: 'XP Inc.',
+    period: 'Oct 2024 – present',
+  },
+  {
+    logo: '/logos/xp.png',
+    role: 'Senior Software Engineer',
+    company: 'XP Inc.',
+    period: 'Apr 2023 – Oct 2024',
+  },
+  {
+    logo: '/logos/itau.png',
+    role: 'Software Engineer',
+    company: 'Itaú Unibanco',
+    period: 'Aug 2019 – Jul 2021',
+  },
+  {
+    logo: '/logos/fiap.png',
+    role: 'Higher Education Tutor',
+    company: 'FIAP',
+    period: 'Feb 2023 – present',
+  },
+];
+
+const education = [
+  { degree: 'MBA in Project Management', institution: 'USP/Esalq', period: '2023 – 2024' },
+  { degree: 'Computer Engineering', institution: 'FIAP', period: '2015 – 2019' },
+];
+
+const values = [
+  'Engineering as a means, business as the end — every technical investment must translate into value for the customer and the operation',
+  'Leadership based on trust, autonomy, and context — not control',
+  'Feedback culture, high performance, and people development',
+  'Architectural decisions connected to strategy — scalability, observability, cost, time-to-market',
+];
 ---
 
 <BaseLayout
@@ -10,84 +49,108 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 >
   <div class="max-w-2xl mx-auto flex flex-col gap-12">
 
-    <!-- Header -->
-    <div class="flex flex-col items-center text-center gap-6">
-      <img src="/avatar.jpg" alt="Vinicius Tirabassi" class="w-24 h-24 rounded-full object-cover" />
-      <div class="flex flex-col gap-2">
-        <h1 class="text-apple-display font-semibold text-apple-ink dark:text-[#f5f5f7]">Vinicius Tirabassi</h1>
-        <p class="text-[22px] leading-[1.2] font-normal text-apple-ink-48 dark:text-[#98989d]">
-          Software Engineering Manager · XP Inc.
+    <!-- Hero -->
+    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+      <img
+        src="/avatar.jpg"
+        alt="Vinicius Tirabassi"
+        class="w-20 h-20 rounded-full object-cover shrink-0"
+      />
+      <div class="text-center sm:text-left">
+        <h1 class="text-apple-display font-semibold text-apple-ink dark:text-[#f5f5f7]">
+          Vinicius Tirabassi
+        </h1>
+        <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d] mt-1">
+          Engineering Manager · XP Inc. · São Paulo
         </p>
-      </div>
-      <div class="flex gap-3 flex-wrap justify-center">
-        <a href="https://github.com/vtirabassi" target="_blank" rel="noopener noreferrer"
-           class="bg-apple-blue text-white text-apple-body rounded-full px-[22px] py-[11px] transition-transform active:scale-95">GitHub</a>
-        <a href="https://www.linkedin.com/in/viniciustirabassi/" target="_blank" rel="noopener noreferrer"
-           class="border border-apple-blue text-apple-blue text-apple-body rounded-full px-[22px] py-[11px] transition-transform active:scale-95">LinkedIn</a>
-        <a href="https://medium.com/@viniciustirabassi" target="_blank" rel="noopener noreferrer"
-           class="border border-apple-hairline dark:border-[#3a3a3c] text-apple-ink-48 dark:text-[#98989d] text-apple-body rounded-full px-[22px] py-[11px] transition-transform active:scale-95">Medium</a>
+        <div class="flex gap-3 flex-wrap mt-4 justify-center sm:justify-start">
+          <a
+            href="https://github.com/vtirabassi"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-apple-blue text-white text-apple-body rounded-full px-[22px] py-[11px] transition-transform active:scale-95"
+          >GitHub</a>
+          <a
+            href="https://www.linkedin.com/in/viniciustirabassi/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border border-apple-blue text-apple-blue dark:text-apple-blue-dark text-apple-body rounded-full px-[22px] py-[11px] transition-transform active:scale-95"
+          >LinkedIn</a>
+          <a
+            href="https://medium.com/@viniciustirabassi"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border border-apple-hairline dark:border-[#3a3a3c] text-apple-ink-48 dark:text-[#98989d] text-apple-body rounded-full px-[22px] py-[11px] transition-transform active:scale-95"
+          >Medium</a>
+        </div>
       </div>
     </div>
 
     <!-- Bio -->
-    <div class="flex flex-col gap-4 text-apple-body text-apple-ink dark:text-[#f5f5f7]">
-      <p>
-        I lead engineering squads on mission-critical platforms at XP Inc. —
-        <strong>Core Banking</strong> and <strong>Core Investments</strong>, responsible for cash-in and cash-out flows
-        across the entire operation. I directly manage 12 engineers across 2 squads.
-      </p>
-      <p>
-        I believe engineering leadership is not about writing less code, but about
-        <strong>amplifying the team's impact</strong>. My job is to build environments where engineers make good
-        technical decisions, have clarity of purpose, and deliver predictably — even in high-complexity,
-        zero-tolerance-for-failure contexts.
-      </p>
-      <p>
-        My background combines a strong technical foundation with management: I started as an engineer building
-        XP's Business Digital Account from scratch (PIX, TED, transfers, payments, multi-channel) and now lead
-        the teams responsible for that and other core platforms.
-      </p>
+    <p class="text-apple-body text-apple-ink dark:text-[#f5f5f7]">
+      I lead engineering squads on mission-critical platforms at XP Inc. — Core Banking and
+      Core Investments, responsible for cash-in and cash-out flows across the entire operation.
+      I started as a founding engineer of the Business Digital Account and now manage 12 engineers
+      across 2 squads, in a 24/7 environment with zero tolerance for failure.
+    </p>
+
+    <!-- Experience -->
+    <div class="flex flex-col gap-5">
+      <h2 class="text-apple-caption font-semibold uppercase tracking-wide text-apple-ink-48 dark:text-[#6e6e73]">
+        Experience
+      </h2>
+      <ul class="flex flex-col gap-5">
+        {experience.map((item) => (
+          <li class="flex items-center gap-4">
+            <img
+              src={item.logo}
+              alt={item.company}
+              class="w-9 h-9 rounded-lg object-contain border border-apple-hairline dark:border-[#3a3a3c] shrink-0"
+            />
+            <div>
+              <p class="text-[15px] font-semibold text-apple-ink dark:text-[#f5f5f7]">
+                {item.role} · {item.company}
+              </p>
+              <p class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73]">{item.period}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
 
     <!-- What drives my work -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-[22px] font-semibold text-apple-ink dark:text-[#f5f5f7] leading-snug">What drives my work</h2>
-      <ul class="flex flex-col gap-3 text-apple-body text-apple-ink dark:text-[#f5f5f7]">
-        <li class="flex gap-3">
-          <span class="text-apple-blue dark:text-apple-blue-dark mt-[2px]">→</span>
-          <span>Engineering as a means, business as the end — every technical investment must translate into value for the customer and the operation</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-apple-blue dark:text-apple-blue-dark mt-[2px]">→</span>
-          <span>Leadership based on trust, autonomy, and context — not control</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-apple-blue dark:text-apple-blue-dark mt-[2px]">→</span>
-          <span>Feedback culture, high performance, and people development</span>
-        </li>
-        <li class="flex gap-3">
-          <span class="text-apple-blue dark:text-apple-blue-dark mt-[2px]">→</span>
-          <span>Architectural decisions connected to strategy — scalability, observability, cost, time-to-market</span>
-        </li>
+      <h2 class="text-apple-caption font-semibold uppercase tracking-wide text-apple-ink-48 dark:text-[#6e6e73]">
+        What drives my work
+      </h2>
+      <ul class="flex flex-col gap-3">
+        {values.map((value) => (
+          <li class="flex gap-3 text-apple-body text-apple-ink dark:text-[#f5f5f7]">
+            <span class="text-apple-blue dark:text-apple-blue-dark mt-[2px] shrink-0">→</span>
+            <span>{value}</span>
+          </li>
+        ))}
       </ul>
     </div>
 
-    <!-- Stack -->
+    <!-- Education -->
     <div class="flex flex-col gap-4">
-      <h2 class="text-[22px] font-semibold text-apple-ink dark:text-[#f5f5f7] leading-snug">Stack</h2>
-      <div class="flex flex-wrap gap-2">
-        {['.NET', 'Azure', 'Kafka', 'Microservices', 'Event-Driven', 'Datadog', 'Grafana', 'Dynatrace', 'CI/CD', 'Azure DevOps', 'GitHub Copilot', 'Claude', 'Codex'].map(tag => (
-          <span class="text-apple-caption text-apple-ink-80 dark:text-[#98989d] bg-apple-parchment dark:bg-[#2c2c2e] border border-apple-hairline dark:border-[#3a3a3c] rounded-full px-3 py-1">
-            {tag}
-          </span>
+      <h2 class="text-apple-caption font-semibold uppercase tracking-wide text-apple-ink-48 dark:text-[#6e6e73]">
+        Education
+      </h2>
+      <ul class="flex flex-col gap-3">
+        {education.map((item) => (
+          <li class="flex gap-3 items-start">
+            <span class="w-2 h-2 rounded-full bg-apple-blue mt-[6px] shrink-0"></span>
+            <div>
+              <p class="text-[15px] font-semibold text-apple-ink dark:text-[#f5f5f7]">
+                {item.degree} · {item.institution}
+              </p>
+              <p class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73]">{item.period}</p>
+            </div>
+          </li>
         ))}
-      </div>
-    </div>
-
-    <!-- Teaching -->
-    <div class="border-t border-apple-hairline dark:border-[#3a3a3c] pt-8 text-apple-body text-apple-ink-48 dark:text-[#98989d]">
-      For over 3 years I have worked as a <strong class="text-apple-ink dark:text-[#f5f5f7]">University Tutor at FIAP</strong>, in the
-      Systems Analysis and Development program. MBA from USP/Esalq.
+      </ul>
     </div>
 
   </div>
