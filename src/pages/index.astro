@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ui } from '../i18n/ui';
+const t = ui.pt;
 
 export const prerender = true;
 
@@ -9,17 +11,17 @@ const recentPosts = (await getCollection('blog'))
   .slice(0, 3);
 ---
 
-<BaseLayout title="Vinicius Tirabassi" description="Artigos sobre engenharia de software e liderança técnica">
+<BaseLayout title="Vinicius Tirabassi" description="Artigos sobre engenharia de software e liderança técnica" lang="pt" altHref="/en/">
   <section>
     <div class="flex items-baseline justify-between mb-12">
-      <h1 class="text-apple-display font-semibold text-apple-ink dark:text-[#f5f5f7]">Artigos recentes</h1>
+      <h1 class="text-apple-display font-semibold text-apple-ink dark:text-[#f5f5f7]">{t.home.recentPosts}</h1>
       <a href="/blog" class="text-apple-body text-apple-blue dark:text-apple-blue-dark hover:opacity-70 transition-opacity shrink-0">
-        Ver todos →
+        {t.home.viewAll}
       </a>
     </div>
 
     {recentPosts.length === 0 && (
-      <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d]">Nenhum artigo publicado ainda.</p>
+      <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d]">{t.home.noPosts}</p>
     )}
 
     <ul class="flex flex-col gap-8">
@@ -27,7 +29,7 @@ const recentPosts = (await getCollection('blog'))
         <li>
           <a href={`/blog/${post.slug}`} class="group block">
             <p class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] mb-1">
-              {post.data.date.toLocaleDateString('pt-BR', {
+              {post.data.date.toLocaleDateString(t.dateLocale, {
                 day: '2-digit',
                 month: 'long',
                 year: 'numeric',

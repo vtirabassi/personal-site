@@ -2,6 +2,8 @@
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProgressBar from '../../components/ProgressBar.astro';
+import { ui } from '../../i18n/ui';
+const t_ui = ui.pt;
 
 export const prerender = true;
 
@@ -43,12 +45,12 @@ const renderedModules = await Promise.all(
 );
 ---
 
-<BaseLayout title={track.data.title + ' — Trilhas'} description={track.data.description}>
+<BaseLayout title={track.data.title + ' — Trilhas'} description={track.data.description} lang="pt" altHref={`/en/tracks/${slug}`}>
 
   <!-- Breadcrumb + header -->
   <div class="mb-10">
     <a href="/trilhas" class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] hover:text-apple-blue dark:hover:text-apple-blue-dark transition-colors inline-block mb-4">
-      ← Trilhas
+      {t_ui.tracks.backToTracks}
     </a>
     <div class="flex items-start justify-between gap-4 mb-4">
       <div>
@@ -65,7 +67,7 @@ const renderedModules = await Promise.all(
         </h1>
         <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d]">
           {track.data.source} · ~{track.data.estimatedHours}h ·
-          <span id="modules-progress-text">0 de {totalResources} recursos</span>
+          <span id="modules-progress-text">0 de {totalResources} {t_ui.tracks.resources}</span>
         </p>
       </div>
       <span id="track-pct" class="text-apple-tagline font-semibold text-apple-blue dark:text-apple-blue-dark shrink-0 mt-1 hidden">

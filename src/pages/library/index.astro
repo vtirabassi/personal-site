@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ShareButton from '../../components/ShareButton.astro';
+import { ui } from '../../i18n/ui';
+const t = ui.pt;
 import StarRating from '../../components/StarRating.astro';
 import libraryData from '../../data/library.json';
 
@@ -49,7 +51,7 @@ function themeClass(theme: string): string {
 }
 ---
 
-<BaseLayout title="Biblioteca" description="Recursos que estudo e recomendo">
+<BaseLayout title={t.library.title} description={t.library.description} lang="pt" altHref="/en/library/">
   <div class="mb-12">
     <h1 class="text-apple-display font-semibold text-apple-ink dark:text-[#f5f5f7]">Biblioteca</h1>
     <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d] mt-2">
@@ -62,7 +64,7 @@ function themeClass(theme: string): string {
       class="filter-btn px-4 py-[11px] text-apple-caption rounded-full border border-apple-blue bg-apple-blue text-white transition-all"
       data-theme="all"
     >
-      Todos
+      {t.library.allThemes}
     </button>
     {themes.map((theme) => (
       <button
@@ -116,7 +118,7 @@ function themeClass(theme: string): string {
                   </div>
                 </div>
                 <p class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] mt-4">
-                  Adicionado em {new Date(item.addedAt).toLocaleDateString('pt-BR')}
+                  {t.library.addedAt} {new Date(item.addedAt).toLocaleDateString(t.dateLocale)}
                 </p>
               </li>
             ))}
@@ -130,7 +132,7 @@ function themeClass(theme: string): string {
       <aside class="hidden lg:block">
         <div class="sticky top-20">
           <p class="text-apple-caption font-semibold text-apple-ink-48 dark:text-[#6e6e73] mb-3 uppercase tracking-wide">
-            Nesta página
+            {t.library.sidebarTitle}
           </p>
           <nav>
             <ul class="flex flex-col gap-1">
