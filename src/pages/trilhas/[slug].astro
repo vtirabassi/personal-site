@@ -27,6 +27,26 @@ const categoryColors: Record<string, string> = {
 };
 const tagClass = categoryColors[track.data.category] ?? 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]';
 
+const domainColorMap: Record<string, string> = {
+  'Prompt Engineering': 'bg-[#ff3b30]/10 text-[#cc1a10] dark:bg-[#ff3b30]/20 dark:text-[#ff6b62]',
+  'Claude Code':        'bg-apple-blue/10 text-apple-blue dark:bg-apple-blue/20 dark:text-apple-blue-dark',
+  'Agentic':            'bg-[#af52de]/10 text-[#7c3aed] dark:bg-[#af52de]/20 dark:text-[#af52de]',
+  'MCP & Tools':        'bg-[#32ade6]/10 text-[#0a6e8a] dark:bg-[#32ade6]/20 dark:text-[#32ade6]',
+  'Context':            'bg-[#c8a96e]/10 text-[#7a5c1e] dark:bg-[#c8a96e]/20 dark:text-[#c8a96e]',
+  'Evals':              'bg-[#34c759]/10 text-[#1a7a33] dark:bg-[#34c759]/20 dark:text-[#34c759]',
+  'Revisão Geral':      'bg-[#ff9500]/10 text-[#8a5100] dark:bg-[#ff9500]/20 dark:text-[#ff9500]',
+};
+
+function domainTagClass(tag: string): string {
+  const key = Object.keys(domainColorMap).find(k => tag.startsWith(k));
+  return key ? domainColorMap[key] : 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]';
+}
+
+function parseDomains(domain: string | undefined): string[] {
+  if (!domain) return [];
+  return domain.split(' / ').map(d => d.trim()).filter(Boolean);
+}
+
 const totalResources = modules.reduce((sum, mod) => {
   return sum + ((mod.data.officialResources as any[] | undefined)?.length ?? 0);
 }, 0);
@@ -110,11 +130,18 @@ const renderedModules = await Promise.all(
             <p class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7]">
               {mod.data.title}
             </p>
-            {(mod.data.duration || mod.data.domain) && (
-              <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] mt-0.5">
-                {[mod.data.duration, mod.data.domain].filter(Boolean).join(' · ')}
-              </p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            {mod.data.duration && (
+              <span class="text-apple-caption text-apple-ink-48 dark:text-[#98989d]">
+                {mod.data.duration}
+              </span>
             )}
+            {parseDomains(mod.data.domain as string | undefined).map((tag) => (
+              <span class={`text-apple-nav font-medium px-2 py-0.5 rounded-full whitespace-nowrap ${domainTagClass(tag)}`}>
+                {tag}
+              </span>
+            ))}
           </div>
         </button>
 
