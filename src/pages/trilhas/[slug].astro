@@ -97,9 +97,13 @@ const renderedModules = await Promise.all(
     <ProgressBar percent={0} id="track-progress-bar" />
 
     {track.data.domains && (track.data.domains as any[]).length > 0 && (
-      <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] mt-2">
-        {'Domínios: ' + (track.data.domains as any[]).map((d: any) => d.name + ' ' + d.percent + '%').join(' · ')}
-      </p>
+      <div class="flex flex-wrap gap-2 mt-3">
+        {(track.data.domains as any[]).map((d: any) => (
+          <span class={`text-apple-nav font-medium px-2 py-0.5 rounded-full whitespace-nowrap ${domainTagClass(d.name)}`}>
+            {d.name} ({d.percent}%)
+          </span>
+        ))}
+      </div>
     )}
   </div>
 
