@@ -17,10 +17,14 @@ export async function fetchMetadata(url: string): Promise<UrlMetadata> {
     html.match(/<meta[^>]+property="og:description"[^>]+content="([^"]+)"/)?.[1] ??
     html.match(/<meta[^>]+content="([^"]+)"[^>]+property="og:description"/)?.[1];
 
+  const metaDesc =
+    html.match(/<meta[^>]+name="description"[^>]+content="([^"]+)"/)?.[1] ??
+    html.match(/<meta[^>]+content="([^"]+)"[^>]+name="description"/)?.[1];
+
   const titleTag = html.match(/<title[^>]*>([^<]+)<\/title>/)?.[1]?.trim();
 
   return {
     title: ogTitle ?? titleTag ?? url,
-    description: ogDesc ?? '',
+    description: ogDesc ?? metaDesc ?? '',
   };
 }

@@ -15,7 +15,7 @@
       "url": "https://martinfowler.com/articles/structured-prompt-driven/",
       "type": "link",
       "theme": "SDD",
-      "description": "",
+      "description": "Como estruturar prompts com especificações formais para tornar o desenvolvimento com agentes de IA mais previsível e rastreável.",
       "addedAt": "2026-05-28"
     },
     {
@@ -24,7 +24,7 @@
       "url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
       "type": "link",
       "theme": "SDD",
-      "description": "",
+      "description": "Comparativo entre três ferramentas de Spec-Driven Development — Kiro, spec-kit e Tessl — e como cada uma formaliza o ciclo de especificação e implementação.",
       "addedAt": "2026-05-30"
     },
     {
@@ -33,7 +33,7 @@
       "url": "https://martinfowler.com/articles/harness-engineering.html",
       "type": "link",
       "theme": "Harness",
-      "description": "",
+      "description": "Como construir scaffolding de ferramentas, permissões e contexto para maximizar a eficácia de agentes de codificação.",
       "addedAt": "2026-05-30"
     }
   ]
