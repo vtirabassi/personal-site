@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ui } from '../../i18n/ui';
+const t = ui.pt;
 
 export const prerender = true;
 
@@ -16,11 +18,11 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} lang="pt" altHref={`/en/blog/${post.slug}`}>
   <article>
     <header class="mb-8">
       <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] mb-2">
-        {post.data.date.toLocaleDateString('pt-BR', {
+        {post.data.date.toLocaleDateString(t.dateLocale, {
           day: '2-digit',
           month: 'long',
           year: 'numeric',
@@ -41,7 +43,7 @@ const { Content } = await post.render();
 
     <div class="mt-12 pt-8 border-t border-apple-hairline dark:border-[#3a3a3c]">
       <a href="/" class="text-apple-body text-apple-blue dark:text-apple-blue-dark hover:opacity-70 transition-opacity">
-        ← Voltar para o blog
+        {t.post.backToHome}
       </a>
     </div>
   </article>
