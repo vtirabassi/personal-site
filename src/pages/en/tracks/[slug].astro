@@ -1,0 +1,305 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProgressBar from '../../../components/ProgressBar.astro';
+import { ui } from '../../../i18n/ui';
+const t = ui.en;
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const tracks = await getCollection('tracks-en');
+  return tracks.map(track => ({ params: { slug: track.slug } }));
+}
+
+const { slug } = Astro.params;
+const track = await getEntry('tracks-en', slug!);
+if (!track) return Astro.redirect('/en/tracks/');
+
+const slugPrefix = slug + '/';
+const modules = (await getCollection('track-modules-en', ({ id }) => id.startsWith(slugPrefix)))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const categoryColors: Record<string, string> = {
+  'certification': 'bg-apple-blue/10 text-apple-blue dark:bg-apple-blue/20 dark:text-apple-blue-dark',
+  'certificação':  'bg-apple-blue/10 text-apple-blue dark:bg-apple-blue/20 dark:text-apple-blue-dark',
+  'engineering':   'bg-[#34c759]/10 text-[#1a7a33] dark:bg-[#34c759]/20 dark:text-[#34c759]',
+  'engenharia':    'bg-[#34c759]/10 text-[#1a7a33] dark:bg-[#34c759]/20 dark:text-[#34c759]',
+  'product':       'bg-[#ff9500]/10 text-[#8a5100] dark:bg-[#ff9500]/20 dark:text-[#ff9500]',
+  'produto':       'bg-[#ff9500]/10 text-[#8a5100] dark:bg-[#ff9500]/20 dark:text-[#ff9500]',
+};
+const tagClass = categoryColors[track.data.category] ?? 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]';
+
+const totalResources = modules.reduce((sum, mod) => {
+  return sum + ((mod.data.officialResources as any[] | undefined)?.length ?? 0);
+}, 0);
+
+const moduleResourceCounts: Record<string, number> = {};
+for (const mod of modules) {
+  moduleResourceCounts[String(mod.data.order)] =
+    (mod.data.officialResources as any[] | undefined)?.length ?? 0;
+}
+
+const renderedModules = await Promise.all(
+  modules.map(async (mod) => {
+    const { Content } = await render(mod);
+    return { mod, Content };
+  })
+);
+---
+
+<BaseLayout title={track.data.title + ' — Tracks'} description={track.data.description} lang="en" altHref={"/trilhas/" + slug}>
+
+  <!-- Breadcrumb + header -->
+  <div class="mb-10">
+    <a href="/en/tracks/" class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] hover:text-apple-blue dark:hover:text-apple-blue-dark transition-colors inline-block mb-4">
+      {t.tracks.backToTracks}
+    </a>
+    <div class="flex items-start justify-between gap-4 mb-4">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class={'text-apple-nav font-medium px-2 py-0.5 rounded-full uppercase tracking-wide ' + tagClass}>
+            {track.data.category}
+          </span>
+          <span class="text-apple-nav font-medium px-2 py-0.5 rounded-full bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]">
+            {track.data.source}
+          </span>
+        </div>
+        <h1 class="text-apple-display font-semibold text-apple-ink dark:text-[#f5f5f7] mb-1">
+          {track.data.title}
+        </h1>
+        <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d]">
+          {track.data.source} · ~{track.data.estimatedHours} {t.tracks.hours} ·
+          <span id="modules-progress-text">0 of {totalResources} {t.tracks.resources}</span>
+        </p>
+      </div>
+      <span id="track-pct" class="text-apple-tagline font-semibold text-apple-blue dark:text-apple-blue-dark shrink-0 mt-1 hidden">
+        0%
+      </span>
+    </div>
+    <ProgressBar percent={0} id="track-progress-bar" />
+
+    {track.data.domains && (track.data.domains as any[]).length > 0 && (
+      <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] mt-2">
+        {'Domains: ' + (track.data.domains as any[]).map((d: any) => d.name + ' ' + d.percent + '%').join(' · ')}
+      </p>
+    )}
+  </div>
+
+  <!-- Modules list -->
+  <div
+    id="track-page"
+    data-slug={slug}
+    data-total-resources={totalResources}
+    data-module-resource-counts={JSON.stringify(moduleResourceCounts)}
+    class="flex flex-col gap-3"
+  >
+    {renderedModules.map(({ mod, Content }) => (
+      <div
+        data-module
+        data-order={mod.data.order}
+        id={'module-' + mod.data.order}
+        class="border border-apple-hairline dark:border-[#3a3a3c] rounded-apple-lg overflow-hidden transition-colors duration-200"
+      >
+        <button
+          class="w-full flex items-center gap-3 p-4 text-left hover:bg-apple-parchment dark:hover:bg-[#2c2c2e] transition-colors"
+          onclick={'window.__toggleModule(' + mod.data.order + ')'}
+        >
+          <div
+            id={'indicator-' + mod.data.order}
+            class="w-4 h-4 rounded-full border border-apple-hairline bg-apple-divider dark:bg-[#3a3a3c] flex-shrink-0"
+          />
+          <div class="flex-1 min-w-0">
+            <p class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7]">
+              {mod.data.title}
+            </p>
+            {(mod.data.duration || mod.data.domain) && (
+              <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] mt-0.5">
+                {[mod.data.duration, mod.data.domain].filter(Boolean).join(' · ')}
+              </p>
+            )}
+          </div>
+        </button>
+
+        <div
+          id={'content-' + mod.data.order}
+          class="hidden border-t border-apple-hairline dark:border-[#3a3a3c] p-4"
+        >
+          <!-- Official resources checklist -->
+          {mod.data.officialResources && (mod.data.officialResources as any[]).length > 0 && (
+            <div class="mb-4 flex flex-col gap-3">
+              {(mod.data.officialResources as any[]).map((r: any, idx: number) => (
+                <div class="flex items-start gap-3">
+                  <button
+                    id={'resource-check-' + mod.data.order + '-' + idx}
+                    onclick={'window.__toggleResource(' + mod.data.order + ', ' + idx + ')'}
+                    class="mt-0.5 w-4 h-4 rounded border border-apple-chip dark:border-[#3a3a3c] flex-shrink-0 bg-white dark:bg-[#2c2c2e] transition-colors hover:border-apple-blue"
+                  />
+                  <div class="flex-1 min-w-0">
+                    <p
+                      id={'resource-label-' + mod.data.order + '-' + idx}
+                      class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7]"
+                    >
+                      {r.title}
+                    </p>
+                    <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] mt-0.5">
+                      {r.description}
+                    </p>
+                    <a
+                      href={r.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mt-1.5 inline-flex items-center gap-1 text-apple-caption text-apple-blue dark:text-apple-blue-dark bg-apple-blue/10 dark:bg-apple-blue/20 px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
+                    >
+                      Access →
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <!-- Complementary resources -->
+          {mod.data.complementaryResources && (mod.data.complementaryResources as any[]).length > 0 && (
+            <div class="mb-4 bg-apple-parchment dark:bg-[#2c2c2e] rounded-apple-md p-3">
+              <p class="text-apple-caption font-semibold text-apple-ink-48 dark:text-[#6e6e73] uppercase tracking-wide mb-3">
+                + Complementary
+              </p>
+              <div class="flex flex-col gap-3">
+                {(mod.data.complementaryResources as any[]).map((r: any) => (
+                  <div>
+                    <p class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7]">
+                      {r.title}
+                    </p>
+                    <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d] mt-0.5">
+                      {r.description}
+                    </p>
+                    <a
+                      href={r.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mt-1.5 inline-flex items-center gap-1 text-apple-caption text-[#1a7a33] dark:text-[#34c759] bg-[#34c759]/10 dark:bg-[#34c759]/20 px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
+                    >
+                      Access →
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 opacity-60"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- visual only, not tracked -->
+          {mod.data.exercises && (mod.data.exercises as any[]).length > 0 && (
+            <div class="mb-4">
+              <p class="text-apple-caption font-semibold text-apple-ink-48 dark:text-[#6e6e73] uppercase tracking-wide mb-2">
+                Exercises
+              </p>
+              <ul class="flex flex-col gap-2">
+                {(mod.data.exercises as any[]).map((ex: any) => (
+                  <li class="flex items-start gap-2 text-apple-body text-apple-ink dark:text-[#f5f5f7]">
+                    <span class="mt-1 w-4 h-4 rounded border border-apple-chip dark:border-[#3a3a3c] flex-shrink-0 bg-white dark:bg-[#2c2c2e]" />
+                    {ex}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <article class="prose prose-apple dark:prose-invert prose-sm mt-4 max-w-none">
+            <Content />
+          </article>
+        </div>
+      </div>
+    ))}
+  </div>
+</BaseLayout>
+
+<script>
+  import { getCompletedResources, toggleResourceComplete, calcProgressPercent } from '../../../lib/track-progress';
+
+  const page = document.getElementById('track-page')!;
+  const slug            = page.dataset.slug!;
+  const totalResources  = parseInt(page.dataset.totalResources!);
+  const moduleResourceCounts: Record<string, number> = JSON.parse(page.dataset.moduleResourceCounts!);
+
+  function updateProgress() {
+    const completed = getCompletedResources(slug);
+    const pct = calcProgressPercent(completed.length, totalResources);
+
+    const progressText = document.getElementById('modules-progress-text');
+    const progressBar  = document.getElementById('track-progress-bar');
+    const pctEl        = document.getElementById('track-pct');
+    if (progressText) progressText.textContent = `${completed.length} of ${totalResources} resources`;
+    if (progressBar)  progressBar.style.width = `${pct}%`;
+    if (pctEl)        { pctEl.textContent = `${pct}%`; pctEl.classList.remove('hidden'); }
+
+    const moduleEls = document.querySelectorAll<HTMLElement>('[data-module]');
+    let currentFound = false;
+
+    moduleEls.forEach(el => {
+      const order = parseInt(el.dataset.order!);
+      const count = moduleResourceCounts[String(order)] ?? 0;
+
+      let moduleDone = count > 0;
+      for (let i = 0; i < count; i++) {
+        if (!completed.includes(`${order}-${i}`)) { moduleDone = false; break; }
+      }
+
+      const isCurrent = !moduleDone && !currentFound;
+      if (isCurrent) currentFound = true;
+
+      const indicator   = document.getElementById(`indicator-${order}`);
+      const content     = document.getElementById(`content-${order}`);
+
+      if (indicator) {
+        if (moduleDone) {
+          indicator.className = 'w-4 h-4 rounded-full bg-apple-blue flex-shrink-0';
+        } else if (isCurrent) {
+          indicator.className = 'w-4 h-4 rounded-full border-2 border-apple-blue bg-white dark:bg-[#1c1c1e] flex-shrink-0';
+        } else {
+          indicator.className = 'w-4 h-4 rounded-full border border-apple-hairline bg-apple-divider dark:bg-[#3a3a3c] flex-shrink-0';
+        }
+      }
+
+      if (isCurrent) {
+        el.classList.add('border-apple-blue', 'border-2');
+        el.classList.remove('border-apple-hairline', 'dark:border-[#3a3a3c]');
+      } else {
+        el.classList.remove('border-apple-blue', 'border-2');
+        el.classList.add('border-apple-hairline', 'dark:border-[#3a3a3c]');
+      }
+
+      if (content) {
+        if (isCurrent) content.classList.remove('hidden');
+        else if (moduleDone) content.classList.add('hidden');
+      }
+
+      for (let i = 0; i < count; i++) {
+        const isDoneResource = completed.includes(`${order}-${i}`);
+        const checkbox = document.getElementById(`resource-check-${order}-${i}`);
+        const label    = document.getElementById(`resource-label-${order}-${i}`);
+        if (checkbox) {
+          checkbox.classList.toggle('bg-apple-blue', isDoneResource);
+          checkbox.classList.toggle('border-apple-blue', isDoneResource);
+        }
+        if (label) {
+          label.classList.toggle('line-through', isDoneResource);
+          label.classList.toggle('opacity-50', isDoneResource);
+        }
+      }
+    });
+  }
+
+  (window as any).__toggleResource = (order: number, index: number) => {
+    toggleResourceComplete(slug, `${order}-${index}`);
+    updateProgress();
+  };
+
+  (window as any).__toggleModule = (order: number) => {
+    document.getElementById(`content-${order}`)?.classList.toggle('hidden');
+  };
+
+  updateProgress();
+</script>
