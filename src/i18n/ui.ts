@@ -46,7 +46,7 @@ export const ui = {
     },
     dateLocale: 'pt-BR' as const,
     monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'] as const,
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
   },
   en: {
     htmlLang: 'en-US',
@@ -95,7 +95,7 @@ export const ui = {
     },
     dateLocale: 'en-US' as const,
     monthNames: ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'] as const,
+      'July', 'August', 'September', 'October', 'November', 'December'],
   },
 } as const;
 
