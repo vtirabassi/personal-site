@@ -3,6 +3,7 @@ import { Bot } from 'grammy';
 import { kv } from '@vercel/kv';
 import { fetchMetadata } from '../../lib/fetch-metadata';
 import { classifyTheme } from '../../lib/classify-theme';
+import { generateDescription } from '../../lib/generate-description';
 import { addLibraryItem } from '../../lib/github-api';
 import { slugify, inferType } from '../../lib/slugify';
 import type { LibraryItem } from '../../lib/library-schema';
@@ -86,12 +87,13 @@ function createBot() {
 
     try {
       const metadata = await fetchMetadata(url);
-      const theme = await classifyTheme(metadata.title, metadata.description);
+      const description = metadata.description || await generateDescription(metadata.title, url);
+      const theme = await classifyTheme(metadata.title, description);
 
       const pendingItem: PendingItem = {
         url,
         title: metadata.title,
-        description: metadata.description,
+        description,
         theme,
         personalNote,
       };
