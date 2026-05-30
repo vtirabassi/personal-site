@@ -71,8 +71,8 @@ const [featured, ...rest] = tracksData;
               {featured.title}
             </h2>
             <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d]">
-              {featured.source} · ~{featured.estimatedHours}h ·
-              <span id="featured-progress-text">Não iniciada</span>
+              {featured.source} · ~{featured.estimatedHours} {t_ui.tracks.hours} ·
+              <span id="featured-progress-text">{t_ui.tracks.notStarted}</span>
             </p>
           </div>
           <span id="featured-pct" class="text-apple-tagline font-semibold text-apple-blue dark:text-apple-blue-dark shrink-0 hidden">
@@ -103,7 +103,7 @@ const [featured, ...rest] = tracksData;
                 {t.title}
               </span>
             </div>
-            <span class="shrink-0 text-apple-caption text-apple-ink-48 dark:text-[#98989d]">Não iniciada</span>
+            <span class="shrink-0 text-apple-caption text-apple-ink-48 dark:text-[#98989d]">{t_ui.tracks.notStarted}</span>
           </a>
         </li>
       ))}

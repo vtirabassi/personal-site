@@ -33,6 +33,7 @@ export const ui = {
       hours: 'horas',
       progress: 'Progresso',
       backToTracks: '← Trilhas',
+      notStarted: 'Não iniciada',
     },
     library: {
       title: 'Biblioteca',
@@ -82,6 +83,7 @@ export const ui = {
       hours: 'hours',
       progress: 'Progress',
       backToTracks: '← Tracks',
+      notStarted: 'Not started',
     },
     library: {
       title: 'Library',
