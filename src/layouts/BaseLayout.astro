@@ -2,44 +2,51 @@
 import { getCollection } from 'astro:content';
 import libraryRaw from '../data/library.json';
 import type { LibraryData } from '../lib/library-schema';
+import { ui } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
 
 interface Props {
   title: string;
   description?: string;
+  lang?: Lang;
+  altHref?: string;
 }
-const { title, description = 'Meu site pessoal' } = Astro.props;
+const { title, description = 'Meu site pessoal', lang = 'pt', altHref = lang === 'pt' ? '/en/' : '/' } = Astro.props;
+const t = ui[lang];
 
 const library = libraryRaw as LibraryData;
 const posts = await getCollection('blog');
+const enPosts = await getCollection('blog-en');
 const tracks = await getCollection('tracks');
 
+const searchPosts = lang === 'en' ? enPosts : posts;
 const searchItems = [
-  ...posts.map(p => ({
+  ...searchPosts.map(p => ({
     type: 'blog',
     title: p.data.title,
     description: p.data.description ?? '',
-    url: `/blog/${p.slug}`,
+    url: lang === 'en' ? `/en/blog/${p.slug}` : `/blog/${p.slug}`,
     external: false,
   })),
   ...library.items.map(i => ({
     type: 'library',
-    title: i.title,
-    description: i.description ?? '',
+    title: (lang === 'en' ? (i.title_en ?? i.title) : i.title),
+    description: (lang === 'en' ? (i.description_en ?? i.description) : i.description) ?? '',
     url: i.url,
     external: true,
   })),
-  ...tracks.map(t => ({
+  ...tracks.map(track => ({
     type: 'trilha',
-    title: t.data.title,
-    description: t.data.description,
-    url: `/trilhas/${t.slug}`,
+    title: track.data.title,
+    description: track.data.description,
+    url: lang === 'en' ? `/en/tracks/${track.slug}` : `/trilhas/${track.slug}`,
     external: false,
   })),
 ];
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang={t.htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,18 +71,31 @@ const searchItems = [
           Vinicius Tirabassi
         </a>
         <div class="flex items-center gap-4">
-          <a href="/sobre"    class="text-apple-nav text-white/80 hover:text-white transition-colors">Sobre</a>
-          <a href="/blog"     class="text-apple-nav text-white/80 hover:text-white transition-colors">Blog</a>
-          <a href="/trilhas"  class="text-apple-nav text-white/80 hover:text-white transition-colors">Trilhas</a>
-          <a href="/library"  class="text-apple-nav text-white/80 hover:text-white transition-colors">Biblioteca</a>
+          <a href={lang === 'en' ? '/en/about/' : '/sobre/'}   class="text-apple-nav text-white/80 hover:text-white transition-colors">{t.nav.about}</a>
+          <a href={lang === 'en' ? '/en/blog/' : '/blog/'}     class="text-apple-nav text-white/80 hover:text-white transition-colors">{t.nav.blog}</a>
+          <a href={lang === 'en' ? '/en/tracks/' : '/trilhas/'} class="text-apple-nav text-white/80 hover:text-white transition-colors">{t.nav.tracks}</a>
+          <a href={lang === 'en' ? '/en/library/' : '/library/'} class="text-apple-nav text-white/80 hover:text-white transition-colors">{t.nav.library}</a>
 
           <!-- Search box -->
           <button id="search-open" aria-label="Buscar" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white/70 hover:text-white rounded-full px-3 h-7 transition-colors text-apple-nav">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
             </svg>
-            <span class="hidden sm:inline">Buscar</span>
+            <span class="hidden sm:inline">{t.nav.search}</span>
           </button>
+
+          <!-- Language toggle -->
+          <div class="flex items-center gap-1 text-apple-nav shrink-0">
+            {lang === 'pt'
+              ? <span class="text-white font-semibold">PT</span>
+              : <a href={altHref} class="text-white/60 hover:text-white transition-colors">PT</a>
+            }
+            <span class="text-white/30 select-none">|</span>
+            {lang === 'en'
+              ? <span class="text-white font-semibold">EN</span>
+              : <a href={altHref} class="text-white/60 hover:text-white transition-colors">EN</a>
+            }
+          </div>
 
           <!-- Theme dropdown -->
           <div class="relative" id="theme-wrapper">
@@ -126,7 +146,7 @@ const searchItems = [
           <input
             id="search-input"
             type="search"
-            placeholder="Buscar artigos e recursos..."
+            placeholder={t.search.placeholder}
             autocomplete="off"
             class="w-full bg-apple-parchment dark:bg-[#2c2c2e] text-apple-ink dark:text-[#f5f5f7] placeholder-apple-ink-48 dark:placeholder-[#6e6e73] rounded-apple-md px-4 py-2 pl-10 text-apple-body border border-apple-hairline dark:border-[#3a3a3c] outline-none focus:border-apple-blue dark:focus:border-apple-blue-dark"
           />
@@ -145,7 +165,7 @@ const searchItems = [
       </div>
     </footer>
 
-    <script define:vars={{ searchItems }}>
+    <script define:vars={{ searchItems, emptyMsg: t.search.empty, labelBlog: t.search.labelBlog, labelTrack: t.search.labelTrack, labelLibrary: t.search.labelLibrary }}>
       // --- Theme ---
       const icons = {
         system: document.getElementById('icon-system'),
@@ -232,15 +252,15 @@ const searchItems = [
         ).slice(0, 8);
 
         if (!hits.length) {
-          searchResults.innerHTML = '<li class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] px-2 py-3">Nenhum resultado encontrado.</li>';
+          searchResults.innerHTML = `<li class="text-apple-caption text-apple-ink-48 dark:text-[#6e6e73] px-2 py-3">${emptyMsg}</li>`;
           return;
         }
 
         hits.forEach(item => {
           const li = document.createElement('li');
-          const label = item.type === 'blog' ? 'Blog'
-                      : item.type === 'trilha' ? 'Trilha'
-                      : 'Biblioteca';
+          const label = item.type === 'blog' ? labelBlog
+                      : item.type === 'trilha' ? labelTrack
+                      : labelLibrary;
           const labelColor = item.type === 'blog'
             ? 'bg-apple-blue/10 text-apple-blue'
             : item.type === 'trilha'
