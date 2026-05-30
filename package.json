@@ -12,7 +12,8 @@
     "astro": "astro",
     "test": "vitest run",
     "test:watch": "vitest",
-    "import:medium": "npx tsx scripts/import-medium.ts"
+    "import:medium": "npx tsx scripts/import-medium.ts",
+    "translate": "npx tsx scripts/translate.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
