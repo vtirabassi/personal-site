@@ -2,11 +2,11 @@
   "items": [
     {
       "id": "what-is-the-superpowers-plugin-for-claude-code-the-agentic-skills-framework-explained",
-      "title": "What Is the Superpowers Plugin for Claude Code? The Agentic Skills Framework Explained",
+      "title": "O que é o Plugin Superpowers para Claude Code? O Agentic Skills Framework explicado",
       "url": "https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code",
       "type": "link",
       "theme": "IA Skills",
-      "description": "Superpowers is a free open-source plugin that installs 14 structured skills into Claude Code. Learn how it reduces tokens and improves output quality.",
+      "description": "Plugin open-source gratuito que instala 14 skills estruturadas no Claude Code, reduzindo tokens e melhorando a qualidade do output.",
       "addedAt": "2026-05-28"
     },
     {
@@ -20,7 +20,7 @@
     },
     {
       "id": "understanding-spec-driven-development-kiro-spec-kit-and-tessl",
-      "title": "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl",
+      "title": "Entendendo Spec-Driven Development: Kiro, spec-kit e Tessl",
       "url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
       "type": "link",
       "theme": "SDD",
@@ -29,7 +29,7 @@
     },
     {
       "id": "harness-engineering-for-coding-agent-users",
-      "title": "Harness engineering for coding agent users",
+      "title": "Harness Engineering para usuários de coding agents",
       "url": "https://martinfowler.com/articles/harness-engineering.html",
       "type": "link",
       "theme": "Harness",
