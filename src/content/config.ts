@@ -41,4 +41,11 @@ const trackModules = defineCollection({
   }).passthrough(),
 });
 
-export const collections = { blog, tracks, 'track-modules': trackModules };
+export const collections = {
+  blog,
+  tracks,
+  'track-modules': trackModules,
+  'blog-en': blog,
+  'tracks-en': tracks,
+  'track-modules-en': trackModules,
+};
