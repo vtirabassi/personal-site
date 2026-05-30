@@ -66,7 +66,7 @@ const renderedModules = await Promise.all(
           {track.data.title}
         </h1>
         <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d]">
-          {track.data.source} · ~{track.data.estimatedHours}h ·
+          {track.data.source} · ~{track.data.estimatedHours} {t_ui.tracks.hours} ·
           <span id="modules-progress-text">0 de {totalResources} {t_ui.tracks.resources}</span>
         </p>
       </div>
