@@ -3,37 +3,45 @@
     {
       "id": "what-is-the-superpowers-plugin-for-claude-code-the-agentic-skills-framework-explained",
       "title": "O que é o Plugin Superpowers para Claude Code? O Agentic Skills Framework explicado",
+      "title_en": "What is the Superpowers Plugin for Claude Code? The Agentic Skills Framework Explained",
       "url": "https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code",
       "type": "link",
       "theme": "IA Skills",
       "description": "Plugin open-source gratuito que instala 14 skills estruturadas no Claude Code, reduzindo tokens e melhorando a qualidade do output.",
+      "description_en": "Free open-source plugin that installs 14 structured skills in Claude Code, reducing tokens and improving output quality.",
       "addedAt": "2026-05-28"
     },
     {
       "id": "structured-prompt-driven-development-spdd",
       "title": "Structured-Prompt-Driven Development (SPDD)",
+      "title_en": "Structured-Prompt-Driven Development (SPDD)",
       "url": "https://martinfowler.com/articles/structured-prompt-driven/",
       "type": "link",
       "theme": "SDD",
       "description": "Como estruturar prompts com especificações formais para tornar o desenvolvimento com agentes de IA mais previsível e rastreável.",
+      "description_en": "How to structure prompts with formal specifications to make development with AI agents more predictable and traceable.",
       "addedAt": "2026-05-28"
     },
     {
       "id": "understanding-spec-driven-development-kiro-spec-kit-and-tessl",
       "title": "Entendendo Spec-Driven Development: Kiro, spec-kit e Tessl",
+      "title_en": "Understanding Spec-Driven Development: Kiro, spec-kit and Tessl",
       "url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
       "type": "link",
       "theme": "SDD",
       "description": "Comparativo entre três ferramentas de Spec-Driven Development — Kiro, spec-kit e Tessl — e como cada uma formaliza o ciclo de especificação e implementação.",
+      "description_en": "Comparative between three Spec-Driven Development tools — Kiro, spec-kit and Tessl — and how each one formalizes the specification and implementation cycle.",
       "addedAt": "2026-05-30"
     },
     {
       "id": "harness-engineering-for-coding-agent-users",
       "title": "Harness Engineering para usuários de coding agents",
+      "title_en": "Harness Engineering for Coding Agent Users",
       "url": "https://martinfowler.com/articles/harness-engineering.html",
       "type": "link",
       "theme": "Harness",
       "description": "Como construir scaffolding de ferramentas, permissões e contexto para maximizar a eficácia de agentes de codificação.",
+      "description_en": "How to build tool scaffolding, permissions, and context to maximize the effectiveness of coding agents.",
       "addedAt": "2026-05-30"
     }
   ]
