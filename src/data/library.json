@@ -26,6 +26,15 @@
       "theme": "SDD",
       "description": "",
       "addedAt": "2026-05-30"
+    },
+    {
+      "id": "harness-engineering-for-coding-agent-users",
+      "title": "Harness engineering for coding agent users",
+      "url": "https://martinfowler.com/articles/harness-engineering.html",
+      "type": "link",
+      "theme": "Harness",
+      "description": "",
+      "addedAt": "2026-05-30"
     }
   ]
 }
