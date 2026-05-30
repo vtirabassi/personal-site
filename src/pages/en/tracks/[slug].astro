@@ -30,19 +30,15 @@ const categoryColors: Record<string, string> = {
 };
 const tagClass = categoryColors[track.data.category] ?? 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]';
 
-const domainColorMap: Record<string, string> = {
-  'Prompt Engineering': 'bg-[#ff3b30]/10 text-[#cc1a10] dark:bg-[#ff3b30]/20 dark:text-[#ff6b62]',
-  'Claude Code':        'bg-apple-blue/10 text-apple-blue dark:bg-apple-blue/20 dark:text-apple-blue-dark',
-  'Agentic':            'bg-[#af52de]/10 text-[#7c3aed] dark:bg-[#af52de]/20 dark:text-[#af52de]',
-  'MCP & Tools':        'bg-[#32ade6]/10 text-[#0a6e8a] dark:bg-[#32ade6]/20 dark:text-[#32ade6]',
-  'Context':            'bg-[#c8a96e]/10 text-[#7a5c1e] dark:bg-[#c8a96e]/20 dark:text-[#c8a96e]',
-  'Evals':              'bg-[#34c759]/10 text-[#1a7a33] dark:bg-[#34c759]/20 dark:text-[#34c759]',
-  'Revisão Geral':      'bg-[#ff9500]/10 text-[#8a5100] dark:bg-[#ff9500]/20 dark:text-[#ff9500]',
-};
-
 function domainTagClass(tag: string): string {
-  const key = Object.keys(domainColorMap).find(k => tag.startsWith(k));
-  return key ? domainColorMap[key] : 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]';
+  const t = tag.toLowerCase();
+  if (t.startsWith('prompt'))      return 'bg-[#ff3b30]/10 text-[#cc1a10] dark:bg-[#ff3b30]/20 dark:text-[#ff6b62]';
+  if (t.startsWith('claude code')) return 'bg-apple-blue/10 text-apple-blue dark:bg-apple-blue/20 dark:text-apple-blue-dark';
+  if (t.startsWith('agentic'))     return 'bg-[#af52de]/10 text-[#7c3aed] dark:bg-[#af52de]/20 dark:text-[#af52de]';
+  if (t.startsWith('mcp'))         return 'bg-[#32ade6]/10 text-[#0a6e8a] dark:bg-[#32ade6]/20 dark:text-[#32ade6]';
+  if (t.startsWith('context'))     return 'bg-[#c8a96e]/10 text-[#7a5c1e] dark:bg-[#c8a96e]/20 dark:text-[#c8a96e]';
+  if (t.startsWith('evals'))       return 'bg-[#34c759]/10 text-[#1a7a33] dark:bg-[#34c759]/20 dark:text-[#34c759]';
+  return 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]';
 }
 
 function parseDomains(domain: string | undefined): string[] {
