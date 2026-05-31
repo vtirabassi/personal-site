@@ -173,10 +173,10 @@ function themeClass(theme: string): string {
     btn.addEventListener('click', () => {
       filterBtns.forEach((b) => {
         b.classList.remove('bg-apple-blue', 'text-white', 'border-apple-blue');
-        b.classList.add('border-apple-hairline', 'text-apple-ink');
+        b.classList.add('border-apple-hairline', 'dark:border-[#3a3a3c]', 'text-apple-ink', 'dark:text-[#f5f5f7]');
       });
       btn.classList.add('bg-apple-blue', 'text-white', 'border-apple-blue');
-      btn.classList.remove('border-apple-hairline', 'text-apple-ink');
+      btn.classList.remove('border-apple-hairline', 'dark:border-[#3a3a3c]', 'text-apple-ink', 'dark:text-[#f5f5f7]');
 
       const theme = btn.dataset.theme;
       libraryItems.forEach((item) => {
