@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import Analytics from '@vercel/analytics/astro';
 import libraryRaw from '../data/library.json';
 import type { LibraryData } from '../lib/library-schema';
 import { ui } from '../i18n/ui';
@@ -166,6 +167,8 @@ const searchItems = [
         © {new Date().getFullYear()} Vinicius Tirabassi
       </div>
     </footer>
+
+    <Analytics />
 
     <script define:vars={{ searchItems, emptyMsg: t.search.empty, labelBlog: t.search.labelBlog, labelTrack: t.search.labelTrack, labelLibrary: t.search.labelLibrary }}>
       // --- Theme ---
