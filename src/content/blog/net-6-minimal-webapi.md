@@ -1,11 +1,11 @@
 ---
-title: ".NET 6 — Minimal WebApi"
+title: ".NET 6 Minimal WebApi"
 date: 2021-11-03
 description: "Com a versão do .NET 6 sendo lançada em novembro/2021, versão LTS. Uma das grandes novidades é a facilidade de criar pequenos endpoints de forma simples."
-tags: []
+tags: [".net", "backend", "api"]
 ---
 
-### .NET 6 — Minimal WebApi
+### .NET 6 Minimal WebApi
 
 Com a versão do .NET 6 sendo lançada em novembro/2021, versão a qual será LTS (Long Time Support). Uma das grandes novidades é a facilidade de poder criar pequenos endpoints de forma simples, rápida e clara.
 
@@ -15,7 +15,7 @@ Um dos ganhos é a velocidade de warm-up (tempo de aquecimento) da aplicação, 
 
 ![](https://cdn-images-1.medium.com/max/1024/1*i9SdX7potVtj_gziyn_8kA.png)
 
-[Minimal APIs in .NET 6 | DotNet 2021 — YouTube](https://www.youtube.com/watch?v=1daODFp6xvs)
+[Minimal APIs in .NET 6 | DotNet 2021 YouTube](https://www.youtube.com/watch?v=1daODFp6xvs)
 
 Utilizei o visual studio code para esse breve tutorial, assim programadores de node.js podem ver como é tão simples quanto. 😎
 
@@ -83,7 +83,6 @@ Nessa primeira imagem, podemos ver a validação que desenvolvemos com o Fluent 
 Acredito que seja isso! 🙌
 
 Podemos ver o quão simples é realizar a criação de novos endpoints, microsserviços com as novidades que a versão 6 do dotnet traz.
-
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/net-6-minimal-webapi-19f56ab814e?source=rss-93f65ddb28b5------2).*

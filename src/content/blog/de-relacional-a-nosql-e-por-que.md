@@ -2,7 +2,7 @@
 title: "De Relacional a NoSQL e por quê?"
 date: 2023-10-13
 description: "Em algum momento de sua trajetória profissional como programador, analista ou engenheiro de software, você já deve ter se deparado com a seguinte pergunta"
-tags: []
+tags: ["banco-de-dados", "nosql", "backend"]
 ---
 
 ![](https://cdn-images-1.medium.com/max/1024/1*CcTjcvXTFfIcSkY2AEmP2g.png)
@@ -111,7 +111,6 @@ Exemplos de banco: MongoDB, CouchDB, Firebase Firestore.
 Temos diversos assuntos a serem explorados quando falamos dos bancos NoSQL, como os modelos de distribuição, consistências (Teorema CAP), marcadores de versões, mas a minha intenção principal era dar um panorama geral das categorias existentes de bancos não relacionais e enriquecer um pouco mais a resposta que poderia ser dada para a primeira pergunta desse artigo.
 
 Tenham em mente que, nenhuma das tecnologias hoje existente é dada como uma bala de prata. Essa regra serve para os bancos NoSQL também. Com isso é essencial o time de engenharia testar, validar suas expectativas sobre a produtividade, desempenho do time antes de decidir utilizar um desses bancos.
-
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/de-relacional-a-nosql-e-por-qu%C3%AA-5b521c348216?source=rss-93f65ddb28b5------2).*
