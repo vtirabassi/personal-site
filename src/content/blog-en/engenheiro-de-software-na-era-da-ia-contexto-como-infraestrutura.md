@@ -151,4 +151,4 @@ The new leverage is context. Smaller teams, with mixed roles and direct access t
 
 Brazil has the engineers. It has the tools. What's missing is autonomy and instrumented context.
 
-**Building that starts this week.**
+**Start this week.**

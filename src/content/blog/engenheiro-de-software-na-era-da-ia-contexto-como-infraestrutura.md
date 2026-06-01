@@ -151,4 +151,4 @@ A nova alavanca é contexto. Times menores, com papéis misturados e acesso dire
 
 O Brasil tem os engenheiros. Tem as ferramentas. O que falta é autonomia e contexto instrumentado.
 
-**Construir isso começa esta semana.**
+**Comece esta semana.**
