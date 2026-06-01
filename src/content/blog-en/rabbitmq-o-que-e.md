@@ -2,7 +2,7 @@
 title: "RabbitMQ, What is it?"
 date: 2021-09-22
 description: "Before we talk about RabbitMQ, we need to understand what a messaging system is and its purpose. A message broker capable of processing up to 20 thousand messages per second."
-tags: []
+tags: ["messaging", "backend", "rabbitmq"]
 ---
 
 Before we talk about RabbitMQ, we need to understand what a messaging system is and its purpose.
@@ -87,7 +87,6 @@ Messages are stored on disk as early as possible and are only loaded into RAM wh
 RabbitMQ provides a user interface automatically, so we have the possibility to see the messages that are stopped, that have already been consumed, the consumers, binds, among other information that will help in daily life.
 
 I hope I could have helped and clarified some curiosities. Leave a suggestion in the comments and give it your like. I'm just like a YouTuber now! :)
-
 
 ---
 *Originally published on [Medium](https://medium.com/@viniciustirabassi/rabbitmq-o-que-%C3%A9-3fff92a4ba18?source=rss-93f65ddb28b5------2).*

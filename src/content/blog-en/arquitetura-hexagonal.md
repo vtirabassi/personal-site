@@ -2,7 +2,7 @@
 title: "Hexagonal Architecture"
 date: 2021-08-13
 description: "Well, every time I study something new in this world of technology I tell myself that I will document it to share about it and even to remember it"
-tags: []
+tags: ["architecture", "backend", "engineering"]
 ---
 
 Well, every time I study something new in this world of technology I tell myself that I will document it to share about it and even to remember it in the near future haha. There are so many things we study that sometimes we don't have the subject on the tip of our tongue. I hope this time it sticks!
@@ -65,7 +65,6 @@ There are several ways to do this, you can try to create your own.
 Much is said about applying hexagonal architecture only to large systems, due to a degree of development effort and understanding at first, since in small systems it will rarely generate maintenance, development of new features and perhaps the cost and effort may not be worthwhile.
 
 However, this is not set in stone, since all software development demands analysis and technical discussions, and can have n variables, from team knowledge to business needs.
-
 
 ---
 *Originally published on [Medium](https://medium.com/@viniciustirabassi/arquitetura-hexagonal-de58e8c495be?source=rss-93f65ddb28b5------2).*

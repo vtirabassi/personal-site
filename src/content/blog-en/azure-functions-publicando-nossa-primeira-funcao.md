@@ -2,7 +2,7 @@
 title: "Azure Functions: Publishing our first function"
 date: 2024-09-11
 description: "In this article, we will learn how to publish a function developed locally to Azure and also how to interact with a queue as a trigger."
-tags: []
+tags: ["azure", "serverless", "cloud"]
 ---
 
 ![](https://cdn-images-1.medium.com/max/600/0*lVfAfJXcvjoUVyf4)
@@ -134,7 +134,6 @@ We were able to observe the public message being processed by our function.
 ![](https://cdn-images-1.medium.com/max/1024/1*o_wKPvtKIEJ75RTqgYJykQ.png)
 
 Great! This is what I wanted to share with you in this second article about Azure Functions. I hope to have contributed a little more to our endless learning journey. 👨🏻‍💻
-
 
 ---
 *Originally published on [Medium](https://medium.com/@viniciustirabassi/azure-functions-publicando-nossa-primeira-fun%C3%A7%C3%A3o-3eb0fdd91a1d?source=rss-93f65ddb28b5------2).*

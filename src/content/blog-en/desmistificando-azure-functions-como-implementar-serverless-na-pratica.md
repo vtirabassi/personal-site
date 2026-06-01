@@ -2,7 +2,7 @@
 title: "Demystifying Azure Functions: How to Implement Serverless in Practice"
 date: 2024-08-21
 description: "To better understand Azure Functions, let's take a small step back. What comes to mind when you hear the word Serverless?"
-tags: []
+tags: ["azure", "serverless", "cloud"]
 ---
 
 ### Demystifying Azure Functions: How to implement serverless in practice
@@ -154,7 +154,6 @@ Now, when running the project successfully, we will be able to view the logs gen
 ![](https://cdn-images-1.medium.com/max/1024/1*jaG-Uykux79ZNWbdx2QnHQ.png)
 
 I hope I've contributed to your knowledge and demystified a bit about the implementation of Microsoft's serverless model, Azure Functions. 🙌
-
 
 ---
 *Originally published on [Medium](https://medium.com/@viniciustirabassi/desmistificando-azure-functions-como-implementar-serverless-na-pr%C3%A1tica-7c6dc811a4ad?source=rss-93f65ddb28b5------2).*

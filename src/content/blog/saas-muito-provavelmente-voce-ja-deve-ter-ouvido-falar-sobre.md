@@ -2,7 +2,7 @@
 title: "SaaS, muito provavelmente você já deve ter ouvido falar sobre…"
 date: 2022-02-15
 description: "SaaS (software-as-a-service), muito provavelmente você já deve ter ouvido falar sobre esse termo, seja desenvolvendo o mesmo ou consumindo algum produto SaaS."
-tags: []
+tags: ["saas", "produto", "negócios"]
 ---
 
 ![](https://cdn-images-1.medium.com/max/845/1*Pu3vnbFzM2sRCkOEK6Gyfw.png)
@@ -89,7 +89,6 @@ As aplicações mais robustas, as vezes apresentam a necessidade de execução d
 Essas rotinas devem ser incluídas no codebase de sua aplicação e nunca deve ser aberto um SSL para o container específico da aplicação e executar, o processo não deve concorrer com requisições de usuários
 
 Vale lembrar que simplesmente aplicar os 12 fatores não significa que você terá uma aplicação automaticamente escalável, mas não aplicá-los irá dificultar muito. 🙌
-
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/saas-muito-provavelmente-voc%C3%AA-j%C3%A1-deve-ter-ouvido-falar-sobre-d8e5fe1d878a?source=rss-93f65ddb28b5------2).*

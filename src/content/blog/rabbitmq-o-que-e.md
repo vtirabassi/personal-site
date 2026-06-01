@@ -2,7 +2,7 @@
 title: "RabbitMQ, O que é?"
 date: 2021-09-22
 description: "Antes de falarmos sobre o RabbitMQ, precisamos entender o que é um sistema de mensageria e seu objetivo. Um broker de mensagens capaz de processar até 20 mil mensagens por segundo."
-tags: []
+tags: ["mensageria", "backend", "rabbitmq"]
 ---
 
 Antes de falarmos sobre o RabbitMQ, precisamos entender o que é um sistema de mensageria e seu objetivo.
@@ -87,7 +87,6 @@ As mensagens são armazenadas em disco o mais cedo possível e só são carregad
 O RabbitMQ disponibiliza uma interface de usuário automaticamente, com isso temos a possibilidade de vermos as mensagens que estão paradas, que já foram consumidas, os consumers, binds, entre outras informações que ajudarão no dia a dia.
 
 Espero poder ter ajudado e ter sanado algumas curiosidades ou curiosidades. Deixe uma sugestão nos comentários e de o seu like. To igual youtuber já! :)
-
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/rabbitmq-o-que-%C3%A9-3fff92a4ba18?source=rss-93f65ddb28b5------2).*

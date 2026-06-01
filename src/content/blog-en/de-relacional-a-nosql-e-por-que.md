@@ -2,7 +2,7 @@
 title: "From Relational to NoSQL and Why?"
 date: 2023-10-13
 description: "At some point in your professional journey as a programmer, analyst or software engineer, you must have encountered the following question"
-tags: []
+tags: ["database", "nosql", "backend"]
 ---
 
 ![](https://cdn-images-1.medium.com/max/1024/1*CcTjcvXTFfIcSkY2AEmP2g.png)
@@ -111,7 +111,6 @@ Example databases: MongoDB, CouchDB, Firebase Firestore.
 We have many subjects to explore when talking about NoSQL databases, such as distribution models, consistency (CAP Theorem), version markers, but my main intention was to give a general overview of the existing categories of non-relational databases and enrich the answer that could be given to the first question of this article.
 
 Keep in mind that none of today's existing technologies is considered a silver bullet. This rule applies to NoSQL databases as well. With this, it is essential for the engineering team to test and validate their expectations about productivity and team performance before deciding to use one of these databases.
-
 
 ---
 *Originally published on [Medium](https://medium.com/@viniciustirabassi/de-relacional-a-nosql-e-por-qu%C3%AA-5b521c348216?source=rss-93f65ddb28b5------2).*

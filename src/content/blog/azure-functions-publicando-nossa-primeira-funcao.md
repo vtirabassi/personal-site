@@ -2,7 +2,7 @@
 title: "Azure Functions: Publicando nossa primeira função"
 date: 2024-09-11
 description: "Neste artigo, vamos aprender como publicar no Azure uma função desenvolvida localmente e também como interagir com uma fila como gatilho."
-tags: []
+tags: ["azure", "serverless", "cloud"]
 ---
 
 ![](https://cdn-images-1.medium.com/max/600/0*lVfAfJXcvjoUVyf4)
@@ -134,7 +134,6 @@ Conseguimos observar a mensagem pública sendo processada pela nossa função.
 ![](https://cdn-images-1.medium.com/max/1024/1*o_wKPvtKIEJ75RTqgYJykQ.png)
 
 Ótimo! Isso é o que eu queria compartilhar com vocês neste segundo artigo sobre Azure Functions. Espero ter contribuído um pouco mais à nossa jornada sem fim de aprendizado. 👨🏻‍💻
-
 
 ---
 *Publicado originalmente no [Medium](https://medium.com/@viniciustirabassi/azure-functions-publicando-nossa-primeira-fun%C3%A7%C3%A3o-3eb0fdd91a1d?source=rss-93f65ddb28b5------2).*

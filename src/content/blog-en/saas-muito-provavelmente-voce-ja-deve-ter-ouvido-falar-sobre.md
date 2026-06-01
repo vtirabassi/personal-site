@@ -2,7 +2,7 @@
 title: "SaaS, you've most likely already heard about it…"
 date: 2022-02-15
 description: "SaaS (software-as-a-service), you've most likely already heard about this term, whether developing it yourself or consuming some SaaS product."
-tags: []
+tags: ["saas", "product", "business"]
 ---
 
 ![](https://cdn-images-1.medium.com/max/845/1*Pu3vnbFzM2sRCkOEK6Gyfw.png)
@@ -89,7 +89,6 @@ More robust applications sometimes have the need to execute some routines to mai
 These routines should be included in your application's codebase and should never open an SSL to the application's specific container and execute. The process should not compete with user requests.
 
 It's worth noting that simply applying the 12 factors does not mean you'll automatically have a scalable application, but not applying them will make it much harder. 🙌
-
 
 ---
 *Originally published on [Medium](https://medium.com/@viniciustirabassi/saas-muito-provavelmente-voc%C3%AA-j%C3%A1-deve-ter-ouvido-falar-sobre-d8e5fe1d878a?source=rss-93f65ddb28b5------2).*
