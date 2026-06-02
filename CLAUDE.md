@@ -49,6 +49,14 @@ Definido em `DESIGN.md`. Regras principais:
 - Cards: `rounded-apple-lg` (18px), borda `border-apple-hairline`
 - Sem sombras no chrome da UI
 
+## Sincronização PT/EN de artigos
+
+Cada artigo existe em duas versões com o mesmo nome de arquivo:
+- PT: `src/content/blog/<slug>.md`
+- EN: `src/content/blog-en/<slug>.md`
+
+**Regra obrigatória:** sempre que um artigo PT for editado, a versão EN correspondente em `src/content/blog-en/` deve ser atualizada na mesma sessão para refletir as mesmas mudanças. Nunca deixar as duas versões dessincronizadas.
+
 ## Como publicar um artigo
 
 Cria um arquivo `.md` em `src/content/blog/`:

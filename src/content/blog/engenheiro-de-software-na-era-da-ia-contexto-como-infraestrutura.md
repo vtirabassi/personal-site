@@ -7,13 +7,19 @@ tags: ["ia", "engenharia", "produtividade", "carreira"]
 
 ---
 
-Em março de 2024, a Shopify demitiu 20% dos seus engenheiros. Em paralelo, dobrou o output de produto.
+Em 2024, Tobi Lütke mandou um memo interno para todos na Shopify: qualquer pedido de headcount precisaria vir acompanhado de uma justificativa de por que o trabalho não poderia ser feito com IA. O output de produto dobrou. O time encolheu.
 
-Não foi mágica. Foi a consequência de uma mudança que os melhores times de tecnologia do mundo já tinham entendido e que a maioria das empresas brasileiras ainda ignora: **a alavanca do engenheiro de software mudou de lugar**.
+Na Klarna, um agente de IA passou a fazer o trabalho de 700 atendentes em tempo real, com índice de satisfação acima da média humana. Na Duolingo, contratos de terceirizados de conteúdo não foram renovados. O trabalho passou para agentes. Na Cursor, dois engenheiros construíram em semanas um produto que chegou a um bilhão de dólares de valuation.
 
-Por anos, a alavanca era execução: quantas histórias o time entregava por sprint, quantas linhas de código eram produzidas, quantos tickets fechados por semana. O processo todo daily, refinamento, review existia para coordenar essa execução.
+Em todos esses casos, o padrão foi o mesmo: **a alavanca do engenheiro de software mudou de lugar**.
 
-Com IA acelerando a execução, esse modelo não faz mais sentido. O gargalo deixou de ser "quantas mãos eu tenho" e passou a ser "quão bom é o escopo que essas mãos recebem".
+Por anos, a alavanca era execução: quantas histórias o time entregava por sprint, quantas linhas de código eram produzidas, quantos tickets fechados por semana. O processo todo, daily, refinamento, review, existia para coordenar essa execução.
+
+Com IA acelerando a execução, esse modelo começa a mostrar suas tensões. E o motivo não é óbvio:
+
+Não é que escrever código ficou trivial. É que o custo marginal de escrever código errado despencou. Se antes você perdia duas semanas construindo a feature errada, hoje você perde dois dias, mas ainda assim construiu a feature errada. A velocidade expõe o problema de escopo, não o resolve.
+
+O gargalo deixou de ser "quantas mãos eu tenho" e passou a ser "quão bom é o escopo que essas mãos recebem".
 
 Neste artigo explico o que mudou, por que contexto virou infraestrutura e o que você pode fazer começando esta semana.
 
@@ -29,7 +35,7 @@ Hierarquia clara. Especialidades bem definidas. Handoffs entre áreas. O engenhe
 
 Esse modelo funcionou bem **enquanto a principal restrição era execução**. O processo sprint, refinamento, daily, retro existia para compensar a falta de autonomia individual. Quanto mais pessoas no loop, mais cerimônia para garantir alinhamento.
 
-O problema: esse modelo pressupõe que execução é cara e lenta. Na era da IA, isso deixou de ser verdade.
+A tensão: esse modelo foi desenhado para um mundo onde execução era cara e lenta. Com IA, essa premissa muda de intensidade.
 
 ### O que o Vale está fazendo diferente
 
@@ -91,13 +97,13 @@ Vou ser direto: o gap entre o Brasil e o Vale do Silício não é de acesso a fe
 
 O Copilot, o Cursor, o Claude qualquer engenheiro no Brasil pode usar hoje. **O gap não é de ferramenta. É de autonomia e contexto.**
 
-### Como é o dia a dia típico no Brasil
+### Como é o dia a dia em boa parte das empresas
 
-- Ticket refinado que passou por PM, PO e Tech Lead o engenheiro executa, não decide
-- Sem acesso a métricas ou dados de negócio direto
-- Sem contato com quem levantou o requisito
-- O engenheiro não sabe qual número de negócio a feature que ele está construindo pretende mover
-- A IA vai acelerar o código mas dentro do escopo errado
+- Ticket refinado que passou por PM, PO e Tech Lead o engenheiro tem pouco espaço para influenciar o escopo
+- Acesso limitado a métricas ou dados de negócio direto
+- Pouco contato com quem levantou o requisito
+- O número de negócio que a feature pretende mover fica na cabeça do PM, não do engenheiro
+- A IA acelera a execução mas dentro de um escopo que o engenheiro não ajudou a definir
 
 ### Como é o dia a dia nas empresas AI-native
 
@@ -145,10 +151,10 @@ Se você é sênior ou tech lead, somos agentes de mudança cultural mas essa mu
 
 ## Conclusão
 
-O modelo de times grandes, com silos de especialidade e processos que compensam falta de autonomia, foi desenhado para um mundo onde execução era o gargalo. Esse mundo acabou.
+O modelo de times grandes, com silos de especialidade e processos que compensam falta de autonomia, foi desenhado para um mundo onde execução era o gargalo. Esse mundo está se transformando rápido.
 
 A nova alavanca é contexto. Times menores, com papéis misturados e acesso direto ao problema real, conseguem usar IA de forma que amplifica escopo de produto não só velocidade de código.
 
-O Brasil tem os engenheiros. Tem as ferramentas. O que falta é autonomia e contexto instrumentado.
+O Brasil tem os engenheiros. Tem as ferramentas. A diferença, no momento, está em construir autonomia e contexto instrumentado.
 
 **Comece esta semana.**

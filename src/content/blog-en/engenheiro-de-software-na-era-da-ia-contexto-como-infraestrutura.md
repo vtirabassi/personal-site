@@ -7,13 +7,19 @@ tags: ["ai", "engineering", "productivity", "career"]
 
 ---
 
-In March 2024, Shopify fired 20% of its engineers. At the same time, it doubled its product output.
+In April 2025, Tobi Lütke sent an internal memo to everyone at Shopify: any headcount request would need to come with a justification for why the work couldn't be done with AI. Product output doubled. The team shrank.
 
-It wasn't magic. It was the consequence of a shift that the best tech teams in the world had already understood and that most Brazilian companies still ignore: **the leverage point of the software engineer has moved.**
+At Klarna, an AI agent took over the work of 700 customer service agents in real time, with satisfaction scores on par with humans. At Duolingo, the CEO announced that contracts with content contractors would not be renewed. The work would move to agents. At Cursor, four engineers founded a product that crossed one billion dollars in annual revenue before turning three years old.
 
-For years, the leverage was execution: how many stories the team delivered per sprint, how many lines of code were produced, how many tickets closed per week. The entire process daily, refinement, review existed to coordinate that execution.
+In every one of these cases, the pattern was the same: **the leverage point of the software engineer has moved.**
 
-With AI accelerating execution, this model no longer makes sense. The bottleneck stopped being "how many hands do I have" and became "how good is the scope those hands receive."
+For years, the leverage was execution: how many stories the team delivered per sprint, how many lines of code were produced, how many tickets closed per week. The entire process, daily, refinement, review, existed to coordinate that execution.
+
+With AI accelerating execution, this model starts to show its tensions. And the reason is not obvious:
+
+It's not that writing code became trivial. It's that the marginal cost of writing the wrong code dropped. If before you lost two weeks building the wrong feature, today you lose two days, but you still built the wrong feature. Speed exposes the scope problem, it doesn't solve it.
+
+The bottleneck stopped being "how many hands do I have" and became "how good is the scope those hands receive."
 
 In this article I explain what changed, why context became infrastructure and what you can start doing this week.
 
@@ -29,7 +35,7 @@ Clear hierarchy. Well-defined specialties. Handoffs between areas. The engineer 
 
 This model worked well **as long as the main constraint was execution**. The process sprint, refinement, daily, retro existed to compensate for lack of individual autonomy. The more people in the loop, the more ceremony to ensure alignment.
 
-The problem: this model assumes that execution is expensive and slow. In the age of AI, that's no longer true.
+The tension: this model was designed for a world where execution was expensive and slow. With AI, that premise shifts in intensity.
 
 ### What the Valley is doing differently
 
@@ -91,13 +97,13 @@ Let me be direct: the gap between Brazil and Silicon Valley isn't about access t
 
 Copilot, Cursor, Claude any engineer in Brazil can use them today. **The gap isn't tools. It's autonomy and context.**
 
-### What the typical workday looks like in Brazil
+### What the typical workday looks like at most companies
 
-- Refined ticket that went through PM, PO, and Tech Lead the engineer executes, doesn't decide
-- Without direct access to metrics or business data
-- Without contact with whoever raised the requirement
-- The engineer doesn't know which business number the feature they're building intends to move
-- AI will speed up the code but within the wrong scope
+- Refined ticket that went through PM, PO, and Tech Lead the engineer has little room to influence the scope
+- Limited access to metrics or business data
+- Little contact with whoever raised the requirement
+- The business number the feature is meant to move stays in the PM's head, not the engineer's
+- AI speeds up execution but within a scope the engineer had no hand in defining
 
 ### What the typical workday looks like at AI-native companies
 
@@ -145,10 +151,10 @@ If you're senior or tech lead, we're cultural change agents but that change does
 
 ## Conclusion
 
-The model of large teams with specialty silos and processes that compensate for lack of autonomy was designed for a world where execution was the bottleneck. That world is over.
+The model of large teams with specialty silos and processes that compensate for lack of autonomy was designed for a world where execution was the bottleneck. That world is shifting fast.
 
 The new leverage is context. Smaller teams, with mixed roles and direct access to the real problem, can use AI in a way that amplifies product scope not just code speed.
 
-Brazil has the engineers. It has the tools. What's missing is autonomy and instrumented context.
+Brazil has the engineers. It has the tools. The difference, right now, is in building autonomy and instrumented context.
 
 **Start this week.**
