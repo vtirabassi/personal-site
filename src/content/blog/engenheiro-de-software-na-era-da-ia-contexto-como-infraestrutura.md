@@ -1,6 +1,6 @@
 ---
 title: "O Engenheiro de Software na Era da IA: o que o Vale do Silício já entendeu e o Brasil ainda não faz"
-date: 2026-05-29
+date: 2026-06-01
 description: "A IA não vai te dar autonomia que você não tem. Ela vai amplificar a alavanca que você já tem. E a principal alavanca do engenheiro moderno não é velocidade de código é contexto."
 tags: ["ia", "engenharia", "produtividade", "carreira"]
 ---

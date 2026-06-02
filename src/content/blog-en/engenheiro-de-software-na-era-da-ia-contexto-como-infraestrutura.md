@@ -1,6 +1,6 @@
 ---
 title: "The Software Engineer in the Age of AI: What Silicon Valley Already Understands and Brazil Still Doesn't"
-date: 2026-05-29
+date: 2026-06-01
 description: "AI won't give you autonomy you don't have. It will amplify the leverage you already have. And the main leverage of the modern engineer isn't code speed it's context."
 tags: ["ai", "engineering", "productivity", "career"]
 ---
