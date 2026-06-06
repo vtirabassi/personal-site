@@ -60,9 +60,9 @@ Each step is a separate model call. A 20-minute session on a medium-sized repo c
 
 To make this concrete: say you have an authentication bug and ask the agent to investigate.
 
-1. It reads `src/auth/middleware.ts` (first call)
-2. Spots a suspicious import, opens `src/auth/jwt.ts` (second call)
-3. Runs `npm test` to see what's failing (third call)
+1. It reads `AuthMiddleware.cs` (first call)
+2. Spots a suspicious dependency, opens `JwtValidator.cs` (second call)
+3. Runs `dotnet test` to see what's failing (third call)
 4. Analyzes the 3 errors and writes the fix (fourth call)
 5. Runs the tests again to confirm (fifth call)
 
@@ -78,7 +78,7 @@ Heavier models (frontier models) burn credits faster. **Model selection is the m
 Define what the agent should do *before* starting the session. Mid-session corrections are expensive: the agent recaps context, discards work, and restarts. A clear upfront instruction is worth more than ten corrections along the way.
 
 **2. Hyper-specific prompts**
-Provide a reference file, objective, and expected format. "Refactor the auth module" is expensive. "Extract JWT validation from `src/auth/middleware.ts` into a pure function in `src/auth/jwt.ts` without changing the interface" is surgical.
+Provide a reference file, objective, and expected format. "Refactor the auth module" is expensive. "Extract JWT validation from `AuthMiddleware.cs` into a static method in `JwtValidator.cs` without changing the interface" is surgical.
 
 **3. Model by complexity**
 Routine tasks (explaining code, generating simple unit tests, renaming variables) use a lightweight model. Architectural refactors, large codebase analysis, complex debugging: that's when the frontier model earns its keep. Most plans let you choose.
@@ -92,7 +92,7 @@ Especially on large repos. An open session with no clear scope burns credits in 
 
 Both tools target the same problem but at different moments in the same session. Understanding this avoids the "which one do I pick?" confusion.
 
-**RTK acts before the model processes anything.** When the agent runs a terminal command (`git status`, `npm test`, `docker logs`...), RTK intercepts the output and delivers a compressed version to the model. The model gets fewer tokens to read.
+**RTK acts before the model processes anything.** When the agent runs a terminal command (`git status`, `dotnet test`, `docker logs`...), RTK intercepts the output and delivers a compressed version to the model. The model gets fewer tokens to read.
 
 **Caveman acts after the model has already processed everything.** It instructs the model to respond concisely: no intro, no padding, just the answer. The model writes fewer tokens.
 
@@ -125,7 +125,7 @@ The second command activates a global hook that intercepts commands automaticall
 
 Without RTK, `git status` on a medium-sized repo returns dozens of lines listing each modified file individually, with full paths, staging status, and metadata. With RTK, you get a directory-grouped summary with file counts, a fraction of the tokens.
 
-The same applies to `npm test` or `./gradlew test`: passing tests disappear, failures show up complete. Rafael Pazini documented 5.3 million tokens saved across 612 commands, without changing a single line of code. Read the full account at [dev.to/rflpazini](https://dev.to/rflpazini/rtk-como-economizei-53-milhoes-de-tokens-sem-mudar-uma-linha-de-codigo-5e1m) (in Portuguese).
+The same applies to `dotnet test`: passing tests disappear, failures show up complete. Rafael Pazini documented 5.3 million tokens saved across 612 commands, without changing a single line of code. Read the full account at [dev.to/rflpazini](https://dev.to/rflpazini/rtk-como-economizei-53-milhoes-de-tokens-sem-mudar-uma-linha-de-codigo-5e1m) (in Portuguese).
 
 ---
 
@@ -149,9 +149,9 @@ Or just type "talk like caveman" in the session.
 
 **Before and after:**
 
-> Without caveman: "The reason your React component is re-rendering is likely because you're creating a new object reference on every render cycle. To fix this, you should wrap the object creation in a `useMemo` hook, which will memoize the value and prevent unnecessary re-renders."
+> Without caveman: "The reason your LINQ query is slow is likely because you're calling `.ToList()` inside the loop, which re-evaluates the query on every iteration. To fix this, you should move the `.ToList()` call outside the loop so the collection is materialized only once."
 
-> With caveman: "New object ref each render. Wrap in `useMemo`."
+> With caveman: "`.ToList()` inside loop re-evaluates each iteration. Move it outside."
 
 Same solution. 73% fewer tokens.
 
