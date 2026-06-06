@@ -193,3 +193,11 @@ Code completion continua gratuito: a IA no editor do dia a dia não mudou. O que
 A boa notícia: a maior parte da economia vem de comportamento, não de ferramenta. Prompts claros, escopo antes de delegar e escolha consciente de modelo já resolvem boa parte do problema. RTK e Caveman atacam o que sobra nas camadas de input e output.
 
 Empilhados, os ganhos se multiplicam. E você continua com o benefício dos agentes sem deixar a conta explodir.
+
+---
+
+## Referências
+
+- [Cobrança do GitHub Copilot](https://docs.github.com/pt/copilot/reference/copilot-billing) — visão geral do sistema de AI Credits
+- [Modelos e preços para GitHub Copilot](https://docs.github.com/pt/copilot/reference/copilot-billing/models-and-pricing) — tabela de preços por token de cada modelo disponível
+- [Multiplicadores de modelo para planos anuais (legacy)](https://docs.github.com/pt/copilot/reference/copilot-billing/request-based-billing-legacy/model-multipliers-for-annual-plans) — referência do sistema de cobrança anterior (PRUs)
