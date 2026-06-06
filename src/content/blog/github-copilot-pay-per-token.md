@@ -7,7 +7,7 @@ tags: ["ia", "produtividade", "ferramentas", "engenharia"]
 
 Você abre um repositório grande, pede ao agente do Copilot para entender a arquitetura e propor um refactor. Vinte minutos depois, ele terminou. Você fecha a sessão satisfeito.
 
-O que você ainda não sabe: acabou de consumir 35 dos seus 1.000 créditos mensais. No plano Pro, isso é $0,35 do seu orçamento de $10. Repita quatro vezes na semana e você chega em meados do mês sem créditos para qualquer sessão avançada.
+O que você ainda não sabe: acabou de consumir 35 dos seus 1.000 créditos mensais. No plano Pro, isso é $0,35 do seu orçamento de $10. Com 1.000 créditos no plano Pro, você tem margem para cerca de 28 sessões assim por mês — pouco mais de uma por dia útil.
 
 Em 1 de junho de 2026, o GitHub migrou o Copilot de mensalidade fixa para cobrança por tokens via **GitHub AI Credits**. Se você usa agentes, isso muda a conta. Este artigo explica o que mudou, por que sessões agênticas são caras, e deixa você com um plano concreto para sair na frente.
 
