@@ -2,7 +2,7 @@
   "items": [
     {
       "id": "what-is-the-superpowers-plugin-for-claude-code-the-agentic-skills-framework-explained",
-      "title": "O que é o Plugin Superpowers para Claude Code? O Agentic Skills Framework explicado",
+      "title": "O que Ã© o Plugin Superpowers para Claude Code? O Agentic Skills Framework explicado",
       "title_en": "What is the Superpowers Plugin for Claude Code? The Agentic Skills Framework Explained",
       "url": "https://www.mindstudio.ai/blog/what-is-superpowers-plugin-claude-code",
       "type": "link",
@@ -18,7 +18,7 @@
       "url": "https://martinfowler.com/articles/structured-prompt-driven/",
       "type": "link",
       "theme": "SDD",
-      "description": "Como estruturar prompts com especificações formais para tornar o desenvolvimento com agentes de IA mais previsível e rastreável.",
+      "description": "Como estruturar prompts com especificaÃ§Ãµes formais para tornar o desenvolvimento com agentes de IA mais previsÃ­vel e rastreÃ¡vel.",
       "description_en": "How to structure prompts with formal specifications to make development with AI agents more predictable and traceable.",
       "addedAt": "2026-05-28"
     },
@@ -29,20 +29,29 @@
       "url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
       "type": "link",
       "theme": "SDD",
-      "description": "Comparativo entre três ferramentas de Spec-Driven Development — Kiro, spec-kit e Tessl — e como cada uma formaliza o ciclo de especificação e implementação.",
-      "description_en": "Comparative between three Spec-Driven Development tools — Kiro, spec-kit and Tessl — and how each one formalizes the specification and implementation cycle.",
+      "description": "Comparativo entre trÃªs ferramentas de Spec-Driven Development â Kiro, spec-kit e Tessl â e como cada uma formaliza o ciclo de especificaÃ§Ã£o e implementaÃ§Ã£o.",
+      "description_en": "Comparative between three Spec-Driven Development tools â Kiro, spec-kit and Tessl â and how each one formalizes the specification and implementation cycle.",
       "addedAt": "2026-05-30"
     },
     {
       "id": "harness-engineering-for-coding-agent-users",
-      "title": "Harness Engineering para usuários de coding agents",
+      "title": "Harness Engineering para usuÃ¡rios de coding agents",
       "title_en": "Harness Engineering for Coding Agent Users",
       "url": "https://martinfowler.com/articles/harness-engineering.html",
       "type": "link",
       "theme": "Harness",
-      "description": "Como construir scaffolding de ferramentas, permissões e contexto para maximizar a eficácia de agentes de codificação.",
+      "description": "Como construir scaffolding de ferramentas, permissÃµes e contexto para maximizar a eficÃ¡cia de agentes de codificaÃ§Ã£o.",
       "description_en": "How to build tool scaffolding, permissions, and context to maximize the effectiveness of coding agents.",
       "addedAt": "2026-05-30"
+    },
+    {
+      "id": "caveman-readme-md-at-main-juliusbrussee-caveman",
+      "title": "caveman/README.md at main · JuliusBrussee/caveman",
+      "url": "https://github.com/JuliusBrussee/caveman/blob/main/README.md",
+      "type": "link",
+      "theme": "Otimização de Tokens",
+      "description": "🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman - JuliusBrussee/caveman",
+      "addedAt": "2026-06-06"
     }
   ]
 }
