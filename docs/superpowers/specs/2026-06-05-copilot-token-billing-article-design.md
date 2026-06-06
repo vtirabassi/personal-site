@@ -52,8 +52,33 @@ Quatro hábitos com impacto direto na conta:
 3. **Alternar modelos por complexidade:** tarefas rotineiras (explicar código, gerar testes unitários simples) → modelo leve. Refatoração arquitetural, análise de codebase → modelo robusto.
 4. **Não deixar agente rodando sem supervisão:** especialmente em repos grandes. Sessão aberta sem escopo claro consome créditos em loop.
 
-### Seção 4 — Mini-guia: RTK
+### Seção 4 — RTK e Caveman: a distinção que importa
+
+Antes dos mini-guias, uma seção curta explicando por que as duas ferramentas não são intercambiáveis e por que usá-las juntas faz sentido. Referência: post do LinkedIn sobre a distinção arquitetural.
+
+**Framing a usar no artigo:**
+- RTK opera na camada de execução: reescreve e comprime o contexto *antes* de ele chegar ao modelo. O modelo recebe um input diferente, mais denso. Governa o que o agente *vê*.
+- Caveman opera na camada de geração: não modifica contexto, mas constrange *como* o modelo expressa a resposta — linguagem telegráfica, sem rodeios. Governa o que o agente *escreve*.
+- Efeito indireto do Caveman em workflows agênticos: cada output vira contexto da próxima iteração. Respostas mais curtas = contexto menor nas rodadas seguintes. O benefício propaga para frente.
+- Conclusão: são complementares, não substitutos. RTK melhora o input; Caveman melhora o output. Empilhados, as economias se multiplicam.
+
+**Tabela de comparação (incluir no artigo):**
+
+| Característica | RTK | Caveman |
+|---|---|---|
+| Foco | Reduz tokens de **entrada** (input) | Reduz tokens de **saída** (output) |
+| Camada de atuação | Execução — filtra antes do modelo | Geração — constrange durante a resposta |
+| Como age | Proxy CLI que comprime outputs de terminal | Skill/prompt que instrui o agente a ser telegráfico |
+| Instalação | `brew install rtk` + `rtk init -g` | Instalar skill no agente (ver README) |
+| Economia típica | 60–90% nos outputs de terminal | ~65% nas respostas do agente |
+| Quando usar | Sessões com muitos comandos (git, npm, testes) | Sessões de chat/agente com respostas longas |
+| Agentes suportados | Claude Code, Copilot, Cursor, Gemini CLI e outros | Claude Code e 30+ agentes |
+| Repositório | [github.com/rtk-ai/rtk](https://github.com/rtk-ai/rtk) | [github.com/JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) |
+
+### Seção 5 — Mini-guia: RTK
 **O que é:** CLI proxy open-source escrito em Rust que intercepta outputs de comandos de terminal (git, npm, cargo, docker etc.) antes de chegarem ao contexto do LLM, comprimindo-os.
+
+**Repositório:** [github.com/rtk-ai/rtk](https://github.com/rtk-ai/rtk)
 
 **Como funciona:** RTK executa o comando, filtra ruído, agrupa itens similares, trunca e deduplica — entregando ao agente só o que importa.
 
@@ -67,16 +92,18 @@ rtk init -g   # ativa o hook global que intercepta comandos automaticamente
 - `git status` padrão → centenas de linhas com arquivos listados individualmente
 - `rtk git status` → sumário agrupado por diretório, fração dos tokens
 
-**Dado de referência:** Rafael Pazini economizou 5,3 milhões de tokens em 612 comandos sem mudar uma linha de código (artigo: dev.to/rflpazini/rtk-...).
+**Dado de referência:** Rafael Pazini economizou 5,3 milhões de tokens em 612 comandos sem mudar uma linha de código (artigo: [dev.to/rflpazini/rtk-como-economizei-53-milhoes-de-tokens-sem-mudar-uma-linha-de-codigo-5e1m](https://dev.to/rflpazini/rtk-como-economizei-53-milhoes-de-tokens-sem-mudar-uma-linha-de-codigo-5e1m)).
 
 **Quando usar RTK:** qualquer sessão que envolva comandos de terminal — builds, testes, git, logs de container.
 
-### Seção 5 — Mini-guia: Caveman
+### Seção 6 — Mini-guia: Caveman
 **O que é:** skill/plugin para Claude Code e 30+ agentes que comprime os outputs do próprio agente usando linguagem telegráfica, mantendo precisão técnica.
+
+**Repositório:** [github.com/JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman)
 
 **Como funciona:** instala uma skill que aplica regras de compressão ao output — "drop filler, keep substance, use fragments". Reduz output tokens do agente em ~65%.
 
-**Instalação:** ler o comando exato do README em github.com/JuliusBrussee/caveman antes de escrever o artigo — varia por agente. Para Claude Code, verificar se é um skill instalável via `npx` ou arquivo de configuração manual.
+**Instalação:** ler o comando exato do README em [github.com/JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) antes de escrever o artigo — varia por agente. Para Claude Code, verificar se é um skill instalável via `npx` ou arquivo de configuração manual.
 
 **Exemplo antes/depois:**
 - Resposta normal: "The reason your React component is re-rendering is likely because you're creating a new object reference each render cycle..."
@@ -84,11 +111,9 @@ rtk init -g   # ativa o hook global que intercepta comandos automaticamente
 
 **Níveis disponíveis:** lite, full (padrão), ultra
 
-**Quando usar Caveman:** sessões de chat e agente longo onde o volume de texto nas respostas é alto. Complementa RTK (RTK age nos inputs vindos de CLI; Caveman age nos outputs do agente).
+**Quando usar Caveman:** sessões de chat e agente longo onde o volume de texto nas respostas é alto. Efeito cumulativo em workflows agênticos: outputs menores viram contextos menores nas iterações seguintes.
 
-**Repositório:** github.com/JuliusBrussee/caveman
-
-### Seção 6 — Configurar orçamento no painel
+### Seção 7 — Configurar orçamento no painel
 - Onde acessar: GitHub Settings → Copilot → Usage & billing
 - Como configurar limite mensal e alertas de gasto
 - Diferença de controle: plano individual (limite pessoal) vs. org/enterprise (budget por equipe ou cost center)
