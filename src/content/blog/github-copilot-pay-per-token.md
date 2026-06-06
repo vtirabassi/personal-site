@@ -7,7 +7,7 @@ tags: ["ia", "produtividade", "ferramentas", "engenharia"]
 
 Você abre um repositório grande, pede ao agente do Copilot para entender a arquitetura e propor um refactor. Vinte minutos depois, ele terminou. Você fecha a sessão satisfeito.
 
-O que você ainda não sabe: acabou de consumir 35 dos seus 1.000 créditos mensais. No plano Pro, isso é $0,35 do seu orçamento de $10. Com 1.000 créditos no plano Pro, você tem margem para cerca de 28 sessões assim por mês — pouco mais de uma por dia útil.
+O que você ainda não sabe: acabou de consumir 35 dos seus 1.000 créditos mensais. No plano Pro, isso é $0,35 do seu orçamento de $10. Com 1.000 créditos no plano Pro, você tem margem para cerca de 28 sessões assim por mês, pouco mais de uma por dia útil.
 
 Em 1 de junho de 2026, o GitHub migrou o Copilot de mensalidade fixa para cobrança por tokens via **GitHub AI Credits**. Se você usa agentes, isso muda a conta. Este artigo explica o que mudou, por que sessões agênticas são caras, e deixa você com um plano concreto para sair na frente.
 
@@ -15,7 +15,7 @@ Em 1 de junho de 2026, o GitHub migrou o Copilot de mensalidade fixa para cobran
 
 ## O que mudou (e quando)
 
-A mudança substituiu os antigos Premium Request Units (PRUs) por **GitHub AI Credits**. A regra: 1 crédito = $0,01. Cada token processado — entrada, saída e tokens em cache — é convertido em créditos usando o rate do modelo escolhido.
+A mudança substituiu os antigos Premium Request Units (PRUs) por **GitHub AI Credits**. A regra: 1 crédito = $0,01. Cada token processado (entrada, saída e tokens em cache) é convertido em créditos usando o rate do modelo escolhido.
 
 O que **não** muda: code completion inline (as sugestões enquanto você digita) e Next Edit suggestions continuam gratuitos em todos os planos.
 
@@ -39,7 +39,7 @@ Os preços dos planos não mudaram:
 | Copilot Business | $19/usuário/mês | $19/usuário |
 | Copilot Enterprise | $39/usuário/mês | $39/usuário |
 
-O detalhe que assusta: antes havia um buffer. Agora a franquia de créditos equivale exatamente ao valor do plano — sem sobra. Quando os créditos acabam, o uso avançado pausa até o próximo ciclo. **Não há fallback automático para modelo mais barato.**
+O detalhe que assusta: antes havia um buffer. Agora a franquia de créditos equivale exatamente ao valor do plano, sem sobra. Quando os créditos acabam, o uso avançado pausa até o próximo ciclo. **Não há fallback automático para modelo mais barato.**
 
 ---
 
@@ -56,7 +56,17 @@ O modo agente é caro porque uma única tarefa envolve várias chamadas encadead
 5. Verifica se funcionou
 6. Itera se necessário
 
-Cada etapa é uma chamada separada ao modelo. Uma sessão de 20 minutos num repositório médio pode consumir entre 30 e 40 créditos. Com um plano Pro de $10 (1.000 créditos), você tem margem para cerca de 25 a 30 sessões assim por mês — menos de uma por dia útil.
+Cada etapa é uma chamada separada ao modelo. Uma sessão de 20 minutos num repositório médio pode consumir entre 30 e 40 créditos. Com um plano Pro de $10 (1.000 créditos), você tem margem para cerca de 25 a 30 sessões assim por mês, menos de uma por dia útil.
+
+Para tornar isso concreto: imagine um bug de autenticação. Você pede ao agente para investigar.
+
+1. Ele lê `src/auth/middleware.ts` (primeira chamada)
+2. Vê uma importação suspeita, abre `src/auth/jwt.ts` (segunda chamada)
+3. Roda `npm test` para ver quais testes estão falhando (terceira chamada)
+4. Analisa os 3 erros e escreve o fix (quarta chamada)
+5. Roda os testes de novo para confirmar (quinta chamada)
+
+Cinco chamadas para corrigir um bug simples. Em cada chamada, o contexto inclui tudo que foi lido antes: os dois arquivos, os resultados dos testes. O custo cresce porque o contexto cresce.
 
 Modelos mais pesados (frontier models) consomem créditos mais rápido. **A escolha do modelo é a alavanca de custo mais direta que você tem.**
 
@@ -71,7 +81,7 @@ Defina o que o agente deve fazer *antes* de iniciar a sessão. Reorientações n
 Forneça arquivo de referência, objetivo e formato esperado. "Refatora o módulo de autenticação" é caro. "Extrai a validação de JWT de `src/auth/middleware.ts` para uma função pura em `src/auth/jwt.ts` sem mudar a interface" é cirúrgico.
 
 **3. Modelo por complexidade**
-Tarefas rotineiras — explicar código, gerar testes unitários simples, renomear variáveis — usam modelo leve. Refatoração arquitetural, análise de codebase grande, debugging complexo — aí vale o modelo robusto. A maioria dos planos deixa você escolher.
+Tarefas rotineiras (explicar código, gerar testes unitários simples, renomear variáveis) usam modelo leve. Refatoração arquitetural, análise de codebase grande, debugging complexo: aí vale o modelo robusto. A maioria dos planos deixa você escolher.
 
 **4. Não deixe agente rodando sem supervisão**
 Especialmente em repos grandes. Uma sessão aberta sem escopo claro consome créditos em loop. Se você vai se afastar, pause a sessão.
@@ -80,13 +90,13 @@ Especialmente em repos grandes. Uma sessão aberta sem escopo claro consome cré
 
 ## RTK e Caveman: ferramentas complementares, não substitutas
 
-Antes de instalar qualquer coisa, vale entender por que as duas atuam em camadas diferentes — e por que empilhá-las faz mais sentido do que escolher uma.
+As duas ferramentas atacam o problema em momentos diferentes da mesma sessão. Entender isso evita confusão na hora de escolher.
 
-**RTK opera na camada de entrada.** Ele intercepta os outputs de comandos de terminal (git, npm, cargo, docker etc.) *antes* de chegarem ao contexto do modelo. O agente recebe um input mais compacto e denso. A economia vem do que o modelo *vê*.
+**RTK age antes do modelo processar qualquer coisa.** Quando o agente roda um comando no terminal (`git status`, `npm test`, `docker logs`...), o RTK intercepta o output e entrega ao modelo uma versão comprimida. O modelo recebe menos tokens para ler.
 
-**Caveman opera na camada de saída.** Ele não modifica o contexto, mas constrange *como* o modelo expressa a resposta — linguagem telegráfica, sem rodeios, sem formalidades. A economia vem do que o modelo *escreve*.
+**Caveman age depois que o modelo já processou tudo.** Ele instrui o modelo a responder de forma compacta: sem introdução, sem enrolação, só o que importa. O modelo escreve menos tokens.
 
-**O efeito cumulativo:** em workflows agênticos, cada output vira contexto da próxima iteração. Respostas mais curtas do Caveman significam contexto menor nas rodadas seguintes. O benefício propaga para frente.
+**O efeito que se acumula:** em sessões agênticas, o que o modelo *escreve* numa etapa vira o que ele *lê* na etapa seguinte. Menos saída com Caveman significa menos entrada na próxima chamada. A economia se multiplica ao longo da sessão.
 
 | | RTK | Caveman |
 |---|---|---|
@@ -109,19 +119,19 @@ brew install rtk
 rtk init -g
 ```
 
-O segundo comando ativa um hook global que intercepta comandos automaticamente — você não precisa prefixar manualmente.
+O segundo comando ativa um hook global que intercepta comandos automaticamente. Você não precisa prefixar manualmente.
 
 **Antes e depois:**
 
-Sem RTK, um `git status` num repositório médio retorna dezenas de linhas listando cada arquivo modificado individualmente, incluindo caminhos completos, status de staging e metadados. Com RTK, você recebe um sumário agrupado por diretório com contagem de arquivos — uma fração dos tokens.
+Sem RTK, um `git status` num repositório médio retorna dezenas de linhas listando cada arquivo modificado individualmente, incluindo caminhos completos, status de staging e metadados. Com RTK, você recebe um sumário agrupado por diretório com contagem de arquivos, uma fração dos tokens.
 
-O mesmo vale para `npm test` ou `./gradlew test`: testes que passam desaparecem, falhas aparecem completas. Rafael Pazini documentou 5,3 milhões de tokens economizados em 612 comandos — sem mudar uma linha de código. Veja o relato completo em [dev.to/rflpazini](https://dev.to/rflpazini/rtk-como-economizei-53-milhoes-de-tokens-sem-mudar-uma-linha-de-codigo-5e1m).
+O mesmo vale para `npm test` ou `./gradlew test`: testes que passam desaparecem, falhas aparecem completas. Rafael Pazini documentou 5,3 milhões de tokens economizados em 612 comandos, sem mudar uma linha de código. Veja o relato completo em [dev.to/rflpazini](https://dev.to/rflpazini/rtk-como-economizei-53-milhoes-de-tokens-sem-mudar-uma-linha-de-codigo-5e1m).
 
 ---
 
 ## Mini-guia: Caveman
 
-Caveman é uma skill instalável para Claude Code e mais de 30 agentes. Ela instrui o modelo a responder de forma telegráfica — cortando saudações, explicações longas e formalidades — mantendo toda a precisão técnica.
+Caveman é uma skill instalável para Claude Code e mais de 30 agentes. Ela instrui o modelo a responder de forma telegráfica: corta saudações, explicações longas e formalidades, mas mantém toda a precisão técnica.
 
 **Instalação (macOS/Linux):**
 ```bash
@@ -156,15 +166,15 @@ Mesmo com os hábitos certos e as ferramentas instaladas, é bom ter um limite e
 **Como configurar:**
 1. Acesse **GitHub Settings → Copilot → Usage & billing**
 2. Defina um limite mensal de gastos
-3. Configure alertas (recomendo setar a 70% da cota — você ainda tem margem para ajustar o comportamento antes de pausar)
+3. Configure alertas (recomendo setar a 70% da cota, assim ainda tem margem para ajustar o comportamento antes de pausar)
 
-**Planos individuais** têm controle pessoal. **Planos Business e Enterprise** permitem controle por equipe ou cost center — útil para times que compartilham uma cota corporativa.
+**Planos individuais** têm controle pessoal. **Planos Business e Enterprise** permitem controle por equipe ou cost center, útil para times que compartilham uma cota corporativa.
 
 ---
 
 ## Conclusão
 
-Code completion continua gratuito — a IA no editor do dia a dia não mudou. O que mudou é o custo de usar agentes com autonomia ampla e sem escopo definido.
+Code completion continua gratuito: a IA no editor do dia a dia não mudou. O que mudou é o custo de usar agentes com autonomia ampla e sem escopo definido.
 
 A boa notícia: a maior parte da economia vem de comportamento, não de ferramenta. Prompts claros, escopo antes de delegar e escolha consciente de modelo já resolvem boa parte do problema. RTK e Caveman atacam o que sobra nas camadas de input e output.
 
