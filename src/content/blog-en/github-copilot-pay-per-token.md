@@ -115,7 +115,7 @@ The second command activates a global hook that intercepts commands automaticall
 
 Without RTK, `git status` on a medium-sized repo returns dozens of lines listing each modified file individually, with full paths, staging status, and metadata. With RTK, you get a directory-grouped summary with file counts — a fraction of the tokens.
 
-The same applies to `npm test` or `./gradlew test`: passing tests disappear, failures show up complete. Rafael Pazini documented 5.3 million tokens saved across 612 commands — without changing a single line of code. Read the full account at [dev.to/rflpazini](https://dev.to/rflpazini/rtk-como-economizei-53-milhoes-de-tokens-sem-mudar-uma-linha-de-codigo-5e1m).
+The same applies to `npm test` or `./gradlew test`: passing tests disappear, failures show up complete. Rafael Pazini documented 5.3 million tokens saved across 612 commands — without changing a single line of code. Read the full account at [dev.to/rflpazini](https://dev.to/rflpazini/rtk-como-economizei-53-milhoes-de-tokens-sem-mudar-uma-linha-de-codigo-5e1m) (in Portuguese).
 
 ---
 
