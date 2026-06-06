@@ -49,8 +49,8 @@
       "title": "caveman/README.md at main Â· JuliusBrussee/caveman",
       "url": "https://github.com/JuliusBrussee/caveman/blob/main/README.md",
       "type": "link",
-      "theme": "OtimizaÃ§Ã£o de Tokens",
-      "description": "ðª¨ why use many token when few token do trick â Claude Code skill that cuts 65% of tokens by talking like caveman - JuliusBrussee/caveman",
+      "theme": "IA Skills",
+      "description": "Claude Code skill that cuts 65% of tokens by talking like caveman - JuliusBrussee/caveman",
       "addedAt": "2026-06-06"
     },
     {
@@ -58,7 +58,7 @@
       "title": "rtk/README.md at develop · rtk-ai/rtk",
       "url": "https://github.com/rtk-ai/rtk/blob/develop/README.md",
       "type": "link",
-      "theme": "Otimização de Tokens",
+      "theme": "IA Skills",
       "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands. Single Rust binary, zero dependencies - rtk-ai/rtk",
       "addedAt": "2026-06-06"
     }
