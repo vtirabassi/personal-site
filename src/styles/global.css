@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dark .prose code:not(pre code) {
+  background-color: #3a3a3c;
+  color: #f5f5f7;
+}
