@@ -70,7 +70,7 @@ Five calls for one simple bug. In each call, the context includes everything rea
 
 **The math behind those ~35 credits:**
 
-Using Claude Sonnet 4.6 as reference (per 1 million tokens: input $3.00, output $15.00; 1 credit = $0.01):
+Using Claude Sonnet 4.6 as reference ([per-model pricing](https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing): input $3.00, output $15.00 per million tokens; [1 credit = $0.01](https://docs.github.com/en/copilot/reference/copilot-billing)):
 
 | | Tokens | Rate | Cost |
 |---|---|---|---|
@@ -193,11 +193,3 @@ Inline code completion is still free: the AI in your editor for day-to-day work 
 The good news: most of the savings come from behavior, not tooling. Clear prompts, scope before delegating, and conscious model selection already solve most of the problem. RTK and Caveman handle what's left at the input and output layers.
 
 Stacked, the savings compound. And you keep the benefits of agents without letting the bill get out of hand.
-
----
-
-## References
-
-- [GitHub Copilot billing](https://docs.github.com/en/copilot/reference/copilot-billing) — overview of the AI Credits system
-- [Models and pricing for GitHub Copilot](https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing) — per-token pricing table for each available model
-- [Model multipliers for annual plans (legacy)](https://docs.github.com/en/copilot/reference/copilot-billing/request-based-billing-legacy/model-multipliers-for-annual-plans) — reference for the previous billing system (PRUs)
