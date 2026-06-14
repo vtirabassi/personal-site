@@ -6,7 +6,7 @@ domain: "Prompt eng."
 officialResources:
   - title: "Uso responsável da conclusão de código do GitHub Copilot"
     description: "Como o Copilot processa o contexto e constrói o prompt, o ciclo de vida da sugestão e as limitações dos modelos."
-    url: "https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features/responsible-use-of-github-copilot-code-completion"
+    url: "https://docs.github.com/pt/copilot/responsible-use"
   - title: "Engenharia de prompt para o Copilot Chat (docs)"
     description: "Estrutura de prompt, contexto, zero-shot/few-shot e boas práticas."
     url: "https://docs.github.com/copilot/using-github-copilot/copilot-chat/prompt-engineering-for-copilot-chat"
