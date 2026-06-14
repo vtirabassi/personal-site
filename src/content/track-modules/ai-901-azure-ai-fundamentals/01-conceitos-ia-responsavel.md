@@ -4,18 +4,18 @@ order: 1
 duration: "~8h"
 domain: "Conceitos & responsabilidades"
 officialResources:
-  - title: "Introduction to AI in Azure (curso AI-901T00)"
-    description: "Curso oficial com os conceitos fundamentais de IA e os serviços da Azure."
+  - title: "Introdução à IA no Azure (curso AI-901T00)"
+    description: "Curso oficial com os conceitos fundamentais de IA e os serviços do Azure."
     url: "https://learn.microsoft.com/pt-br/training/courses/ai-901t00"
   - title: "Implementar IA generativa responsável no Microsoft Foundry"
     description: "Módulo oficial: identificar, medir e mitigar danos em soluções de IA generativa."
     url: "https://learn.microsoft.com/pt-br/training/modules/responsible-ai-studio/"
 complementaryResources:
   - title: "Guia de estudos AI-901"
-    description: "Study guide oficial com os domínios e pesos do exame."
+    description: "Guia de estudos oficial com os domínios e pesos do exame."
     url: "https://aka.ms/AI901-StudyGuide"
-  - title: "Exam sandbox AI-901"
-    description: "Demo do ambiente de prova e dos tipos de questão."
+  - title: "Ambiente de demonstração do exame AI-901"
+    description: "Demonstração do ambiente de prova e dos tipos de questão."
     url: "https://go.microsoft.com/fwlink/?linkid=2226877"
 exercises:
   - "Mapear cada um dos 6 princípios de IA responsável a um exemplo prático de aplicação"
@@ -23,4 +23,4 @@ exercises:
   - "Explicar em uma frase como um modelo de GenAI gera respostas"
 ---
 
-Semana conceitual: domine os 6 princípios de IA responsável, como modelos de GenAI funcionam, como escolher um modelo e as principais cargas de trabalho de IA na Azure.
+Semana conceitual: domine os 6 princípios de IA responsável, como modelos de GenAI funcionam, como escolher um modelo e as principais cargas de trabalho de IA no Azure.
