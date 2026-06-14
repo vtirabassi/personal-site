@@ -1,0 +1,26 @@
+---
+title: "Semana 1 — Conceitos de IA e IA Responsável"
+order: 1
+duration: "~8h"
+domain: "Conceitos & responsabilidades"
+officialResources:
+  - title: "Introduction to AI in Azure (curso AI-901T00)"
+    description: "Curso oficial com os conceitos fundamentais de IA e os serviços da Azure."
+    url: "https://learn.microsoft.com/pt-br/training/courses/ai-901t00"
+  - title: "Identificar princípios e práticas de IA responsável"
+    description: "Learning path sobre os 6 princípios de IA responsável da Microsoft."
+    url: "https://learn.microsoft.com/pt-br/training/paths/responsible-ai-business-principles/"
+complementaryResources:
+  - title: "Guia de estudos AI-901"
+    description: "Study guide oficial com os domínios e pesos do exame."
+    url: "https://aka.ms/AI901-StudyGuide"
+  - title: "Exam sandbox AI-901"
+    description: "Demo do ambiente de prova e dos tipos de questão."
+    url: "https://go.microsoft.com/fwlink/?linkid=2226877"
+exercises:
+  - "Mapear cada um dos 6 princípios de IA responsável a um exemplo prático de aplicação"
+  - "Classificar 5 cenários por tipo de carga de trabalho (GenAI, fala, visão, extração, texto)"
+  - "Explicar em uma frase como um modelo de GenAI gera respostas"
+---
+
+Semana conceitual: domine os 6 princípios de IA responsável, como modelos de GenAI funcionam, como escolher um modelo e as principais cargas de trabalho de IA na Azure.
