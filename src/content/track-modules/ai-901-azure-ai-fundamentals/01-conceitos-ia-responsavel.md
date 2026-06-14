@@ -7,9 +7,9 @@ officialResources:
   - title: "Introduction to AI in Azure (curso AI-901T00)"
     description: "Curso oficial com os conceitos fundamentais de IA e os serviços da Azure."
     url: "https://learn.microsoft.com/pt-br/training/courses/ai-901t00"
-  - title: "Identificar princípios e práticas de IA responsável"
-    description: "Learning path sobre os 6 princípios de IA responsável da Microsoft."
-    url: "https://learn.microsoft.com/pt-br/training/paths/responsible-ai-business-principles/"
+  - title: "Implementar IA generativa responsável no Microsoft Foundry"
+    description: "Módulo oficial: identificar, medir e mitigar danos em soluções de IA generativa."
+    url: "https://learn.microsoft.com/pt-br/training/modules/responsible-ai-studio/"
 complementaryResources:
   - title: "Guia de estudos AI-901"
     description: "Study guide oficial com os domínios e pesos do exame."

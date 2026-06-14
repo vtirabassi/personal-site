@@ -13,7 +13,7 @@ officialResources:
 complementaryResources:
   - title: "GitHub Copilot CLI (docs)"
     description: "Installation, commands and interactive use of Copilot in the command line."
-    url: "https://docs.github.com/copilot/github-copilot-in-the-cli"
+    url: "https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli"
   - title: "Copilot organization policies (docs)"
     description: "Configure policies, code review policies and feature availability."
     url: "https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization"

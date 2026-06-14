@@ -13,7 +13,7 @@ officialResources:
 complementaryResources:
   - title: "GitHub Copilot Chat Cookbook (docs)"
     description: "Exemplos de prompts prontos por cenário para acelerar o aprendizado."
-    url: "https://docs.github.com/copilot/copilot-chat-cookbook"
+    url: "https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook"
 exercises:
   - "Reescrever um prompt fraco aplicando contexto explícito e few-shot"
   - "Desenhar o ciclo de vida de uma sugestão de código, do input ao pós-processamento"

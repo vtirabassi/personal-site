@@ -6,7 +6,7 @@ domain: "Implement with Foundry"
 officialResources:
   - title: "Develop generative AI apps in Microsoft Foundry"
     description: "Learning path: build prompts, deploy models and build clients."
-    url: "https://learn.microsoft.com/en-us/training/paths/create-custom-copilots-ai-studio/"
+    url: "https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/"
   - title: "Microsoft Foundry — documentation"
     description: "Foundry portal, model deployment, Agent Service and Foundry SDK."
     url: "https://learn.microsoft.com/en-us/azure/foundry/"
