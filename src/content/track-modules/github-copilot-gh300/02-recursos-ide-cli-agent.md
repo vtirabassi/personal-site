@@ -4,10 +4,10 @@ order: 2
 duration: "~9h"
 domain: "Recursos do Copilot"
 officialResources:
-  - title: "GitHub Copilot Fundamentals — Part 2"
-    description: "Learning path oficial cobrindo recursos avançados, chat, CLI e Agent Mode."
+  - title: "Conceitos básicos do GitHub Copilot — parte 2 de 2"
+    description: "Roteiro de aprendizagem oficial cobrindo recursos avançados, chat, CLI e Agent Mode."
     url: "https://learn.microsoft.com/pt-br/training/paths/gh-copilot-2/"
-  - title: "GitHub Copilot no IDE (docs)"
+  - title: "GitHub Copilot na IDE (docs)"
     description: "Inline suggestions, chat, Plan Mode, Agent Mode, Edit Mode e MCP na prática."
     url: "https://docs.github.com/copilot/using-github-copilot"
 complementaryResources:

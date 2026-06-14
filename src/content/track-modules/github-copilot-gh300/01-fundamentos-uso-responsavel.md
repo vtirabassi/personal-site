@@ -4,10 +4,10 @@ order: 1
 duration: "~7h"
 domain: "Uso responsável"
 officialResources:
-  - title: "GitHub Copilot Fundamentals — Part 1"
-    description: "Learning path oficial: o que é o Copilot, como funciona e onde usar."
+  - title: "Conceitos básicos do GitHub Copilot — parte 1 de 2"
+    description: "Roteiro de aprendizagem oficial: o que é o Copilot, como funciona e onde usar."
     url: "https://learn.microsoft.com/pt-br/training/paths/copilot/"
-  - title: "Responsible AI with GitHub Copilot"
+  - title: "IA responsável com GitHub Copilot"
     description: "Módulo sobre IA responsável: riscos, limitações de GenAI e mitigação de danos."
     url: "https://learn.microsoft.com/pt-br/training/modules/responsible-ai-with-github-copilot/"
   - title: "Planos e recursos do GitHub Copilot"
@@ -15,10 +15,10 @@ officialResources:
     url: "https://docs.github.com/copilot/about-github-copilot/plans-for-github-copilot"
 complementaryResources:
   - title: "Guia de estudos GH-300"
-    description: "Study guide oficial com os domínios e pesos do exame."
+    description: "Guia de estudos oficial com os domínios e pesos do exame."
     url: "https://aka.ms/GH300-StudyGuide"
-  - title: "Exam sandbox GH-300"
-    description: "Demo do ambiente e dos tipos de questão do exame."
+  - title: "Ambiente de demonstração do exame GH-300"
+    description: "Demonstração do ambiente e dos tipos de questão do exame."
     url: "https://aka.ms/GHExamDemo-enu"
 exercises:
   - "Comparar os recursos disponíveis entre os planos Free, Pro, Business e Enterprise"

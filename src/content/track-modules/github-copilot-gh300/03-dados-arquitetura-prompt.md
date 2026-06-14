@@ -1,17 +1,17 @@
 ---
-title: "Semana 3 — Dados, arquitetura e prompt engineering"
+title: "Semana 3 — Dados, arquitetura e engenharia de prompt"
 order: 3
 duration: "~7h"
 domain: "Prompt eng."
 officialResources:
-  - title: "GitHub Trust Center"
-    description: "Como o Copilot funciona: fluxo de dados, proxy de filtragem e pós-processamento."
-    url: "https://github.com/trust-center"
-  - title: "Prompt engineering para o Copilot Chat (docs)"
+  - title: "Uso responsável da conclusão de código do GitHub Copilot"
+    description: "Como o Copilot processa o contexto e constrói o prompt, o ciclo de vida da sugestão e as limitações dos modelos."
+    url: "https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features/responsible-use-of-github-copilot-code-completion"
+  - title: "Engenharia de prompt para o Copilot Chat (docs)"
     description: "Estrutura de prompt, contexto, zero-shot/few-shot e boas práticas."
     url: "https://docs.github.com/copilot/using-github-copilot/copilot-chat/prompt-engineering-for-copilot-chat"
 complementaryResources:
-  - title: "GitHub Copilot Chat Cookbook (docs)"
+  - title: "Cookbook do GitHub Copilot Chat (docs)"
     description: "Exemplos de prompts prontos por cenário para acelerar o aprendizado."
     url: "https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook"
 exercises:

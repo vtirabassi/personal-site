@@ -4,9 +4,9 @@ order: 3
 duration: "~7h"
 domain: "Prompt eng."
 officialResources:
-  - title: "GitHub Trust Center"
-    description: "How Copilot works: data flow, proxy filtering and post-processing."
-    url: "https://github.com/trust-center"
+  - title: "Responsible use of GitHub Copilot code completion"
+    description: "How Copilot processes context and builds the prompt, the suggestion lifecycle and model limitations."
+    url: "https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features/responsible-use-of-github-copilot-code-completion"
   - title: "Prompt engineering for Copilot Chat (docs)"
     description: "Prompt structure, context, zero-shot/few-shot and best practices."
     url: "https://docs.github.com/copilot/using-github-copilot/copilot-chat/prompt-engineering-for-copilot-chat"
