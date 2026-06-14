@@ -3,6 +3,7 @@ import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProgressBar from '../../components/ProgressBar.astro';
 import { ui } from '../../i18n/ui';
+import { domainTagClass, buildDomainColors } from '../../lib/track-colors';
 const t_ui = ui.pt;
 
 export const prerender = true;
@@ -27,16 +28,7 @@ const categoryColors: Record<string, string> = {
 };
 const tagClass = categoryColors[track.data.category] ?? 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]';
 
-function domainTagClass(tag: string): string {
-  const t = tag.toLowerCase();
-  if (t.startsWith('prompt'))      return 'bg-[#ff3b30]/10 text-[#cc1a10] dark:bg-[#ff3b30]/20 dark:text-[#ff6b62]';
-  if (t.startsWith('claude code')) return 'bg-apple-blue/10 text-apple-blue dark:bg-apple-blue/20 dark:text-apple-blue-dark';
-  if (t.startsWith('agentic'))     return 'bg-[#af52de]/10 text-[#7c3aed] dark:bg-[#af52de]/20 dark:text-[#af52de]';
-  if (t.startsWith('mcp'))         return 'bg-[#32ade6]/10 text-[#0a6e8a] dark:bg-[#32ade6]/20 dark:text-[#32ade6]';
-  if (t.startsWith('context'))     return 'bg-[#c8a96e]/10 text-[#7a5c1e] dark:bg-[#c8a96e]/20 dark:text-[#c8a96e]';
-  if (t.startsWith('evals'))       return 'bg-[#34c759]/10 text-[#1a7a33] dark:bg-[#34c759]/20 dark:text-[#34c759]';
-  return 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]';
-}
+const domainColors = buildDomainColors(((track.data.domains as any[]) ?? []).map((d: any) => d.name));
 
 function parseDomains(domain: string | undefined): string[] {
   if (!domain) return [];
@@ -95,7 +87,7 @@ const renderedModules = await Promise.all(
     {track.data.domains && (track.data.domains as any[]).length > 0 && (
       <div class="flex flex-wrap gap-2 mt-3">
         {(track.data.domains as any[]).map((d: any) => (
-          <span class={`text-apple-nav font-medium px-2 py-0.5 rounded-full whitespace-nowrap ${domainTagClass(d.name)}`}>
+          <span class={`text-apple-nav font-medium px-2 py-0.5 rounded-full whitespace-nowrap ${domainTagClass(d.name, domainColors)}`}>
             {d.name} ({d.percent}%)
           </span>
         ))}
@@ -138,7 +130,7 @@ const renderedModules = await Promise.all(
               </span>
             )}
             {parseDomains(mod.data.domain as string | undefined).map((tag) => (
-              <span class={`text-apple-nav font-medium px-2 py-0.5 rounded-full whitespace-nowrap ${domainTagClass(tag)}`}>
+              <span class={`text-apple-nav font-medium px-2 py-0.5 rounded-full whitespace-nowrap ${domainTagClass(tag, domainColors)}`}>
                 {tag}
               </span>
             ))}
