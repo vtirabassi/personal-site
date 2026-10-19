@@ -26,3 +26,6 @@ pnpm-debug.log*
 
 # superpowers brainstorming sessions
 .superpowers/
+
+# rascunhos pessoais (não publicados)
+docs/drafts/

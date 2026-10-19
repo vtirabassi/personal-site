@@ -36,8 +36,6 @@ const tracksData = tracks.map(t => ({
   href:           `/trilhas/${t.slug}`,
   tagClass:       categoryColors[t.data.category] ?? 'bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]',
 }));
-
-const [featured, ...rest] = tracksData;
 ---
 
 <BaseLayout title="Trilhas — Vinicius Tirabassi" description="Trilhas de aprendizado curadas" lang="pt" altHref="/en/tracks/">
@@ -47,104 +45,66 @@ const [featured, ...rest] = tracksData;
     <p class="text-apple-body text-apple-ink-48 dark:text-[#98989d]">Nenhuma trilha disponível ainda.</p>
   )}
 
-  {featured && (
-    <div id="tracks-listing" data-tracks={JSON.stringify(tracksData)} class="mb-10">
-      <a
-        href={featured.href}
-        id="featured-card"
-        class="block border border-apple-hairline dark:border-[#3a3a3c] rounded-apple-lg p-6 hover:border-apple-blue dark:hover:border-apple-blue-dark transition-colors group"
-      >
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2 mb-2 flex-wrap">
-              <span class={`text-apple-nav font-medium px-2 py-0.5 rounded-full uppercase tracking-wide ${featured.tagClass}`}>
-                {featured.category}
-              </span>
-              <span class="text-apple-nav font-medium px-2 py-0.5 rounded-full bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]">
-                {featured.source}
-              </span>
-              <span id="featured-status" class="text-apple-nav text-apple-ink-48 dark:text-[#98989d] hidden">
-                EM PROGRESSO
-              </span>
-            </div>
-            <h2 class="text-apple-tagline font-semibold text-apple-ink dark:text-[#f5f5f7] group-hover:text-apple-blue dark:group-hover:text-apple-blue-dark transition-colors mb-1">
-              {featured.title}
-            </h2>
-            <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d]">
-              {featured.source} · ~{featured.estimatedHours} {t_ui.tracks.hours} ·
-              <span id="featured-progress-text">{t_ui.tracks.notStarted}</span>
-            </p>
-          </div>
-          <span id="featured-pct" class="text-apple-tagline font-semibold text-apple-blue dark:text-apple-blue-dark shrink-0 hidden">
-            0%
-          </span>
-        </div>
-        <ProgressBar percent={0} id="featured-bar" />
-      </a>
-    </div>
-  )}
-
-  {rest.length > 0 && (
-    <ul class="flex flex-col divide-y divide-apple-hairline dark:divide-[#3a3a3c]">
-      {rest.map(t => (
-        <li>
-          <a
-            href={t.href}
-            class="flex items-center justify-between gap-4 py-4 group"
-          >
-            <div class="flex items-center gap-2 min-w-0">
-              <span class={`shrink-0 text-apple-nav font-medium px-2 py-0.5 rounded-full uppercase tracking-wide ${t.tagClass}`}>
-                {t.category}
-              </span>
-              <span class="shrink-0 text-apple-nav font-medium px-2 py-0.5 rounded-full bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]">
-                {t.source}
-              </span>
-              <span class="text-apple-body font-medium text-apple-ink dark:text-[#f5f5f7] group-hover:text-apple-blue dark:group-hover:text-apple-blue-dark transition-colors truncate">
+  {tracksData.length > 0 && (
+    <div id="tracks-listing" class="flex flex-col gap-4">
+      {tracksData.map(t => (
+        <a
+          href={t.href}
+          data-track-card
+          data-slug={t.slug}
+          data-resource-count={t.resourceCount}
+          class="block border border-apple-hairline dark:border-[#3a3a3c] rounded-apple-lg p-6 hover:border-apple-blue dark:hover:border-apple-blue-dark transition-colors group"
+        >
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
+                <span class={`text-apple-nav font-medium px-2 py-0.5 rounded-full uppercase tracking-wide ${t.tagClass}`}>
+                  {t.category}
+                </span>
+                <span class="text-apple-nav font-medium px-2 py-0.5 rounded-full bg-apple-parchment text-apple-ink-48 dark:bg-[#2c2c2e] dark:text-[#98989d]">
+                  {t.source}
+                </span>
+                <span data-card-status class="text-apple-nav text-apple-ink-48 dark:text-[#98989d] hidden">
+                  EM PROGRESSO
+                </span>
+              </div>
+              <h2 class="text-apple-tagline font-semibold text-apple-ink dark:text-[#f5f5f7] group-hover:text-apple-blue dark:group-hover:text-apple-blue-dark transition-colors mb-1">
                 {t.title}
-              </span>
+              </h2>
+              <p class="text-apple-caption text-apple-ink-48 dark:text-[#98989d]">
+                {t.source} · ~{t.estimatedHours} {t_ui.tracks.hours} ·
+                <span data-card-progress-text>{t_ui.tracks.notStarted}</span>
+              </p>
             </div>
-            <span class="shrink-0 text-apple-caption text-apple-ink-48 dark:text-[#98989d]">{t_ui.tracks.notStarted}</span>
-          </a>
-        </li>
+            <span data-card-pct class="text-apple-tagline font-semibold text-apple-blue dark:text-apple-blue-dark shrink-0 hidden">
+              0%
+            </span>
+          </div>
+          <ProgressBar percent={0} id={`bar-${t.slug}`} />
+        </a>
       ))}
-    </ul>
+    </div>
   )}
 </BaseLayout>
 
 <script>
   import { getCompletedResources, calcProgressPercent } from '../../lib/track-progress';
 
-  const listing = document.getElementById('tracks-listing');
-  if (listing) {
-  const tracksData = JSON.parse(listing.dataset.tracks ?? '[]') as Array<{
-    slug: string;
-    resourceCount: number;
-  }>;
+  document.querySelectorAll<HTMLElement>('[data-track-card]').forEach(card => {
+    const slug = card.dataset.slug!;
+    const resourceCount = parseInt(card.dataset.resourceCount ?? '0');
+    const completed = getCompletedResources(slug).length;
+    if (completed <= 0) return;
 
-  let featuredSlug = tracksData[0]?.slug;
-  let maxCompleted = 0;
-  for (const t of tracksData) {
-    const count = getCompletedResources(t.slug).length;
-    if (count > maxCompleted) {
-      maxCompleted = count;
-      featuredSlug = t.slug;
-    }
-  }
+    const pct = calcProgressPercent(completed, resourceCount);
+    const progressText = card.querySelector('[data-card-progress-text]');
+    const progressBar  = document.getElementById(`bar-${slug}`);
+    const progressPct  = card.querySelector('[data-card-pct]');
+    const statusBadge  = card.querySelector('[data-card-status]');
 
-  const featuredTrack = tracksData.find(t => t.slug === featuredSlug);
-  if (featuredTrack && maxCompleted > 0) {
-    const completed = getCompletedResources(featuredTrack.slug);
-    const pct = calcProgressPercent(completed.length, featuredTrack.resourceCount);
-
-    const progressText = document.getElementById('featured-progress-text');
-    const progressBar  = document.getElementById('featured-bar');
-    const progressPct  = document.getElementById('featured-pct');
-    const statusBadge  = document.getElementById('featured-status');
-
-    if (progressText) progressText.textContent = `${completed.length} de ${featuredTrack.resourceCount} recursos`;
+    if (progressText) progressText.textContent = `${completed} de ${resourceCount} recursos`;
     if (progressBar)  progressBar.style.width = `${pct}%`;
     if (progressPct)  { progressPct.textContent = `${pct}%`; progressPct.classList.remove('hidden'); }
     if (statusBadge)  statusBadge.classList.remove('hidden');
-  }
-  }
+  });
 </script>
