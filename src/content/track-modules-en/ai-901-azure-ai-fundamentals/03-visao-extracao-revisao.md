@@ -10,14 +10,25 @@ officialResources:
   - title: "Computer Vision — documentation"
     description: "Interpret visual input and generate visual outputs with multimodal models."
     url: "https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/"
+  - title: "Get started with computer vision in Azure"
+    description: "Analyze images and generate visual content with models in Foundry."
+    url: "https://learn.microsoft.com/en-us/training/modules/get-started-vision-azure/"
+  - title: "Get started with AI-powered information extraction in Azure"
+    description: "Extract structured data from documents, audio and video with Content Understanding."
+    url: "https://learn.microsoft.com/en-us/training/modules/get-started-information-extraction/"
 complementaryResources:
-  - title: "AI-901 exam sandbox"
-    description: "Practice assessment not yet available (beta exam) — use the sandbox and Foundry labs."
-    url: "https://go.microsoft.com/fwlink/?linkid=2226877"
+  - title: "Quickstart — Azure Content Understanding"
+    description: "API examples for extracting data from documents, images, audio and video."
+    url: "https://learn.microsoft.com/en-us/azure/ai-services/content-understanding/quickstart/use-rest-api"
+  - title: "AI-901 practice assessment"
+    description: "Assessment on AI Skills Navigator; Microsoft account sign-in required."
+    url: "https://aiskillsnavigator.microsoft.com/credentials/cert-83587e0a0754cfee561ade3e27d9fa1cdaf15ae03be52d2413b2b858d1b4eda4"
 exercises:
-  - "Extract the fields of a form using Content Understanding"
+  - "Interpret an image in a multimodal prompt and build a minimal client with vision capabilities"
+  - "Extract data from a form and an image with Content Understanding"
+  - "Use the Content Understanding API to extract information from audio and video samples"
   - "Generate an image from a prompt with an image-generation model"
-  - "Review the 2 domains and redo the exercises from weeks 1 and 2"
+  - "Take the AI-901 practice assessment and review both domains based on missed questions"
 ---
 
-Wrap-up week: multimodal computer vision, image generation and information extraction with Content Understanding, followed by a general review. Note: the practice assessment is not yet available because the exam is in beta.
+Wrap-up week: multimodal computer vision, image generation and information extraction from documents, images, audio and video with Content Understanding, followed by the practice assessment and general review.
